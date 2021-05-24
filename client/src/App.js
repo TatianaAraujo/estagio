@@ -1,38 +1,19 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React from 'react';
+import { Switch,Route } from 'react-router-dom';
 import './App.css';
 
-class App extends Component {
-  state = {
-    renderedResponse: ''
-  }
+import Login from './pages/Login';
+import ListaDeDoentes from './pages/ListaDeDoentes';
+import FichaDoDoente from './pages/FichaDoDoente';
 
-  getResponse = async() => {
-    const response = await fetch('/api/hello');
-    const body = await response.json();
-    if (response.status !== 200) throw Error(body.message);
-
-    return body;
-  }
-
-  componentDidMount() {
-    this.getResponse()
-      .then(res => {
-        const someData = res;
-        this.setState({ renderedResponse: someData });
-      })
-  }
-
-  render() {
-    const { renderedResponse } = this.state;
-
-    return (
-      <div className="App">
-        <h2>Call out to API!</h2>
-        <p>{renderedResponse.express}</p>
-      </div>
-    );
-  }
+function App() {
+  return (
+      <Switch>
+        <Route path="/FichaDoDoente" component={FichaDoDoente}/>
+        <Route path="/ListaDeDoentes" component={ListaDeDoentes}/>
+        <Route path="/" component={Login} />
+      </Switch>
+  );
 }
 
 export default App;

@@ -1,5 +1,5 @@
 {
-	"name": "cra-plus-express",
+	"name": "airdoc_app",
 	"version": "1.0.0",
 	"scripts": {
 		"client": "cd client && yarn start",
@@ -8,7 +8,13 @@
 	},
 	"dependencies": {
 		"body-parser": "^1.18.3",
-		"express": "^4.16.4"
+		"express": "^4.16.4",
+		"fhir-kit-client": "^1.6.3",
+		"fhirclient": "^2.3.11",
+		"react-redux": "^7.2.3",
+		"redux-devtools-extension": "^2.13.9",
+		"redux-thunk": "^2.3.0",
+		"wavefile": "^11.0.0"
 	},
 	"devDependencies": {
 		"concurrently": "^4.0.1"
