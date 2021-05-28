@@ -7,7 +7,6 @@ import resSys from "../img/respiratory-system.png";
 import downArrow from "../img/avanco-rapido.png";
 
 import FDInicio from "../Components/FDInicio";
-import FDGraficos from "../Components/FDGraficos";
 import FDMcdt from "../Components/FDMcdt";
 import FDSons from "../Components/FDSons";
 import FDMenu from "../Components/FDMenu";
@@ -15,8 +14,10 @@ import FDAdesao from "../Components/FDAdesao";
 import FDMedicacao from "../Components/FDMedicacao";
 import FDCarat from "../Components/FDCarat";
 import FDEventos from "../Components/FDEventos";
-import FDCoaching from "../Components/FDCoaching";
-import FDQuestionarios from "../Components/FDQuestionarios";
+import FDEstado from "../Components/FDEstado";
+import FDGina from "../Components/FDGina";
+import FDSono from "../Components/FDSono";
+import FDPlanos from "../Components/FDPlanos";
 import FDExtraInfo from "../Components/FDExtraInfo";
 
 const FichaDoDoente = () => {
@@ -170,27 +171,31 @@ const FichaDoDoente = () => {
 
         <div style={{ width: "80%" }}>
           <Switch>
-            <Route
-              path="/FichaDoDoente/Questionarios"
-              render={FDQuestionarios}
-            />
+            <Route path="/FichaDoDoente/MCDT" render={FDMcdt} />
             <Route
               path="/FichaDoDoente/SonsRespiratorios"
               render={(props) => <FDSons {...props} sons={sonsInfo} />}
             />
-            <Route path="/FichaDoDoente/MCDT" render={FDMcdt} />
-            <Route path="/FichaDoDoente/Graficos/Adesao" render={FDAdesao} />
+            <Route path="/FichaDoDoente/Planos" render={FDPlanos} />
+            <Route path="/FichaDoDoente/Monitorizacao/Sono" render={FDSono} />
+            <Route path="/FichaDoDoente/Monitorizacao/GINA" render={FDGina} />
             <Route
-              path="/FichaDoDoente/Graficos/Medicacao"
+              path="/FichaDoDoente/Monitorizacao/Estado"
+              render={FDEstado}
+            />
+            <Route
+              path="/FichaDoDoente/Monitorizacao/Eventos"
+              render={(props) => <FDEventos {...props} eventos={patientId} />}
+            />
+            <Route path="/FichaDoDoente/Monitorizacao/CARAT" render={FDCarat} />
+            <Route
+              path="/FichaDoDoente/Monitorizacao/Medicacao"
               render={FDMedicacao}
             />
-            <Route path="/FichaDoDoente/Graficos/CARAT" render={FDCarat} />
-            <Route path="/FichaDoDoente/Graficos/Eventos" render={FDEventos} />
             <Route
-              path="/FichaDoDoente/Graficos/Coaching"
-              render={FDCoaching}
+              path="/FichaDoDoente/Monitorizacao/Adesao/"
+              render={(props) => <FDAdesao {...props} adesao={patientId} />}
             />
-            <Route path="/FichaDoDoente/Graficos" render={FDGraficos} />
             <Route
               path="/FichaDoDoente/"
               render={(props) => <FDInicio {...props} inicio={patientId} />}

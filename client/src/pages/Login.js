@@ -24,8 +24,7 @@ const Login = () => {
           <p className="textLoginForm"> Password: </p>
           <input type="password" className="formLogin" />
           <p className="textLoginForm" style={{ fontSize: "20px" }}>
-            {" "}
-            Esqueceu-se da password?{" "}
+            Esqueceu-se da password?
           </p>
           <button
             className="loginButton"
@@ -35,8 +34,7 @@ const Login = () => {
               history.push("/ListaDeDoentes");
             }}
           >
-            {" "}
-            Entrar{" "}
+            Entrar
           </button>
         </div>
       </div>

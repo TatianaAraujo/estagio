@@ -4,199 +4,158 @@ import { useHistory } from "react-router-dom";
 const FDMenu = () => {
   const history = useHistory();
 
-  function inicioUp() {
-    const inicio = document.getElementById("inicio");
-    inicio.style.backgroundColor = "#175874";
-    inicio.style.color = "white";
-    inicio.style.fontFamily = "Serif";
-  }
+  const buttonBigUp = (id) => {
+    const button = document.getElementById(id);
+    button.style.backgroundColor = "#175874";
+    button.style.color = "white";
+  };
 
-  function inicioDown() {
-    const inicio = document.getElementById("inicio");
-    inicio.style.backgroundColor = "white";
-    inicio.style.color = "#707070";
-    inicio.style.fontFamily = "Arial";
-  }
+  const buttonBigDown = (id) => {
+    const button = document.getElementById(id);
+    button.style.backgroundColor = "white";
+    button.style.color = "#707070";
+  };
 
-  function graficosUp() {
-    const graficos = document.getElementById("graficos");
+  const buttonLittleUp = (id) => {
+    const button = document.getElementById(id);
+    button.style.backgroundColor = "white";
+    button.style.border = "3px solid #175874";
+  };
+
+  const buttonLittleDown = (id) => {
+    const button = document.getElementById(id);
+    button.style.backgroundColor = "transparent";
+    button.style.border = "1px solid #707070";
+  };
+
+  const conjMonitorizacaoUp = () => {
+    buttonBigUp("monitorizacao");
+
     const adesao = document.getElementById("adesao");
     const medicacao = document.getElementById("medicacao");
     const carat = document.getElementById("carat");
     const eventos = document.getElementById("eventos");
-    const coaching = document.getElementById("coaching");
-    graficos.style.backgroundColor = "#175874";
-    graficos.style.color = "white";
-    graficos.style.fontFamily = "Serif";
-    adesao.style.color = "#707070";
-    medicacao.style.color = "#707070";
-    carat.style.color = "#707070";
-    eventos.style.color = "#707070";
-    coaching.style.color = "#707070";
-  }
+    const estado = document.getElementById("estado");
+    const gina = document.getElementById("gina");
+    const sono = document.getElementById("sono");
 
-  function graficosDown() {
-    const graficos = document.getElementById("graficos");
+    adesao.style.color = "black";
+    medicacao.style.color = "black";
+    carat.style.color = "black";
+    eventos.style.color = "black";
+    estado.style.color = "black";
+    gina.style.color = "black";
+    sono.style.color = "black";
+  };
+
+  const conjMonitorizacaoDown = () => {
+    buttonBigDown("monitorizacao");
+
     const adesao = document.getElementById("adesao");
     const medicacao = document.getElementById("medicacao");
     const carat = document.getElementById("carat");
     const eventos = document.getElementById("eventos");
-    const coaching = document.getElementById("coaching");
-    graficos.style.backgroundColor = "white";
-    graficos.style.color = "#707070";
-    graficos.style.fontFamily = "Arial";
+    const estado = document.getElementById("estado");
+    const gina = document.getElementById("gina");
+    const sono = document.getElementById("sono");
+
     adesao.style.color = "#b7b7b7";
     medicacao.style.color = "#b7b7b7";
     carat.style.color = "#b7b7b7";
     eventos.style.color = "#b7b7b7";
-    coaching.style.color = "#b7b7b7";
-  }
+    estado.style.color = "#b7b7b7";
+    gina.style.color = "#b7b7b7";
+    sono.style.color = "#b7b7b7";
+  };
 
-  function sonsUp() {
-    const sons = document.getElementById("sons");
-    sons.style.backgroundColor = "#175874";
-    sons.style.color = "white";
-    sons.style.fontFamily = "Serif";
-  }
+  const allDown = () => {
+    buttonBigDown("inicio");
+    buttonBigDown("monitorizacao");
+    buttonBigDown("planos");
+    buttonBigDown("sons");
+    buttonBigDown("mcdt");
+    conjMonitorizacaoDown();
 
-  function sonsDown() {
-    const sons = document.getElementById("sons");
-    sons.style.backgroundColor = "white";
-    sons.style.color = "#707070";
-    sons.style.fontFamily = "Arial";
-  }
-
-  function questionariosUp() {
-    const questionarios = document.getElementById("questionarios");
-    questionarios.style.backgroundColor = "#175874";
-    questionarios.style.color = "white";
-    questionarios.style.fontFamily = "Serif";
-  }
-
-  function questionariosDown() {
-    const questionarios = document.getElementById("questionarios");
-    questionarios.style.backgroundColor = "white";
-    questionarios.style.color = "#707070";
-    questionarios.style.fontFamily = "Arial";
-  }
-
-  function adesaoUp() {}
-
-  function adesaoDown() {}
-
-  function medicacaoUp() {}
-
-  function medicacaoDown() {}
-
-  function caratUp() {}
-
-  function caratDown() {}
-
-  function eventosUp() {}
-
-  function eventosDown() {}
-
-  function coachingUp() {}
-
-  function coachingDown() {}
+    buttonLittleDown("adesao");
+    buttonLittleDown("medicacao");
+    buttonLittleDown("carat");
+    buttonLittleDown("eventos");
+    buttonLittleDown("estado");
+    buttonLittleDown("gina");
+    buttonLittleDown("sono");
+  };
 
   function clickInicio() {
-    inicioUp();
+    allDown();
+    buttonBigUp("inicio");
     history.push("/FichaDoDoente/");
-    graficosDown();
-    sonsDown();
-    adesaoDown();
-    medicacaoDown();
-    caratDown();
-    eventosDown();
-    coachingDown();
-    questionariosDown();
-  }
-
-  function clickGraficos() {
-    inicioDown();
-    graficosUp();
-    history.push("/FichaDoDoente/Graficos");
-    sonsDown();
-    questionariosDown();
   }
 
   function clickSons() {
-    inicioDown();
-    graficosDown();
-    sonsUp();
+    allDown();
+    buttonBigUp("sons");
     history.push("/FichaDoDoente/SonsRespiratorios");
-    adesaoDown();
-    medicacaoDown();
-    caratDown();
-    eventosDown();
-    coachingDown();
-    questionariosDown();
+  }
+
+  function clickPlanos() {
+    allDown();
+    buttonBigUp("planos");
+    history.push("/FichaDoDoente/Planos");
+  }
+
+  function clickMcdt() {
+    allDown();
+    buttonBigUp("mcdt");
+    history.push("/FichaDoDoente/MCDT");
   }
 
   function clickAdesao() {
-    clickGraficos();
-    adesaoUp();
-    history.push("/FichaDoDoente/Graficos/Adesao");
-    medicacaoDown();
-    caratDown();
-    eventosDown();
-    coachingDown();
+    allDown();
+    buttonLittleUp("adesao");
+    conjMonitorizacaoUp();
+    history.push("/FichaDoDoente/Monitorizacao/Adesao");
   }
 
   function clickMedicacao() {
-    clickGraficos();
-    adesaoDown();
-    medicacaoUp();
-    history.push("/FichaDoDoente/Graficos/Medicacao");
-    caratDown();
-    eventosDown();
-    coachingDown();
+    allDown();
+    conjMonitorizacaoUp();
+    buttonLittleUp("medicacao");
+    history.push("/FichaDoDoente/Monitorizacao/Medicacao");
   }
 
   function clickCarat() {
-    clickGraficos();
-    adesaoDown();
-    medicacaoDown();
-    caratUp();
-    history.push("/FichaDoDoente/Graficos/CARAT");
-    eventosDown();
-    coachingDown();
+    allDown();
+    conjMonitorizacaoUp();
+    buttonLittleUp("carat");
+    history.push("/FichaDoDoente/Monitorizacao/CARAT");
   }
 
   function clickEventos() {
-    clickGraficos();
-    adesaoDown();
-    medicacaoDown();
-    caratDown();
-    eventosUp();
-    history.push("/FichaDoDoente/Graficos/Eventos");
-    coachingDown();
-    questionariosDown();
+    allDown();
+    conjMonitorizacaoUp();
+    buttonLittleUp("eventos");
+    history.push("/FichaDoDoente/Monitorizacao/Eventos");
   }
 
-  function clickCoaching() {
-    clickGraficos();
-    adesaoDown();
-    medicacaoDown();
-    caratDown();
-    eventosDown();
-    coachingUp();
-    history.push("/FichaDoDoente/Graficos/Coaching");
+  function clickEstado() {
+    allDown();
+    conjMonitorizacaoUp();
+    buttonLittleUp("estado");
+    history.push("/FichaDoDoente/Monitorizacao/Estado");
   }
 
-  function clickQuestionarios() {
-    inicioDown();
-    history.push("/FichaDoDoente/");
-    graficosDown();
-    sonsDown();
-    adesaoDown();
-    medicacaoDown();
-    caratDown();
-    eventosDown();
-    coachingDown();
-    questionariosUp();
-    history.push("/FichaDoDoente/Questionarios");
+  function clickGina() {
+    allDown();
+    conjMonitorizacaoUp();
+    buttonLittleUp("gina");
+    history.push("/FichaDoDoente/Monitorizacao/GINA");
+  }
+
+  function clickSono() {
+    allDown();
+    conjMonitorizacaoUp();
+    buttonLittleUp("sono");
+    history.push("/FichaDoDoente/Monitorizacao/Sono");
   }
 
   return (
@@ -207,7 +166,6 @@ const FDMenu = () => {
         style={{
           backgroundColor: "#175874",
           color: "white",
-          fontFamily: "Serif",
         }}
         onClick={async () => {
           clickInicio();
@@ -217,10 +175,10 @@ const FDMenu = () => {
       </div>
       <button
         className="buttonBig"
-        id="graficos"
-        onClick={() => clickGraficos()}
+        id="monitorizacao"
+        onClick={() => clickAdesao()}
       >
-        Gráficos
+        Monitorização
       </button>
 
       <div className="menu2">
@@ -231,7 +189,7 @@ const FDMenu = () => {
             clickAdesao();
           }}
         >
-          Adesão
+          Adesão Terapêutica
         </div>
         <div
           className="buttonLittle"
@@ -240,7 +198,7 @@ const FDMenu = () => {
             clickMedicacao();
           }}
         >
-          Medicação
+          Medicação S.O.S
         </div>
         <div
           className="buttonLittle"
@@ -262,14 +220,42 @@ const FDMenu = () => {
         </div>
         <div
           className="buttonLittle"
-          id="coaching"
+          id="estado"
           onClick={() => {
-            clickCoaching();
+            clickEstado();
           }}
         >
-          Coaching
+          Estado de Saúde
+        </div>
+        <div
+          className="buttonLittle"
+          id="gina"
+          onClick={() => {
+            clickGina();
+          }}
+        >
+          GINA
+        </div>
+        <div
+          className="buttonLittle"
+          id="sono"
+          onClick={() => {
+            clickSono();
+          }}
+        >
+          Sono
         </div>
       </div>
+
+      <button
+        className="buttonBig"
+        id="planos"
+        onClick={() => {
+          clickPlanos();
+        }}
+      >
+        Planos Ativos
+      </button>
 
       <button
         className="buttonBig"
@@ -282,12 +268,12 @@ const FDMenu = () => {
       </button>
       <button
         className="buttonBig"
-        id="questionarios"
+        id="mcdt"
         onClick={() => {
-          clickQuestionarios();
+          clickMcdt();
         }}
       >
-        Questionários
+        MCDT
       </button>
     </div>
   );
