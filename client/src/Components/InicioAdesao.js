@@ -17,6 +17,7 @@ const InicioCARAT = () => {
 
   return (
     <Doughnut
+      style={{ border: "10px solid yellow" }}
       data={data}
       options={{
         legend: {

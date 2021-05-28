@@ -33,7 +33,7 @@ const FDInicio = (props) => {
         <div className="notasGerais">
           <div className="indicatores">
             Notas Gerais
-            <img className="downArrow" src={downArrow} alt="" />
+            <img className="downArrow2" src={downArrow} alt="" />
           </div>
         </div>
         <div className="centroInferior">
@@ -86,8 +86,8 @@ const FDInicio = (props) => {
         </div>
       </div>
 
-      <div className="medicacao" id="medicacao2">
-        <div className="medicacao2">
+      <div className="right" id="medicacao">
+        <div className="medicacao">
           <div className="indicatores">Medicação Habitual</div>
           <div className="tableMedicationHeader">
             <div className="lineMedicationHeader"> Nome </div>
@@ -101,17 +101,17 @@ const FDInicio = (props) => {
           </div>
         </div>
 
-        <div className="adesao">
+        <div className="adesaoGlobal">
           <div className="indicatores">
             <div>Adesão Global</div>
             <div style={{ height: "100%" }}>
               <img className="inspirer" src={inspirer} alt="" />
-              <img className="downArrow" src={downArrow} alt="" />
+              <img className="downArrow2" src={downArrow} alt="" />
             </div>
           </div>
-          <div className="adesao2">
-            <div className="graficosInicio">{<InicioAdesao />}</div>
 
+          <div className="adesaoGlobal2">
+            <div className="graficosInicio">{<InicioAdesao />}</div>
             <div className="caratInfo">
               <div> Objetivo: </div>
             </div>
