@@ -64,7 +64,6 @@ app.get("/patient", (req, res) => {
 });
 
 app.get("/Observation/Weight", (req, res) => {
-  console.log("no weight");
   if (req.query.id) {
     client
       .search({
@@ -94,8 +93,6 @@ app.get("/Observation/Weight", (req, res) => {
 });
 
 app.get("/Observation/Height", (req, res) => {
-  console.log("no height");
-
   if (req.query.id) {
     client
       .search({
@@ -180,16 +177,12 @@ app.get("/medicationStatement", (req, res) => {
 });
 
 app.get("/Medication", (req, res) => {
-  console.log("entrei");
-  console.log(req.query.id);
   try {
     client
       .search({
         resourceType: "Medication/" + req.query.id,
       })
       .then((response) => {
-        console.log("response");
-        console.log(response);
         if (response != undefined) {
           medication = {
             name: response.code.coding[0].display,
@@ -215,7 +208,6 @@ app.get("/Condition", (req, res) => {
         },
       })
       .then((response) => {
-        console.log(response);
         const info = response.entry
           ? response.entry.map((obj) => {
               return {
@@ -269,11 +261,10 @@ app.get("/QuestionnaireResponse", (req, res) => {
           questionnaire:
             "http://fhir.inspirers.med.up.pt/Questionnaire/" + req.query.code,
           _count: 1,
-          /*_sort: asc recordedDate*/
+          _sort: "asc=authored",
         },
       })
       .then((response) => {
-        console.log(response);
         const info = response.entry
           ? response.entry.map((obj) => {
               return {
