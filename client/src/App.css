@@ -200,7 +200,7 @@ td {
   align-items: center;
   justify-content: right;
   border: 1px solid black;
-  margin-left: 30%;
+  margin-left: 50%;
 }
 
 .specificInformationPanel {
@@ -214,8 +214,7 @@ td {
   align-items: center;
   flex-direction: column;
   width: 20%;
-  height: 740px;
-  padding-top: 3%;
+  height: 780px;
 }
 
 .menu2 {
@@ -232,7 +231,7 @@ td {
   border-radius: 10px;
   border: 1px solid #707070;
   width: 70%;
-  height: 70px;
+  height: 9%;
   margin: 1%;
   cursor: pointer;
   color: #707070;
@@ -256,7 +255,7 @@ td {
   justify-content: space-between;
   flex-direction: row;
   color: #b7b7b7;
-  font-size: 25px;
+  font-size: 21px;
   padding: 5px;
 }
 
@@ -281,6 +280,14 @@ td {
 .downArrow {
   height: 65%;
   transform: rotate(90deg);
+  margin-left: 17%;
+  margin-top: 10%;
+  cursor: pointer;
+}
+
+.downArrow2 {
+  height: 65%;
+  transform: rotate(90deg);
   margin-right: 10px;
   margin-top: 4px;
   cursor: pointer;
@@ -300,14 +307,28 @@ td {
 
 .central {
   display: flex;
-  width: 55%;
+  width: 56%;
+  height: 780px;
   flex-direction: column;
+  align-items: center;
+  justify-items: center;
+}
+
+.notasGerais {
+  background-color: #f8f9f9;
+  border-radius: 20px;
+  border: 1px solid #707070;
+  width: 100%;
+  height: 55%;
+  display: flex;
+  justify-content: center;
 }
 
 .centroInferior {
   display: flex;
   flex-direction: row;
   width: 100%;
+  height: 45%;
   justify-content: space-between;
 }
 
@@ -318,6 +339,7 @@ td {
   margin-top: 2%;
   padding-right: 1%;
   width: 38%;
+  height: 85%;
 }
 
 .exacerbacoesInfo {
@@ -353,6 +375,7 @@ td {
 .carat {
   border: 1px solid #707070;
   width: 59%;
+  height: 85%;
   border-radius: 20px;
   margin-top: 15px;
   background-color: #f8f9f9;
@@ -361,13 +384,14 @@ td {
 .carat2 {
   display: flex;
   flex-direction: row;
+  height: 80%;
 }
 
 .graficosInicio {
   width: 60%;
   justify-content: center;
   align-items: center;
-  height: 20vh;
+  height: 100%;
 }
 
 .caratInfo {
@@ -378,44 +402,40 @@ td {
   flex-direction: column;
 }
 
-.notasGerais {
-  background-color: #f8f9f9;
-  border-radius: 20px;
-  border: 1px solid #707070;
-  width: 100%;
-  height: 400px;
-  display: flex;
-  justify-content: center;
-}
 
-.medicacao {
+.right {
   display: flex;
   align-items: center;
   border-color: #707070;
-  width: 40%;
+  width: 42%;
+  height: 780px;
   flex-direction: column;
 }
 
-.medicacao2 {
+.medicacao {
   background-color: #f8f9f9;
   border-radius: 20px;
   border: 1px solid #707070;
   width: 95%;
-  height: 400px;
+  height: 55%;
 }
 
-.adesao {
+.adesaoGlobal {
   border: 1px solid #707070;
   width: 95%;
+  height: 38%;
   border-radius: 20px;
   margin-top: 15px;
   background-color: #f8f9f9;
 }
 
-.adesao2 {
+.adesaoGlobal2 {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  height: 80%;
 }
+
 
 .infoExtraPanel1 {
   display: flex;
@@ -581,4 +601,378 @@ td {
   color: black;
   margin-top: 2%;
   margin-bottom: 2%;
+}
+
+.adesaoPanel {
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  border: 1px solid #707070;
+  border-radius: 1%;
+  width: 95%;
+  height: 770px;
+}
+
+.adesaoLeft {
+  width: 65%;
+  height: 100%;
+}
+
+
+.menuAdesao {
+  height: 20%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+}
+
+.graficoAdesao {
+  height: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid red;
+}
+
+.legendaAdesao {
+  height: 20%;
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-items: right;
+  float: right;
+}
+
+.legendaAdesao2 {
+  height: 20%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+
+.buttonBigAdesao {
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid #707070;
+  width: 30%;
+  height: 30%;
+  margin: 1%;
+  cursor: pointer;
+  color: #707070;
+  font-family: Arial;
+  font-size: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.squadLegendaAdesao {
+  width: 10%;
+  height: 65%;
+  background-color: red;
+  margin-right: 3%;
+}
+
+.adesaoRight {
+  width: 35%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.adesaoDivGraficoRight {
+  width: 90%;
+  height: 62%;
+  margin-top: 7%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 150%;
+  color: #707070;
+}
+
+.adesaoGraficoRight {
+  width: 90%;
+  height: 80%;
+  border: 1px solid red;
+  margin-top: 7%;
+}
+
+.buttonSchedule {
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid #707070;
+  width: 50%;
+  height: 8%;
+  margin-top: 10%;
+  cursor: pointer;
+  color: #707070;
+  font-family: Arial;
+  font-size: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.medicacaoPanel {
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  border: 1px solid #707070;
+  border-radius: 1%;
+  width: 95%;
+  height: 770px;
+}
+
+.eventosPanel {
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  border: 1px solid #707070;
+  border-radius: 1%;
+  width: 95%;
+  height: 770px;
+}
+
+.eventosLeft {
+  width: 65%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.eventosRight {
+  width: 35%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.graficoEventos {
+  width: 90%;
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid red;
+}
+
+.infoEventos {
+  width: 70%;
+  height: 65%;
+  border: 1px solid #707070;
+  border-radius: 4%;
+  margin-top: 5%;
+  padding: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Arial;
+  font-size: 26px;
+}
+
+.estadoPanel {
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  border: 1px solid #707070;
+  border-radius: 1%;
+  width: 95%;
+  height: 770px;
+}
+
+
+.estadoLeft {
+  width: 65%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.estadoRight {
+  width: 35%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.graficoEstado {
+  width: 90%;
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid red;
+}
+
+.ginaPanel {
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  border: 1px solid #707070;
+  border-radius: 1%;
+  width: 95%;
+  height: 770px;
+}
+
+.ginaLeft {
+  width: 65%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ginaRight {
+  width: 35%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.graficoGina {
+  width: 90%;
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid red;
+}
+
+.legendaGina {
+  height: 25%;
+  width: 65%;
+  display: flex;
+  flex-direction: column;
+}
+
+.legendaGina2 {
+  height: 20%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  font-size: 120%;
+  margin-bottom: 1%;
+}
+
+.circleLegendaGina {
+  background-color: #fe2f2e;
+  border-radius: 50%;
+  width: 7%;
+  height: 70%;
+  margin-right: 3%;
+}
+
+.sonoPanel {
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  border: 1px solid #707070;
+  border-radius: 1%;
+  width: 95%;
+  height: 770px;
+  font-size: 140%;
+  color: #707070;
+}
+
+.sonoLeft {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  border-right: 1px solid #707070;
+}
+
+.sonoRight {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 120%;
+
+}
+
+.sonoData {
+  width: 95%;
+  height: 15%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.sonoChooseData {
+  width: 30%;
+  height: 50%;
+  border: 1px solid #707070;
+  border-radius: 6%;
+  margin-left: 3%;
+}
+
+.sonoDormir {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 95%;
+  height: 30%;
+}
+
+.graficoComoDormiu {
+  width: 95%;
+  height: 50%;
+  border: 1px solid red;
+  margin-left: 3%;
+  margin-top: 1%;
+}
+
+.sonoAsma {
+  width: 95%;
+  height: 25%;
+}
+
+.sonoSonolento {
+  width: 95%;
+  height: 25%;
+}
+
+.graficoSonolento {
+  width: 95%;
+  height: 60%;
+  border: 1px solid red;
+  margin-left: 3%;
+  margin-top: 1%;
+}
+
+.qualidadeSono {
+  width: 95%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.sonolencia {
+  width: 95%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.graficoRight {
+  width: 60%;
+  height: 70%;
+  border: 1px solid red;
 }
