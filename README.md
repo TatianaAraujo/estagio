@@ -3,7 +3,7 @@
 Run the following.
 
 - `git clone https://github.com/TatianaAraujo/estagio.git`
-- `cd airdoc_app/client && yarn`
+- `cd estagio/client && yarn`
 - `cd ..` 
 - `// NOTE: make sure you are back in the root folder`
 - `yarn`
