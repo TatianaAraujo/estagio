@@ -31,10 +31,7 @@ const FDInicio = (props) => {
     <div id="specific" style={{ display: "flex", flexDirection: "row" }}>
       <div className="central" id="central">
         <div className="notasGerais">
-          <div className="indicatores">
-            Notas Gerais
-            <img className="downArrow2" src={downArrow} alt="" />
-          </div>
+          <div className="indicatores">Notas Gerais</div>
         </div>
         <div className="centroInferior">
           <div className="exacerbacoes">
@@ -95,6 +92,7 @@ const FDInicio = (props) => {
             <div className="lineMedicationHeader"> Frequência </div>
             <div className="lineMedicationHeader"> Hora </div>
             <div className="lineMedicationHeader"> Dose </div>
+            <div className="lineMedicationHeader"> Fonte </div>
           </div>
           <div className="MedicationInfo">
             <FDMedicacaoInicio medicationList={medicationList} />
@@ -106,7 +104,6 @@ const FDInicio = (props) => {
             <div>Adesão Global</div>
             <div style={{ height: "100%" }}>
               <img className="inspirer" src={inspirer} alt="" />
-              <img className="downArrow2" src={downArrow} alt="" />
             </div>
           </div>
 

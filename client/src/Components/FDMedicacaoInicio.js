@@ -218,6 +218,7 @@ const FDMedicacaoInicio = ({ medicationList }) => {
           <div className="lineMedication">
             {doseQuantity.value} {doseQuantity.unit}
           </div>
+          <div className="lineMedication"> Fonte</div>
         </div>
       );
     }

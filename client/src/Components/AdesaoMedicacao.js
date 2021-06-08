@@ -1,8 +1,95 @@
 import React from "react";
+import { Line } from "react-chartjs-2";
 
 const AdesaoMedicacao = (props) => {
   const adesao = props;
   const patientId = adesao.adesao;
-  return <div> Reservado para o gráfico Toda a medicacao</div>;
+  
+  const xlabels = [
+    "Janeiro",
+    "Fevereiro",
+    "Março",
+    "Abril",
+    "Maio",
+    "Junho",
+    "Julho",
+    "Agosto",
+    "Setembro",
+    "Outubro",
+    "Novembro",
+    "Dezembro",
+  ];
+  const ylabels = [
+    60,
+    "null",
+    "null",
+    80,
+    70,
+    "null",
+    20,
+    "null",
+    "null",
+    80,
+    "null",
+    19,
+  ];
+
+  const data = {
+    labels: xlabels,
+    datasets: [
+      {
+        label: "Adesão Global ao Tratamento",
+        data: ylabels,
+        fill: false,
+        borderColor: "rgba(76, 120, 198)",
+        tension: 0,
+        pointBackgroundColor: "rgba(221, 82, 60)",
+        spanGaps: true,
+        pointRadius: "8",
+        pointBorderColor: "#e76e54",
+        pointBorderWidth: "6",
+      },
+    ],
+  };
+  return (
+    <div
+      style={{
+        display: "flex",
+        width: "100%",
+        height: "100%",
+        alignItems: "center",
+        justifyContent: "space-between",
+        flexDirection: "column",
+      }}
+    >
+      <h3>Adesão Global ao Tratamento</h3>
+
+      <div style = {{width:"100%", height:"80%"}}>
+        <Line
+          data={data}
+          width={95}
+          height={35}
+          options={{
+            legend: {
+              position: "bottom",
+            },
+            scales: {
+              yAxes: [
+                {
+                  ticks: {
+                    beginAtZero: true,
+                    max: 100,
+                  },
+                },
+              ],
+            },
+          }}
+        />
+      </div>
+
+      
+    </div>
+  );
+
 };
 export default AdesaoMedicacao;
