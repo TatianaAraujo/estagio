@@ -177,8 +177,14 @@ const FichaDoDoente = () => {
               render={(props) => <FDSons {...props} sons={sonsInfo} />}
             />
             <Route path="/FichaDoDoente/Planos" render={FDPlanos} />
-            <Route path="/FichaDoDoente/Monitorizacao/Sono" render={FDSono} />
-            <Route path="/FichaDoDoente/Monitorizacao/GINA" render={FDGina} />
+            <Route
+              path="/FichaDoDoente/Monitorizacao/Sono"
+              render={(props) => <FDSono {...props} sono={patientId} />}
+            />
+            <Route
+              path="/FichaDoDoente/Monitorizacao/Gina"
+              render={(props) => <FDGina {...props} gina={patientId} />}
+            />
             <Route
               path="/FichaDoDoente/Monitorizacao/Estado"
               render={FDEstado}
@@ -187,7 +193,10 @@ const FichaDoDoente = () => {
               path="/FichaDoDoente/Monitorizacao/Eventos"
               render={(props) => <FDEventos {...props} eventos={patientId} />}
             />
-            <Route path="/FichaDoDoente/Monitorizacao/CARAT" render={FDCarat} />
+            <Route
+              path="/FichaDoDoente/Monitorizacao/CARAT"
+              render={(props) => <FDCarat {...props} carat={patientId} />}
+            />
             <Route
               path="/FichaDoDoente/Monitorizacao/Medicacao"
               render={FDMedicacao}

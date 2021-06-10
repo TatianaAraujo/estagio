@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
+
 import { useHistory } from "react-router-dom";
 
 const AdesaoMenu = () => {
   const history = useHistory();
+
+  useEffect(() => {
+    history.push("/FichaDoDoente/Monitorizacao/Adesao/TodaMedicacao");
+  }, []);
 
   const buttonUp = (buttonId) => {
     let button = document.getElementById(buttonId);
@@ -41,6 +46,7 @@ const AdesaoMenu = () => {
       <div
         className="buttonBigAdesao"
         id="todaMedicacao"
+        style={{ border: "4px solid #175874" }}
         onClick={() => {
           clickTodaMedicacao();
         }}

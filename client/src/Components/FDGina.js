@@ -1,17 +1,15 @@
 import React from "react";
+import GinaGrafico from "./GinaGrafico";
 
-const FDGina = () => {
-  /*
-
-<div className="legendaGina">
-          
-
-
-  */
+const FDGina = (props) => {
+  const gina = props;
+  const patientId = gina.gina;
   return (
     <div className="ginaPanel">
       <div className="ginaLeft">
-        <div className="graficoGina"> Reservado para o gráfico</div>
+        <div className="graficoGina">
+          <GinaGrafico />
+        </div>
       </div>
       <div className="ginaRight">
         <div className="legendaGina">
@@ -20,7 +18,7 @@ const FDGina = () => {
               className="circleLegendaGina"
               style={{ backgroundColor: "#b1e0a3" }}
             ></div>
-            <div> Boa Adesão (≥ 80%)</div>
+            <div> Controlado </div>
           </div>
 
           <div className="legendaGina2">
@@ -28,12 +26,12 @@ const FDGina = () => {
               className="circleLegendaGina"
               style={{ backgroundColor: "#fedf69" }}
             ></div>
-            <div> Razoável Adesão (51 - 79%)</div>
+            <div> Parcialmente Controlado</div>
           </div>
 
           <div className="legendaGina2">
             <div className="circleLegendaGina"></div>
-            <div> Má Adesão (≤ 50%)</div>
+            <div> Não Controlado </div>
           </div>
         </div>
       </div>

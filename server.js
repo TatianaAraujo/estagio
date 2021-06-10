@@ -258,17 +258,17 @@ app.get("/QuestionnaireResponse", (req, res) => {
         resourceType: "QuestionnaireResponse",
         searchParams: {
           subject: "Patient/" + req.query.id,
+          /*_sort: "desc=authored", //--> Sem efeito*/
+          _count: 1,
           questionnaire:
             "http://fhir.inspirers.med.up.pt/Questionnaire/" + req.query.code,
-          _count: 1,
-          _sort: "asc=authored",
         },
       })
       .then((response) => {
         const info = response.entry
           ? response.entry.map((obj) => {
               return {
-                all: obj.resource,
+                all: obj.resource.item,
               };
             })
           : [];

@@ -733,7 +733,7 @@ td {
   height: 17%;
   color: #707070;
   font-family: Arial;
-  font-size: 26px;
+  font-size: 23px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -767,6 +767,54 @@ td {
   border-radius: 1%;
   width: 95%;
   height: 770px;
+}
+
+.caratLeft {
+  width: 65%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.caratRight {
+  width: 35%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.graficoCarat {
+  width: 90%;
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid red;
+}
+
+.menuCarat {
+  height: 20%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+}
+
+.buttonBigCarat {
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid #707070;
+  width: 30%;
+  height: 30%;
+  margin: 1%;
+  cursor: pointer;
+  color: #707070;
+  font-family: Arial;
+  font-size: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .eventosPanel {
@@ -884,7 +932,6 @@ td {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid red;
 }
 
 .legendaGina {
@@ -972,6 +1019,9 @@ td {
   border: 1px solid red;
   margin-left: 3%;
   margin-top: 1%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .sonoAsma {
