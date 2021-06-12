@@ -174,18 +174,30 @@ const FDExtraInfo = (props) => {
     getInfecoesInfo();
   }, []);
 
-  const geraisItems = gerais.map((n) => <div className="infoText">{n}</div>);
-  const alergiasItems = alergias.map((n) => (
-    <div className="infoText">{n}</div>
+  const geraisItems = gerais.map((n, index) => (
+    <div className="infoText" key={index}>
+      {n}
+    </div>
   ));
-  const comorbilidadesItems = comorbilidades.map((n) => (
-    <div className="infoText">{n}</div>
+  const alergiasItems = alergias.map((n, index) => (
+    <div className="infoText" key={index}>
+      {n}
+    </div>
   ));
-  const diagnosticosItems = diagnosticos.map((n) => (
-    <div className="infoText">{n}</div>
+  const comorbilidadesItems = comorbilidades.map((n, index) => (
+    <div className="infoText" key={index}>
+      {n}
+    </div>
   ));
-  const infecoesItems = infecoes.map((n) => (
-    <div className="infoText">{n}</div>
+  const diagnosticosItems = diagnosticos.map((n, index) => (
+    <div className="infoText" key={index}>
+      {n}
+    </div>
+  ));
+  const infecoesItems = infecoes.map((n, index) => (
+    <div className="infoText" key={index}>
+      {n}
+    </div>
   ));
 
   return (

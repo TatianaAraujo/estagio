@@ -689,8 +689,10 @@ td {
 .adesaoGraficoRight {
   width: 90%;
   height: 80%;
-  border: 1px solid red;
+  border: 1px solid rgb(23, 88, 116);
   margin-top: 7%;
+  display: flex;
+  justify-content: center;
 }
 
 .buttonSchedule {
@@ -845,16 +847,59 @@ td {
 
 .graficoEventos {
   width: 90%;
-  height: 80%;
+  height: 85%;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid red;
+  flex-direction: column;
 }
 
+.graficoEventos2 {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.graficoEventosDiv {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.graficoEventosLegendaCores {
+  display: flex;
+  width: 5%;
+  height: 90%;
+  flex-direction: column;
+}
+.legendaCor {
+  width: 100%;
+  height: 21%;
+}
+
+.graficoEventosLegenda {
+  width: 17%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 1%;
+}
+
+.graficoPontosEventos {
+  width: 75%;
+  height: 90%;
+  display: flex;
+  margin-top: 7%;
+  margin-left: 1%;
+}
 .infoEventos {
   width: 70%;
-  height: 65%;
+  height: 40%;
   border: 1px solid #707070;
   border-radius: 4%;
   margin-top: 5%;

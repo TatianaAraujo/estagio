@@ -19,13 +19,15 @@ const Patient = ({ PatientList }) => {
             history.push("/FichaDoDoente");
           }}
         >
-          <tr>
-            <td style={{ width: "30px" }}> </td>
-            <td style={{ width: "100px" }}> {id} </td>
-            <td style={{ width: "300px" }}> {name} </td>
-            <td style={{ width: "200px" }}> {birthDate} </td>
-            <td> {gender} </td>
-          </tr>
+          <tbody>
+            <tr>
+              <td style={{ width: "30px" }}> </td>
+              <td style={{ width: "100px" }}> {id} </td>
+              <td style={{ width: "300px" }}> {name} </td>
+              <td style={{ width: "200px" }}> {birthDate} </td>
+              <td> {gender} </td>
+            </tr>
+          </tbody>
         </table>
       </div>
     );

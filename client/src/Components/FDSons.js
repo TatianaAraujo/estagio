@@ -15,8 +15,8 @@ const FDSons = (props) => {
       </div>
 
       <div className="sonsInfo">
-        {sons.map(({ contentData, createdDateTime, type }) => (
-          <div className="tableSounds">
+        {sons.map(({ contentData, createdDateTime, type }, index) => (
+          <div className="tableSounds" key={index}>
             <div
               className="lineSound"
               onClick={() => {

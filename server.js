@@ -29,8 +29,10 @@ function getPatientDataByName(name, res) {
             };
           })
         : [];
-
       res.status(200).json(patients);
+    })
+    .catch((error) => {
+      throw error;
     });
 }
 
@@ -50,6 +52,9 @@ function getPatientDataById(personId, res) {
         };
       }
       res.status(200).json(patient);
+    })
+    .catch((error) => {
+      throw error;
     });
 }
 
@@ -86,6 +91,9 @@ app.get("/Observation/Weight", (req, res) => {
           : [];
 
         res.status(200).json(patients);
+      })
+      .catch((error) => {
+        throw error;
       });
   } else {
     res.status(200).json([]);
@@ -115,6 +123,9 @@ app.get("/Observation/Height", (req, res) => {
           : [];
 
         res.status(200).json(patients);
+      })
+      .catch((error) => {
+        throw error;
       });
   } else {
     res.status(200).json([]);
@@ -140,6 +151,9 @@ app.get("/media", (req, res) => {
           : [];
 
         res.status(200).json(media);
+      })
+      .catch((error) => {
+        throw error;
       });
   } catch {
     res.status(200).json([]);
@@ -170,6 +184,9 @@ app.get("/medicationStatement", (req, res) => {
           : [];
 
         res.status(200).json(medication);
+      })
+      .catch((error) => {
+        throw error;
       });
   } catch {
     res.status(200).json([]);
@@ -189,6 +206,9 @@ app.get("/Medication", (req, res) => {
           };
         }
         res.status(200).json(medication);
+      })
+      .catch((error) => {
+        throw error;
       });
   } catch {
     res.status(200).json([]);
@@ -217,6 +237,9 @@ app.get("/Condition", (req, res) => {
           : [];
 
         res.status(200).json(info);
+      })
+      .catch((error) => {
+        throw error;
       });
   } catch {
     res.status(200).json([]);
@@ -245,6 +268,9 @@ app.get("/Observation", (req, res) => {
           : [];
 
         res.status(200).json(info);
+      })
+      .catch((error) => {
+        throw error;
       });
   } catch {
     res.status(200).json([]);
@@ -274,6 +300,9 @@ app.get("/QuestionnaireResponse", (req, res) => {
           : [];
 
         res.status(200).json(info);
+      })
+      .catch((error) => {
+        throw error;
       });
   } catch {
     res.status(200).json([]);

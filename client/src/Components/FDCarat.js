@@ -17,7 +17,7 @@ const FDCarat = (props) => {
     const filtrarData = document.getElementById("filtrarData");
     const periodosSchedule = document.getElementById("periodosSchedule");
 
-    if (filtrarUp == 0) {
+    if (filtrarUp === 0) {
       filtrarData.style.height = "45%";
       periodosSchedule.style.display = "flex";
       filtrarUp = 1;

@@ -6,11 +6,32 @@ import AdesaoCorticoides from "./AdesaoCorticoides";
 import AdesaoMedicacao from "./AdesaoMedicacao";
 import AdesaoTerapia from "./AdesaoTerapia";
 
+import AdesaoMedicacaoCircular from "./AdesaoMedicacaoCircular";
+import AdesaoCorticoidesCircular from "./AdesaoCorticoidesCircular";
+import AdesaoTerapiaCircular from "./AdesaoTerapiaCircular";
+
 import calendar from "../img/calendar.png";
 
 const FDAdesao = (props) => {
   const adesao = props;
   const patientId = adesao.adesao;
+
+  let filtrarUp = 0;
+
+  const changeDataInformation = () => {
+    const filtrarData = document.getElementById("filtrarData");
+    const periodosSchedule = document.getElementById("periodosSchedule");
+
+    if (filtrarUp === 0) {
+      filtrarData.style.height = "45%";
+      periodosSchedule.style.display = "flex";
+      filtrarUp = 1;
+    } else {
+      filtrarData.style.height = "8%";
+      periodosSchedule.style.display = "none";
+      filtrarUp = 0;
+    }
+  };
 
   return (
     <div className="adesaoPanel">
@@ -61,13 +82,56 @@ const FDAdesao = (props) => {
       </div>
 
       <div className="adesaoRight">
-        <div className="buttonSchedule">
-          Filtrar Data
-          <img style={{ width: "20%" }} src={calendar} alt="" />
+        <div className="buttonSchedule" id="filtrarData">
+          <div className="filtroDiv">
+            <div>Filtrar Data</div>
+            <img
+              style={{ width: "20%", cursor: "pointer" }}
+              src={calendar}
+              alt=""
+              onClick={() => {
+                changeDataInformation();
+              }}
+            />
+          </div>
+          <div className="periodosSchedule" id="periodosSchedule">
+            <div className="periodosSchedule2" id="semana">
+              Última Semana
+            </div>
+            <div className="periodosSchedule2" id="mes">
+              Último Mês
+            </div>
+            <div className="periodosSchedule2" id="3meses">
+              Últimos 3 Meses
+            </div>
+            <div className="periodosSchedule2" id="ano">
+              Último Ano
+            </div>
+          </div>
         </div>
         <div className="adesaoDivGraficoRight">
-          <div>Adesao Média a Toda a Medicação</div>
-          <div className="adesaoGraficoRight"></div>
+          <div className="adesaoGraficoRight">
+            <Switch>
+              <Route
+                path="/FichaDoDoente/Monitorizacao/Adesao/CorticoidesInalados"
+                render={(props) => (
+                  <AdesaoCorticoidesCircular {...props} inicio={patientId} />
+                )}
+              />
+              <Route
+                path="/FichaDoDoente/Monitorizacao/Adesao/TerapiaNasal"
+                render={(props) => (
+                  <AdesaoTerapiaCircular {...props} inicio={patientId} />
+                )}
+              />
+              <Route
+                path="/FichaDoDoente/Monitorizacao/Adesao/TodaMedicacao"
+                render={(props) => (
+                  <AdesaoMedicacaoCircular {...props} inicio={patientId} />
+                )}
+              />
+            </Switch>
+          </div>
         </div>
       </div>
     </div>

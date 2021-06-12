@@ -54,12 +54,14 @@ const Lista = () => {
       <div className="listaPatientsDiv" id="list" style={{ display: "none" }}>
         <div className="listaPatientsTable">
           <table>
-            <tr>
-              <th style={{ width: "35%" }}>SNS</th>
-              <th style={{ width: "300px" }}>| Nome Utente </th>
-              <th style={{ width: "200px" }}>| Data Nascimento </th>
-              <th>| Sexo </th>
-            </tr>
+            <tbody>
+              <tr>
+                <th style={{ width: "35%" }}>SNS</th>
+                <th style={{ width: "300px" }}>| Nome Utente </th>
+                <th style={{ width: "200px" }}>| Data Nascimento </th>
+                <th>| Sexo </th>
+              </tr>
+            </tbody>
           </table>
           <div>
             {!Loading && PatientListShow && (

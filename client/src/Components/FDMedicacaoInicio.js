@@ -23,7 +23,7 @@ const FDMedicacaoInicio = ({ medicationList }) => {
   };*/
 
   return medicationList.map(
-    ({ medicationReference, timing, route, doseQuantity }) => {
+    ({ medicationReference, timing, route, doseQuantity }, index) => {
       let periodUnit;
       let frequency;
       let period;
@@ -115,7 +115,7 @@ const FDMedicacaoInicio = ({ medicationList }) => {
       }
       // {/*frequency*/} {/*period*/} {/*periodUnit*/}
       return (
-        <div className="tableMedication">
+        <div className="tableMedication" key={index}>
           <div className="lineMedication">{medicationName}</div>
           <div className="lineMedication"> {route}</div>
 

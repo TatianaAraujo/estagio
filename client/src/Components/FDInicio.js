@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import InicioCARAT from "./InicioCARAT";
 import InicioAdesao from "./InicioAdesao";
 import FDMedicacaoInicio from "../Components/FDMedicacaoInicio";
+import InicioNotasGerais from "../Components/InicioNotasGerais";
 
-import downArrow from "../img/avanco-rapido.png";
 import informationButton from "../img/botao-de-informacao.png";
 import inspirer from "../img/inspirermundi.png";
 import airdoc from "../img/airdoc.png";
@@ -32,11 +32,12 @@ const FDInicio = (props) => {
       <div className="central" id="central">
         <div className="notasGerais">
           <div className="indicatores">Notas Gerais</div>
+          <InicioNotasGerais {...props} inicioNotasGerais={patientId} />
         </div>
         <div className="centroInferior">
           <div className="exacerbacoes">
             <div className="indicatores">
-              Exacerbações
+              Agudizações
               <img className="info" src={informationButton} alt="" />
             </div>
 

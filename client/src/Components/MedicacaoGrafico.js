@@ -36,7 +36,7 @@ const data = (canvas) => {
   };
 };
 
-export default function GinaGrafico() {
+export default function MedicacaoGrafico() {
   return (
     <div
       style={{
@@ -48,15 +48,12 @@ export default function GinaGrafico() {
         flexDirection: "column",
       }}
     >
-      <h2> GINA </h2>
+      <h2> Nº de tomas de Medicação SOS </h2>
       <Line
         data={data}
         width={95}
         height={60}
         options={{
-          legend: {
-            display: false,
-          },
           scales: {
             xAxes: [
               {
@@ -67,10 +64,6 @@ export default function GinaGrafico() {
             ],
             yAxes: [
               {
-                scaleLabel: {
-                  display: true,
-                  labelString: "Score GINA",
-                },
                 ticks: {
                   beginAtZero: true,
                   max: 4,
