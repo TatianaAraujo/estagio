@@ -31,7 +31,7 @@ const FichaDoDoente = () => {
 
   const [showDataPath] = useState("/FichaDoDoente/");
 
-  const [sonsInfo, setSonsInfo] = useState([]);
+  //const [sonsInfo, setSonsInfo] = useState([]);
 
   useEffect(() => {
     addBodyClass("body-transparent");
@@ -39,14 +39,14 @@ const FichaDoDoente = () => {
     history.push(showDataPath);
     personInformation(patientId);
 
-    const fetchSons = async (patientId) => {
+    /*const fetchSons = async (patientId) => {
       const res = await fetch(`/media?patientId=${patientId}`, {
         accept: "application/json",
       });
       const data = await res.json();
       setSonsInfo(data);
     };
-    fetchSons(patientId);
+    fetchSons(patientId);*/
   }, []);
 
   const getAge = (birthDate) => {
@@ -172,7 +172,7 @@ const FichaDoDoente = () => {
             <Route path="/FichaDoDoente/MCDT" render={FDMcdt} />
             <Route
               path="/FichaDoDoente/SonsRespiratorios"
-              render={(props) => <FDSons {...props} sons={sonsInfo} />}
+              render={(props) => <FDSons {...props} sons={patientId} />}
             />
             <Route path="/FichaDoDoente/Planos" render={FDPlanos} />
             <Route

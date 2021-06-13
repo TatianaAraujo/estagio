@@ -1,19 +1,87 @@
-import React, { Component } from "react";
-import play from "../img/botao-play-ponta-de-seta.png";
+import React, { useState, useEffect } from "react";
+import SonsTabela from "./SonsTabela";
 import downArrow from "../img/avanco-rapido.png";
 
 const FDSons = (props) => {
-  const { sons } = props;
+  const sons = props;
+  const patientId = sons.sons;
 
-  for (let i = 0; i < sons.length; i++) {
-    if (sons[i].type == "Lung Function") {
-      sons[i].type = "Função pulmonar";
-    } else if (sons[i].type.includes("Auscultation")) {
-      sons[i].type = "Auscultação";
-    } else if (sons[i].type == "Free Recording") {
-      sons[i].type = "Gravação livre";
+  const [sonsInfo, setSonsInfo] = useState([]);
+  const [filterOrdr, setFilterOrdr] = useState("ASC");
+
+  useEffect(() => {
+    const fetchSons = async (patientId) => {
+      const res = await fetch(`/media?patientId=${patientId}`, {
+        accept: "application/json",
+      });
+      const data = await res.json();
+      setSonsInfo(data);
+    };
+    fetchSons(patientId);
+  }, []);
+
+  const sortData = () => {
+    console.log(sonsInfo);
+    if (filterOrdr === "DESC") {
+      const testSom = sonsInfo.sort(function (a, b) {
+        if (a.createdDateTime > b.createdDateTime) {
+          return 1;
+        }
+        if (a.createdDateTime < b.createdDateTime) {
+          return -1;
+        }
+      });
+      setSonsInfo(testSom);
+    } else {
+      const testSom = sonsInfo.sort(function (a, b) {
+        if (a.createdDateTime < b.createdDateTime) {
+          return 1;
+        }
+        if (a.createdDateTime > b.createdDateTime) {
+          return -1;
+        }
+      });
+      setSonsInfo(testSom);
     }
-  }
+  };
+
+  const sortData2 = () => {
+    console.log(sonsInfo);
+    if (filterOrdr === "ASC") {
+      setFilterOrdr("DESC");
+    } else {
+      setFilterOrdr("ASC");
+    }
+  };
+
+  let changeTypeFlag = 0;
+  const changeType = () => {
+    const changeType = document.getElementById("changeType");
+    if (changeTypeFlag === 0) {
+      changeType.style.display = "flex";
+      changeTypeFlag = 1;
+    } else {
+      changeType.style.display = "none";
+      changeTypeFlag = 0;
+    }
+  };
+
+  const selectType = (nome) => {
+    let newSonsInfo = [];
+    for (let i = 0; i < sonsInfo.length; i++) {
+      if (sonsInfo[i].type !== nome) {
+        sonsInfo[i].showItem = 0;
+      } else {
+        sonsInfo[i].showItem = 1;
+      }
+      if (nome === "todos") {
+        sonsInfo[i].showItem = 1;
+      }
+      newSonsInfo.push(sonsInfo[i]);
+    }
+    changeType();
+    setSonsInfo(newSonsInfo);
+  };
 
   return (
     <div className="sons">
@@ -29,8 +97,47 @@ const FDSons = (props) => {
                 className="downArrow"
                 src={downArrow}
                 alt=""
+                onClick={() => {
+                  sortData2();
+                  sortData();
+                }}
               />
             </div>
+          </div>
+        </div>
+
+        <div className="changeType" id="changeType">
+          <div
+            className="changeTypeLine"
+            onClick={() => {
+              selectType("todos");
+            }}
+          >
+            Todos
+          </div>
+          <div
+            className="changeTypeLine"
+            onClick={() => {
+              selectType("Auscultação");
+            }}
+          >
+            Auscultação
+          </div>
+          <div
+            className="changeTypeLine"
+            onClick={() => {
+              selectType("Gravação livre");
+            }}
+          >
+            Gravação Livre
+          </div>
+          <div
+            className="changeTypeLine"
+            onClick={() => {
+              selectType("Função pulmonar");
+            }}
+          >
+            Função Pulmonar
           </div>
         </div>
 
@@ -43,6 +150,9 @@ const FDSons = (props) => {
                 className="downArrow"
                 src={downArrow}
                 alt=""
+                onClick={() => {
+                  changeType();
+                }}
               />
             </div>
           </div>
@@ -55,25 +165,7 @@ const FDSons = (props) => {
           Notas Médico
         </div>
       </div>
-      <div className="sonsInfo">
-        {sons.map(({ contentData, createdDateTime, type, note }, index) => (
-          <div className="tableSounds" key={index}>
-            <div
-              className="lineSound"
-              onClick={() => {
-                new Audio("data:audio/wav;base64," + contentData).play();
-              }}
-              style={{ width: "5%", cursor: "pointer" }}
-            >
-              <img width="40%" src={play} alt="" />
-            </div>
-            <div className="lineSound">{createdDateTime.substring(0, 10)}</div>
-            <div className="lineSound"> {type} </div>
-            <div className="lineSound"> {note} </div>
-            <div className="lineSound"> {} </div>
-          </div>
-        ))}
-      </div>
+      <SonsTabela sons={sonsInfo} />
     </div>
   );
 };

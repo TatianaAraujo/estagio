@@ -148,6 +148,7 @@ app.get("/media", (req, res) => {
                 type: obj.resource.bodySite.text,
                 createdDateTime: obj.resource.createdDateTime,
                 note: obj.resource.note[0].text,
+                showItem: 1,
               };
             })
           : [];

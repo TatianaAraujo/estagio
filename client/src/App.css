@@ -549,6 +549,34 @@ td {
   border-right: 1px solid #dadada;
   padding-bottom: 15px;
 }
+.changeType {
+  background-color: rgb(23, 88, 116);
+  position: absolute;
+  top: 23.9%;
+  left: 45.5%;
+  height: 20%;
+  width: 16.2%;
+  display: none;
+  flex-direction: column;
+  border-bottom: 1px solid white;
+  border-right: 1px solid white;
+  border-left: 1px solid white;
+  border-bottom-left-radius: 5%;
+  border-bottom-right-radius: 5%;
+  box-shadow: 7px 5px 5px #707070;
+}
+
+.changeTypeLine {
+  width: 100%;
+  height: 33%;
+  border-bottom: 1px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: white;
+  cursor: pointer;
+}
 
 .tableMedicationHeader {
   border: #707070 solid 1px;
@@ -707,6 +735,9 @@ td {
 }
 
 .adesaoGraficoRight {
+  position: relative;
+  top: 20%;
+  z-index: 0;
   width: 90%;
   height: 80%;
   border: 1px solid rgb(23, 88, 116);
@@ -716,10 +747,13 @@ td {
 }
 
 .buttonSchedule {
+  position: absolute;
+  top: 6%;
+  z-index: 1;
   background-color: white;
   border-radius: 10px;
   border: 1px solid #707070;
-  width: 50%;
+  width: 15%;
   height: 8%;
   margin-top: 10%;
   color: #707070;
@@ -918,8 +952,11 @@ td {
   margin-left: 1%;
 }
 .infoEventos {
+  position: relative;
+  top: 20%;
+  z-index: 0;
   width: 70%;
-  height: 40%;
+  height: 60%;
   border: 1px solid #707070;
   border-radius: 4%;
   margin-top: 5%;
