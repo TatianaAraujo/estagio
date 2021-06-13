@@ -141,9 +141,7 @@ const FichaDoDoente = () => {
               />
 
               <div className="personInformation2">
-                <div id="dados" className="patientData">
-                  {" "}
-                </div>
+                <div id="dados" className="patientData"></div>
                 <hr></hr>
                 <div className="ocupation"> Trabalha em </div>
               </div>

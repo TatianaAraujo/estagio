@@ -143,9 +143,11 @@ app.get("/media", (req, res) => {
         const media = response.entry
           ? response.entry.map((obj) => {
               return {
+                all: obj.resource,
                 contentData: obj.resource.content.data,
                 type: obj.resource.bodySite.text,
                 createdDateTime: obj.resource.createdDateTime,
+                note: obj.resource.note[0].text,
               };
             })
           : [];
