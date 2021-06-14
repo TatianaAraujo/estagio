@@ -5,7 +5,8 @@ import pause from "../img/pause.png";
 const SonsTabela = (props) => {
   const { sons } = props;
   let newSons = sons.filter((sons) => sons.showItem > 0);
-  const [playButtonType, setPlayButtonType] = useState(true);
+  const [playButtonIndex, setPlayButtonIndex] = useState("none");
+  const [audio, setAudio] = useState({ pause: () => {} });
 
   for (let i = 0; i < newSons.length; i++) {
     if (newSons[i].type == "Lung Function") {
@@ -17,57 +18,72 @@ const SonsTabela = (props) => {
     }
   }
 
-  var audio;
-  const playSound = (e) => {
-    e.target.id = "playing";
-    const play = document.getElementById("playing");
-    setPlayButtonType(false);
-    //const pause = document.getElementById("pause");
-    play.style.display = "none";
-    pause.style.display = "flex";
-    //audio = new Audio("data:audio/wav;base64," + contentData);
-    //audio.play();
+  const playSound = (contentData, e) => {
+    const index = e.target.id.slice(-1);
+    const playing = document.getElementById(`playing${playButtonIndex}`);
+    const pause = document.getElementById(`pause${index}`);
+
+    if (playing === null) {
+      e.target.id = `playing${index}`;
+      e.target.style.display = "none";
+      pause.style.display = "flex";
+      setPlayButtonIndex(index);
+      const a = new Audio("data:audio/wav;base64," + contentData);
+      setAudio(a);
+      a.play();
+    } else {
+      const pausePlaying = document.getElementById(`pause${playButtonIndex}`);
+      audio.pause();
+      pausePlaying.style.display = "none";
+      playing.style.display = "flex";
+      playing.id = `play${playButtonIndex}`;
+
+      e.target.id = `playing${index}`;
+      e.target.style.display = "none";
+      pause.style.display = "flex";
+      setPlayButtonIndex(index);
+      const a = new Audio("data:audio/wav;base64," + contentData);
+      setAudio(a);
+      a.play();
+    }
+    return;
   };
+
   const pauseSound = (e) => {
-    const playing = document.getElementById("playing");
-    playing.id = "play";
-    const pause = document.getElementById("pause");
-    playing.style.display = "flex";
-    pause.style.display = "none";
-
-    //audio.pause();
+    const index = e.target.id.slice(-1);
+    const play = document.getElementById(`playing${index}`);
+    e.target.style.display = "none";
+    play.style.display = "flex";
+    play.id = `play${index}`;
+    setPlayButtonIndex("none");
+    audio.pause();
   };
-  const playButton = (
-    <img
-      style={{ display: "flex" }}
-      id="play"
-      width="40%"
-      src={play}
-      alt=""
-      onClick={(e) => {
-        playSound(e);
-      }}
-    />
-  );
 
-  const pauseButton = (
-    <img
-      style={{ display: "flex" }}
-      id="pause"
-      width="40%"
-      src={pause}
-      alt=""
-      onClick={(e) => {
-        pauseSound(e);
-      }}
-    />
-  );
   return (
     <div className="sonsInfo">
       {newSons.map(({ contentData, createdDateTime, type, note }, index) => (
         <div className="tableSounds" key={index}>
           <div className="lineSound" style={{ width: "5%", cursor: "pointer" }}>
-            {playButtonType ? playButton : pauseButton}
+            <img
+              style={{ display: "flex" }}
+              id={`play${index}`}
+              width="40%"
+              src={play}
+              alt=""
+              onClick={(e) => {
+                playSound(contentData, e);
+              }}
+            />
+            <img
+              style={{ display: "none" }}
+              id={`pause${index}`}
+              width="40%"
+              src={pause}
+              alt=""
+              onClick={(e) => {
+                pauseSound(e);
+              }}
+            />
           </div>
 
           <div className="lineSound">{createdDateTime.substring(0, 10)}</div>

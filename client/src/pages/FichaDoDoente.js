@@ -67,7 +67,6 @@ const FichaDoDoente = () => {
           diagnosticosSet.push({ text: value.Text, validado: value.Validate });
         }
       }
-      console.log(diagnosticosSet);
       setDiagnosticos(diagnosticosSet);
     };
     getDiagnosticosInfo();
@@ -199,7 +198,7 @@ const FichaDoDoente = () => {
             <Route path="/FichaDoDoente/MCDT" render={FDMcdt} />
             <Route
               path="/FichaDoDoente/SonsRespiratorios"
-              render={(props) => <FDSons {...props} sons={patientId} />}
+              render={(props) => <FDSons {...props} patientId={patientId} />}
             />
             <Route path="/FichaDoDoente/Planos" render={FDPlanos} />
             <Route

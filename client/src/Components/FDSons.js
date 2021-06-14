@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import SonsTabela from "./SonsTabela";
 import downArrow from "../img/avanco-rapido.png";
 
-const FDSons = (props) => {
-  const sons = props;
-  const patientId = sons.sons;
+const FDSons = ({ patientId }) => {
+  //const sons = props;
+  //const patientId = sons.patientId;
 
   const [sonsInfo, setSonsInfo] = useState([]);
   const [filterOrdr, setFilterOrdr] = useState("ASC");
@@ -21,7 +21,6 @@ const FDSons = (props) => {
   }, []);
 
   const sortData = () => {
-    console.log(sonsInfo);
     if (filterOrdr === "DESC") {
       const testSom = sonsInfo.sort(function (a, b) {
         if (a.createdDateTime > b.createdDateTime) {
@@ -46,7 +45,6 @@ const FDSons = (props) => {
   };
 
   const sortData2 = () => {
-    console.log(sonsInfo);
     if (filterOrdr === "ASC") {
       setFilterOrdr("DESC");
     } else {

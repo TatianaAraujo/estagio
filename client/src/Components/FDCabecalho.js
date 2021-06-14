@@ -4,8 +4,6 @@ import naoValidado from "../img/Imagem2.png";
 
 const FDCabecalho = (props) => {
   const { diagnosticos } = props;
-  console.log(diagnosticos);
-
   const diagnosticoValidado = <img width="34%" src={validado} alt="" />;
   const diagnosticoNaoValidado = <img width="40%" src={naoValidado} alt="" />;
 
