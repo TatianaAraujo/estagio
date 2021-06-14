@@ -11,10 +11,15 @@ const Patient = ({ PatientList }) => {
     if (gender === "male") gender = "M";
     else gender = "F";
 
+    const sendToLocalStorage = (id) => {
+      localStorage.setItem("patientId", id);
+    };
+
     return (
       <div className="patient" key={index}>
         <table
           onClick={() => {
+            sendToLocalStorage(id);
             dispatch(getId(id));
             history.push("/FichaDoDoente");
           }}

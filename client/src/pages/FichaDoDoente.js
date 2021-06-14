@@ -27,7 +27,12 @@ const FichaDoDoente = () => {
   const addBodyClass = (className) => document.body.classList.add(className);
   const removeBodyClass = (className) =>
     document.body.classList.remove(className);
-  const patientId = useSelector((state) => state.fichaDoDoente.id);
+
+  const patientId = localStorage.getItem("patientId");
+  if (patientId == null) {
+    history.push("/");
+  }
+
   const [showDataPath] = useState("/FichaDoDoente/");
 
   //Diagnósticos -> Tudo Condition
@@ -45,7 +50,7 @@ const FichaDoDoente = () => {
   diagnosticosInfo.set("D_1.5_1", { Text: "conjuntivite", Validate: 1 });
   diagnosticosInfo.set("D_1.5_2", { Text: "conjuntivite", Validate: 2 });
 
-  useEffect(() => {
+  useEffect(async () => {
     addBodyClass("body-transparent");
     removeBodyClass("body");
     history.push(showDataPath);
@@ -69,7 +74,7 @@ const FichaDoDoente = () => {
       }
       setDiagnosticos(diagnosticosSet);
     };
-    getDiagnosticosInfo();
+    await getDiagnosticosInfo();
   }, []);
 
   const getAge = (birthDate) => {

@@ -17,6 +17,7 @@
 		"express": "^4.16.4",
 		"fhir-kit-client": "^1.6.3",
 		"fhirclient": "^2.3.11",
+		"material-ui-slider": "^3.0.8",
 		"react-calendar": "^3.4.0",
 		"react-datepicker": "^4.1.1",
 		"react-redux": "^7.2.3",

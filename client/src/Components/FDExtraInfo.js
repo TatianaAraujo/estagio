@@ -66,7 +66,7 @@ const FDExtraInfo = (props) => {
   infecoesInfo.set("2_16.5_2.1", "Outra infeção respiratória"); //Observation
   infecoesInfo.set("2_16.5_3", "Infeção respiratória nos últimos 3 meses"); //Observation
 
-  useEffect(() => {
+  useEffect(async () => {
     //Carateristicas Gerais
     const getHeight = async () => {
       const res = await fetch(`/Observation/Height?id=${patientId}`, {
@@ -75,7 +75,7 @@ const FDExtraInfo = (props) => {
       const data = await res.json();
       setHeight(data[0]);
     };
-    getHeight(patientId);
+    await getHeight(patientId);
 
     const getWeight = async () => {
       const res = await fetch(`/Observation/Weight?id=${patientId}`, {
@@ -84,7 +84,7 @@ const FDExtraInfo = (props) => {
       const data = await res.json();
       setWeight(data[0]);
     };
-    getWeight(patientId);
+    await getWeight(patientId);
 
     const getQuestionnaireResponse = async (code) => {
       const res = await fetch(

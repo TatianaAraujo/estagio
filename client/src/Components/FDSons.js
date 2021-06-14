@@ -9,7 +9,7 @@ const FDSons = ({ patientId }) => {
   const [sonsInfo, setSonsInfo] = useState([]);
   const [filterOrdr, setFilterOrdr] = useState("ASC");
 
-  useEffect(() => {
+  useEffect(async () => {
     const fetchSons = async (patientId) => {
       const res = await fetch(`/media?patientId=${patientId}`, {
         accept: "application/json",
@@ -17,7 +17,7 @@ const FDSons = ({ patientId }) => {
       const data = await res.json();
       setSonsInfo(data);
     };
-    fetchSons(patientId);
+    await fetchSons(patientId);
   }, []);
 
   const sortData = () => {
@@ -83,6 +83,7 @@ const FDSons = ({ patientId }) => {
 
   return (
     <div className="sons">
+      <h2>Registo dos Sons Respiratórios</h2>
       <div className="tableSoundsHeader">
         <div className="lineSoundHeader" style={{ width: "5%" }}></div>
 

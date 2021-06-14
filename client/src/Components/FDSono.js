@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import cruz from "../img/cruz.png";
+import { Slider } from "@material-ui/core";
 
 const FDSono = (props) => {
   const sono = props;
@@ -9,7 +10,7 @@ const FDSono = (props) => {
   const [problemasAsma, setProblemasAsma] = useState([]);
   const [sonolento, setSonolento] = useState([]);
 
-  useEffect(() => {
+  useEffect(async () => {
     const fetchSono = async (patientId) => {
       const res = await fetch(
         `/QuestionnaireResponse?id=${patientId}&code=Q801PTpt_1.0`,
@@ -39,7 +40,7 @@ const FDSono = (props) => {
         }
       }
     };
-    informationRegister();
+    await informationRegister();
   }, []);
 
   return (
@@ -52,7 +53,13 @@ const FDSono = (props) => {
 
         <div className="sonoDormir">
           <div>Como dormiu a noite passada?</div>
-          <div className="graficoComoDormiu"></div>
+          <div className="graficoComoDormiu">
+            <Slider
+              disabled
+              defaultValue={30}
+              aria-labelledby="disabled-slider"
+            />
+          </div>
         </div>
 
         <div className="sonoAsma">

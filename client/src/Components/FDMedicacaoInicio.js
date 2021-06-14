@@ -23,7 +23,7 @@ const FDMedicacaoInicio = ({ medicationList }) => {
   };*/
 
   return medicationList.map(
-    ({ medicationReference, timing, route, doseQuantity }, index) => {
+    ({ medicationReference, timing, route, doseQuantity, font }, index) => {
       let periodUnit;
       let frequency;
       let period;

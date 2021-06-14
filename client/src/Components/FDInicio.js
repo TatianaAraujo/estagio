@@ -13,7 +13,7 @@ const FDInicio = (props) => {
   const patientId = inicio.inicio;
   const [medicationList, setMedicationList] = useState([]);
 
-  useEffect(() => {
+  useEffect(async () => {
     const fetchMedication = async (patientId) => {
       const res = await fetch(
         `/MedicationStatement?status=active&subject=Patient/${patientId}`,
@@ -24,7 +24,7 @@ const FDInicio = (props) => {
       const data = await res.json();
       setMedicationList(data);
     };
-    fetchMedication(patientId);
+    await fetchMedication(patientId);
   }, []);
 
   return (

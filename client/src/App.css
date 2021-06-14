@@ -528,6 +528,7 @@ td {
   flex-direction: row;
   width: 85%;
   margin-bottom: 1%;
+  margin-top: 2%;
 }
 
 .lineSoundHeader {

@@ -182,6 +182,7 @@ app.get("/medicationStatement", (req, res) => {
                 route: obj.resource.dosage[0].route.coding[0].display,
                 doseQuantity:
                   obj.resource.dosage[0].doseAndRate[0].doseQuantity,
+                /*font: obj.resource.meta.source,*/
               };
             })
           : [];
