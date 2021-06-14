@@ -5,8 +5,8 @@ import calendar from "../img/calendar.png";
 import GinaGrafico from "./GinaGrafico";
 
 const FDGina = (props) => {
-  const gina = props;
-  const patientId = gina.gina;
+  //const gina = props;
+  //const patientId = gina.gina;
 
   let filtrarUp = 0;
 

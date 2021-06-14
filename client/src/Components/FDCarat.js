@@ -1,6 +1,6 @@
 import React from "react";
 import calendar from "../img/calendar.png";
-import { Switch, Route, useHistory } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 
 import CaratTotal from "./CaratTotal";
 import CaratVAS from "./CaratVAS";

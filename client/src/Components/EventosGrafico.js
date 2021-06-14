@@ -1,5 +1,5 @@
 import React from "react";
-import { Bar, Line } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 
 import entubVentMecanica from "../img/entubventmecanica.png";
 import intensivista from "../img/intensivista.png";
@@ -10,7 +10,6 @@ import medicacao from "../img/medicacao.png";
 import moment from "moment";
 
 const startDate = new Date(2020, 0, 1);
-let info = [{}];
 const labels = [];
 
 for (let i = 1; i < 6; i++) {
@@ -38,8 +37,8 @@ const data = () => {
   };
 };
 const EventosGrafico = (props) => {
-  const adesao = props;
-  const patientId = adesao.adesao;
+  //const adesao = props;
+  //const patientId = adesao.adesao;
   return (
     <div className="graficoEventos2">
       <div className="graficoEventosDiv">

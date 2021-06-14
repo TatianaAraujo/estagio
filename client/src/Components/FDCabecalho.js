@@ -11,7 +11,7 @@ const FDCabecalho = (props) => {
     <div className="linhaDiagnosticos">
       {diagnosticos.map(({ text, validado }, index) => (
         <div className="diagnosticosItem" key={index}>
-          {validado == 1 ? diagnosticoValidado : diagnosticoNaoValidado}
+          {validado === 1 ? diagnosticoValidado : diagnosticoNaoValidado}
           <div className="diagnosticosText">
             <div style={{ fontSize: "22px" }}>{text}</div>
             <div>Desde os X</div>

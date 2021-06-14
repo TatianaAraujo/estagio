@@ -9,11 +9,11 @@ const SonsTabela = (props) => {
   const [audio, setAudio] = useState({ pause: () => {} });
 
   for (let i = 0; i < newSons.length; i++) {
-    if (newSons[i].type == "Lung Function") {
+    if (newSons[i].type === "Lung Function") {
       newSons[i].type = "Função pulmonar";
     } else if (newSons[i].type.includes("Auscultation")) {
       newSons[i].type = "Auscultação";
-    } else if (newSons[i].type == "Free Recording") {
+    } else if (newSons[i].type === "Free Recording") {
       newSons[i].type = "Gravação livre";
     }
   }

@@ -2,8 +2,8 @@ import React from "react";
 import calendar from "../img/calendar.png";
 import EventosGrafico from "./EventosGrafico";
 const FDEventos = (props) => {
-  const eventos = props;
-  const patientId = eventos.eventos;
+  //const eventos = props;
+  //const patientId = eventos.eventos;
 
   let filtrarUp = 0;
 

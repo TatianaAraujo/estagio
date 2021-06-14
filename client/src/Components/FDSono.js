@@ -1,14 +1,23 @@
 import React, { useEffect, useState } from "react";
+import { registerLocale } from "react-datepicker";
+
+import DatePicker from "react-datepicker";
 import cruz from "../img/cruz.png";
 import { Slider } from "@material-ui/core";
+import pt from "date-fns/locale/pt";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 const FDSono = (props) => {
+  registerLocale("pt", pt);
   const sono = props;
   const patientId = sono.sono;
 
-  const [comoDormiu, setComoDormiu] = useState([]);
+  const [comoDormiu, setComoDormiu] = useState(0);
   const [problemasAsma, setProblemasAsma] = useState([]);
   const [sonolento, setSonolento] = useState([]);
+
+  const [startDate, setStartDate] = useState(new Date());
 
   useEffect(async () => {
     const fetchSono = async (patientId) => {
@@ -24,6 +33,7 @@ const FDSono = (props) => {
 
     const informationRegister = async () => {
       let arrayAnswer = await fetchSono(patientId);
+
       for (let i = 0; i < arrayAnswer.length; i++) {
         switch (arrayAnswer[i].linkId) {
           case "Q801_3.1":
@@ -48,17 +58,29 @@ const FDSono = (props) => {
       <div className="sonoLeft">
         <div className="sonoData">
           <div>Últimas respostas a</div>
-          <div className="sonoChooseData"></div>
+          <DatePicker
+            className="sonoChooseData"
+            selected={startDate}
+            onChange={(date) => setStartDate(date)}
+            locale="pt"
+            dateFormat="dd-MM-yyyy"
+          />
         </div>
 
         <div className="sonoDormir">
           <div>Como dormiu a noite passada?</div>
           <div className="graficoComoDormiu">
             <Slider
+              style={{ color: "#175874" }}
               disabled
-              defaultValue={30}
+              value={comoDormiu}
               aria-labelledby="disabled-slider"
+              valueLabelDisplay="on"
             />
+            <div className="sonoLegenda">
+              <div>Muito Bem</div>
+              <div>Muito Mal</div>
+            </div>
           </div>
         </div>
 
@@ -67,7 +89,7 @@ const FDSono = (props) => {
             Os seus problemas de sono da noite passada foram relacionados com a
             sua asma?
           </div>
-          <div className="graficoComoDormiu">
+          <div className="graficoComoDormiuAsma">
             <img style={{ width: "10%" }} src={cruz} alt="" />
             {problemasAsma === "A.1" ? (
               <div> Sim </div>
@@ -80,7 +102,19 @@ const FDSono = (props) => {
         </div>
         <div className="sonoSonolento">
           <div>Esteve sonolento durante o dia?</div>
-          <div className="graficoSonolento"></div>
+          <div className="graficoSonolento">
+            <Slider
+              style={{ color: "#175874" }}
+              disabled
+              value={sonolento}
+              aria-labelledby="disabled-slider"
+              valueLabelDisplay="on"
+            />
+            <div className="sonoLegenda">
+              <div>Nada</div>
+              <div>Muito Bem</div>
+            </div>
+          </div>
         </div>
       </div>
       <div className="sonoRight">
@@ -96,4 +130,5 @@ const FDSono = (props) => {
     </div>
   );
 };
+
 export default FDSono;

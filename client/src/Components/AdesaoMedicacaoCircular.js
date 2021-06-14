@@ -2,8 +2,8 @@ import React from "react";
 import { Doughnut } from "react-chartjs-2";
 
 const AdesaoMedicacaoCircular = (props) => {
-  const adesao = props;
-  const patientId = adesao.adesao;
+  //const adesao = props;
+  //const patientId = adesao.adesao;
 
   let values = [50, 100];
   const data = {

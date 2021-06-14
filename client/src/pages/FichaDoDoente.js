@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route, useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 import lupa from "../img/lupa.png";
 import resSys from "../img/respiratory-system.png";
