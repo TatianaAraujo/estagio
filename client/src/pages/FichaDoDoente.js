@@ -6,6 +6,7 @@ import lupa from "../img/lupa.png";
 import resSys from "../img/respiratory-system.png";
 import downArrow from "../img/avanco-rapido.png";
 
+import FDCabecalho from "../Components/FDCabecalho";
 import FDInicio from "../Components/FDInicio";
 import FDMcdt from "../Components/FDMcdt";
 import FDSons from "../Components/FDSons";
@@ -26,12 +27,23 @@ const FichaDoDoente = () => {
   const addBodyClass = (className) => document.body.classList.add(className);
   const removeBodyClass = (className) =>
     document.body.classList.remove(className);
-
   const patientId = useSelector((state) => state.fichaDoDoente.id);
-
   const [showDataPath] = useState("/FichaDoDoente/");
 
-  //const [sonsInfo, setSonsInfo] = useState([]);
+  //Diagnósticos -> Tudo Condition
+  const [diagnosticos, setDiagnosticos] = useState([]);
+  let diagnosticosSet = [];
+  let diagnosticosInfo = new Map();
+  diagnosticosInfo.set("D_1.1_1", { Text: "Asma", Validate: 1 }); //Validado - 1
+  diagnosticosInfo.set("D_1.1_2", { Text: "Asma", Validate: 2 }); //Não validado - 2
+  diagnosticosInfo.set("D_1.2_1", { Text: "COPD", Validate: 1 });
+  diagnosticosInfo.set("D_1.2_2", { Text: "COPD", Validate: 2 });
+  diagnosticosInfo.set("D_1.3_1", { Text: "Rinite", Validate: 1 });
+  diagnosticosInfo.set("D_1.3_2", { Text: "Rinite", Validate: 2 });
+  diagnosticosInfo.set("D_1.4_1", { Text: "rinossinusite", Validate: 1 });
+  diagnosticosInfo.set("D_1.4_2", { Text: "rinossinusite", Validate: 2 });
+  diagnosticosInfo.set("D_1.5_1", { Text: "conjuntivite", Validate: 1 });
+  diagnosticosInfo.set("D_1.5_2", { Text: "conjuntivite", Validate: 2 });
 
   useEffect(() => {
     addBodyClass("body-transparent");
@@ -39,14 +51,26 @@ const FichaDoDoente = () => {
     history.push(showDataPath);
     personInformation(patientId);
 
-    /*const fetchSons = async (patientId) => {
-      const res = await fetch(`/media?patientId=${patientId}`, {
+    const getCondition = async (code) => {
+      const res = await fetch(`/Condition?id=${patientId}&code=${code}`, {
         accept: "application/json",
       });
-      const data = await res.json();
-      setSonsInfo(data);
+      const d = await res.json();
+      if (d.length > 0) return 1;
+      return undefined;
     };
-    fetchSons(patientId);*/
+
+    const getDiagnosticosInfo = async () => {
+      for (var [key, value] of diagnosticosInfo) {
+        const i = await getCondition(key);
+        if (i !== undefined) {
+          diagnosticosSet.push({ text: value.Text, validado: value.Validate });
+        }
+      }
+      console.log(diagnosticosSet);
+      setDiagnosticos(diagnosticosSet);
+    };
+    getDiagnosticosInfo();
   }, []);
 
   const getAge = (birthDate) => {
@@ -145,6 +169,9 @@ const FichaDoDoente = () => {
                 <hr></hr>
                 <div className="ocupation"> Trabalha em </div>
               </div>
+            </div>
+            <div className="diagnosticosDiv">
+              <FDCabecalho diagnosticos={diagnosticos} />
             </div>
 
             <div

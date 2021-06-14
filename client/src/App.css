@@ -145,10 +145,11 @@ td {
 
 .generalInformationPanel2 {
   display: flex;
+  flex-direction: row;
   align-items: center;
-  justify-content: space-between;
-  padding-left: 15px;
-  padding-right: 30px;
+  justify-content: left;
+  /*justify-content: center;*/
+  padding-left: 1%;
   background-color: #f9f9f9;
   border: 2px solid black;
   border-radius: 30px;
@@ -168,7 +169,7 @@ td {
 
 .personInformation {
   height: 100%;
-  width: 50%;
+  width: 41%;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -177,36 +178,77 @@ td {
 
 .personInformation2 {
   width: 87%;
-  margin-left: 20px;
+  margin-left: 2%;
 }
 
 .patientData {
   font-size: 27px;
   color: #707070;
-  margin-left: 25px;
+  margin-left: 1%;
 }
 
 .ocupation {
   font-size: 25px;
-  margin-left: 25px;
+  margin-left: 1%;
 }
 
+.diagnosticosDiv {
+  height: 100%;
+  width: 54%;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+}
+
+.linhaDiagnosticos {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: right;
+  width: 100%;
+  height: 100%;
+}
+
+.diagnosticosItem {
+  background-color: #e3f9f8;
+  color: #707070;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  height: 80%;
+  width: 18%;
+  border: 1px solid #707070;
+  margin-left: 0.5%;
+  margin-right: 0.5%;
+}
+
+.diagnosticosText {
+  height: 100%;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+}
 .circle {
   background-color: #e3f9f8;
   border-radius: 50%;
-  width: 3.2%;
+  width: 3%;
   height: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   border: 1px solid black;
-  margin-left: 50%;
+  margin-left: 1%;
 }
 
 .specificInformationPanel {
   display: flex;
   flex-direction: row;
-  margin-top: 25px;
+  margin-top: 1%;
 }
 
 .menu {
@@ -552,10 +594,10 @@ td {
 .changeType {
   background-color: rgb(23, 88, 116);
   position: absolute;
-  top: 23.9%;
+  top: 23%;
   left: 45.5%;
   height: 20%;
-  width: 16.2%;
+  width: 16.1%;
   display: none;
   flex-direction: column;
   border-bottom: 1px solid white;
@@ -740,7 +782,6 @@ td {
   z-index: 0;
   width: 90%;
   height: 80%;
-  border: 1px solid rgb(23, 88, 116);
   margin-top: 7%;
   display: flex;
   justify-content: center;
