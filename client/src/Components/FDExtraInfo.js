@@ -22,7 +22,7 @@ const FDExtraInfo = (props) => {
   let alergiasSet = [];
   let alergiasInfo = new Map();
   alergiasInfo.set("2_5.20", "Alergia a comida");
-  alergiasInfo.set("2_5.31", "Alergia a polens");
+  alergiasInfo.set("2_5.31", "Alergia a pólens");
   alergiasInfo.set("2_5.32", "Alergia ao mofo");
   alergiasInfo.set("2_5.40", "Ocupacional/Alergia relacionada com o trabalho");
   alergiasInfo.set("2_5.50", "Alergia a outros animais");
@@ -30,7 +30,7 @@ const FDExtraInfo = (props) => {
   alergiasInfo.set("2_5.53", "Alergia a carne");
   alergiasInfo.set("2_5.54", "Alergia a gatos");
   alergiasInfo.set("2_5.55", "Alergia a cães");
-  alergiasInfo.set("2_5.60", "Alergia a medicacao");
+  alergiasInfo.set("2_5.60", "Alergia a medicação");
   alergiasInfo.set("2_5.0", "Outras alergias não especificadas");
 
   //Comorbilidades -> Tudo Conditions
@@ -39,8 +39,8 @@ const FDExtraInfo = (props) => {
   let comorbilidadesInfo = new Map();
   comorbilidadesInfo.set("D_1.7_1", "Bronquiectasia confirmada");
   comorbilidadesInfo.set("D_1.7_2", "Bronquiectasia não confirmada");
-  comorbilidadesInfo.set("D_1.8_1", "polipose nasal confirmada");
-  comorbilidadesInfo.set("D_1.8_2", "polipose nasal não confirmada");
+  comorbilidadesInfo.set("D_1.8_1", "Polipose nasal confirmada");
+  comorbilidadesInfo.set("D_1.8_2", "Polipose nasal não confirmada");
 
   //Diagnósticos -> Tudo Condition
   const [diagnosticos, setDiagnosticos] = useState([]);
@@ -50,21 +50,28 @@ const FDExtraInfo = (props) => {
   diagnosticosInfo.set("D_1.1_2", "Asma não Confirmado");
   diagnosticosInfo.set("D_1.2_1", "COPD Confirmado");
   diagnosticosInfo.set("D_1.2_2", "COPD não Confirmado");
-  diagnosticosInfo.set("D_1.3_1", "rinite Confirmado");
-  diagnosticosInfo.set("D_1.3_2", "rinite não Confirmado");
-  diagnosticosInfo.set("D_1.4_1", "rinossinusite Confirmado");
-  diagnosticosInfo.set("D_1.4_2", "rinossinusite não Confirmado");
-  diagnosticosInfo.set("D_1.5_1", "conjuntivite Confirmado");
-  diagnosticosInfo.set("D_1.5_2", "conjuntivite não Confirmado");
+  diagnosticosInfo.set("D_1.3_1", "Rinite Confirmado");
+  diagnosticosInfo.set("D_1.3_2", "Rinite não Confirmado");
+  diagnosticosInfo.set("D_1.4_1", "Rinossinusite Confirmado");
+  diagnosticosInfo.set("D_1.4_2", "Rinossinusite não Confirmado");
+  diagnosticosInfo.set("D_1.5_1", "Conjuntivite Confirmado");
+  diagnosticosInfo.set("D_1.5_2", "Conjuntivite não Confirmado");
 
   //História de infeçoes
   const [infecoes, setInfecoes] = useState([]);
   let infecoesSet = [];
   let infecoesInfo = new Map();
   infecoesInfo.set("D_16.5_2.2", "pneumonia"); //Condition
-  infecoesInfo.set("2_16.5_1.1", "Infeção respiratória na adolescência"); //Observation
+  infecoesInfo.set("2_16.5_1.1", "Infeção respiratória na infância"); //Observation
   infecoesInfo.set("2_16.5_2.1", "Outra infeção respiratória"); //Observation
   infecoesInfo.set("2_16.5_3", "Infeção respiratória nos últimos 3 meses"); //Observation
+
+  //Habitos
+  const [habitos, setHabitos] = useState([]);
+
+  //Outros
+  const [gravidez, setGravidez] = useState([]);
+  const [amamentar, setAmamentar] = useState([]);
 
   useEffect(async () => {
     //Carateristicas Gerais
@@ -94,7 +101,7 @@ const FDExtraInfo = (props) => {
         }
       );
       const d = await res.json();
-      if (d.length > 0) return 1;
+      if (d.length > 0) return d;
       return undefined;
     };
 
@@ -117,9 +124,11 @@ const FDExtraInfo = (props) => {
     };
 
     const getGeraisInfo = async () => {
+      //Apenas vai buscar a escolaridade Q02PTpt_1.0 (questionario)
+      const qr = await getQuestionnaireResponse("Q02PTpt_1.0");
+      let answer = qr[0].all[0].answer[0].valueCoding.code;
       for (var [key, value] of geraisInfo) {
-        const i = await getQuestionnaireResponse(key);
-        if (i !== undefined) {
+        if (key === answer) {
           geraisSet.push(value);
         }
       }
@@ -172,6 +181,29 @@ const FDExtraInfo = (props) => {
       setInfecoes(infecoesSet);
     };
     getInfecoesInfo();
+
+    const gethabitosInfo = async () => {
+      let qr = await getQuestionnaireResponse("Q510PTpt_1.0");
+      let qrAnswer = qr[0].all[0];
+      qrAnswer.answer[0].valueCoding.code === "A.1"
+        ? setHabitos("Fumador")
+        : setHabitos("Não Fumador");
+    };
+    gethabitosInfo();
+
+    const getOutrosInfo = async () => {
+      let qr = await getQuestionnaireResponse("Q502PTpt_1.0");
+      qr[0].all[0].answer[0].valueCoding.code === "A.1"
+        ? setGravidez(
+            "Gravidez " + qr[0].all[1].answer[0].valueInteger + " semanas"
+          )
+        : setGravidez("");
+
+      qr[0].all[2].answer[0].valueCoding.code === "A.1"
+        ? setAmamentar("A amamentar")
+        : setAmamentar("");
+    };
+    getOutrosInfo();
   }, []);
 
   const geraisItems = gerais.map((n, index) => (
@@ -247,6 +279,7 @@ const FDExtraInfo = (props) => {
             <div className="indicatores" style={{ color: "black" }}>
               Hábitos
             </div>
+            <div className="infoText">{habitos}</div>
           </div>
 
           <div className="infoBlock">
@@ -269,6 +302,8 @@ const FDExtraInfo = (props) => {
             <div className="indicatores" style={{ color: "black" }}>
               Outros
             </div>
+            <div className="infoText">{gravidez}</div>
+            <div className="infoText">{amamentar}</div>
           </div>
         </div>
       </div>

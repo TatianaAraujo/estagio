@@ -33,6 +33,8 @@ const FichaDoDoente = () => {
   }
 
   const [showDataPath] = useState("/FichaDoDoente/");
+  const [trabalho, setTrabalho] = useState([]);
+  const [trabalhando, setTrabalhando] = useState(true);
 
   //Diagnósticos -> Tudo Condition
   const [diagnosticos, setDiagnosticos] = useState([]);
@@ -74,6 +76,40 @@ const FichaDoDoente = () => {
       setDiagnosticos(diagnosticosSet);
     };
     await getDiagnosticosInfo();
+
+    const getTrabalho = async (code) => {
+      const res = await fetch(
+        `/QuestionnaireResponse?id=${patientId}&code=Q701PTpt_1.0`,
+        {
+          accept: "application/json",
+        }
+      );
+      const d = await res.json();
+      //console.log(d[0].all[i].length);
+      for (let i = 0; i < d[0].all.length; i++) {
+        if (d[0].all[i].linkId === "Q701_1.1") {
+          let answer = d[0].all[i].answer[0].valueCoding.code;
+          if (answer === "N.3") {
+            console.log("entrei");
+            setTrabalhando(false);
+            setTrabalho("Desempregado");
+          } else if (answer === "N.4") {
+            console.log("entrei");
+            setTrabalhando(false);
+            setTrabalho("Estudante");
+          } else if (answer === "N.5") {
+            console.log("entrei");
+            setTrabalhando(false);
+            setTrabalho("Reformado");
+          }
+        }
+        if (d[0].all[i].linkId === "Q701_1.3") {
+          setTrabalho(d[0].all[i].answer[0].valueString);
+        }
+      }
+      console.log(d[0].all);
+    };
+    await getTrabalho();
   }, []);
 
   const getAge = (birthDate) => {
@@ -170,7 +206,12 @@ const FichaDoDoente = () => {
               <div className="personInformation2">
                 <div id="dados" className="patientData"></div>
                 <hr></hr>
-                <div className="ocupation"> Trabalha em </div>
+
+                {trabalhando ? (
+                  <div className="ocupation"> Trabalhadora em {trabalho}</div>
+                ) : (
+                  <div className="ocupation"> {trabalho}</div>
+                )}
               </div>
             </div>
             <div className="diagnosticosDiv">

@@ -1,5 +1,5 @@
 import React from "react";
-
+import airdoc from "../img/airdoc.png";
 const FDMedicacaoInicio = ({ medicationList }) => {
   /*const getMedicationName = (id) => {
     //console.log(id);
@@ -21,6 +21,8 @@ const FDMedicacaoInicio = ({ medicationList }) => {
       return;
     });
   };*/
+
+  const airdocIcone = <img width="60%" src={airdoc} alt="" />;
 
   return medicationList.map(
     ({ medicationReference, timing, route, doseQuantity, font }, index) => {
@@ -218,7 +220,10 @@ const FDMedicacaoInicio = ({ medicationList }) => {
           <div className="lineMedication">
             {doseQuantity.value} {doseQuantity.unit}
           </div>
-          <div className="lineMedication"> Fonte</div>
+          <div className="lineMedication">
+            {" "}
+            {font === "CARATm" ? font : airdocIcone}
+          </div>
         </div>
       );
     }
