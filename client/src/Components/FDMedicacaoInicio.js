@@ -1,68 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import airdoc from "../img/airdoc.png";
-const FDMedicacaoInicio = ({ medicationList }) => {
-  /*const getMedicationName = (id) => {
-    //console.log(id);
-    id = id.substring(11);
-    //console.log(id);
-    fetch(`/Medication/?id=${id}`, {
-      accept: "application/json",
-    })
-    .then(function (data) {
-      return data.json();
-    })
-    
-    .then(function (data) {
-      //console.log(data);
-      return data.name;
-    })
-    
-    .catch(function (error) {
-      return;
-    });
-  };*/
+import caratm from "../img/caratm.png";
 
+const FDMedicacaoInicio = ({ medicationList }) => {
   const airdocIcone = <img width="60%" src={airdoc} alt="" />;
+  const caratmIcone = <img width="90%" src={caratm} alt="" />;
 
   return medicationList.map(
     ({ medicationReference, timing, route, doseQuantity, font }, index) => {
-      let periodUnit;
-      let frequency;
-      let period;
+      let periodUnit = timing.periodUnit;
+      let modoDeToma;
       let dayOfWeekExist;
 
       timing.dayOfWeek ? (dayOfWeekExist = 1) : (dayOfWeekExist = 0);
 
-      if (timing.frequency === 1) {
-        frequency = "A cada";
-      } else {
-        frequency = timing.frequency;
-      }
-
-      if (timing.period === 1 || timing.period === 0) {
-        period = "";
-      } else {
-        period = "a cada" + timing.frequency;
-      }
-
-      switch (timing.periodUnit) {
-        case "d":
-          periodUnit = "dia";
-          if (timing.frequency > 1) {
-            periodUnit = "dias";
-          }
-          break;
-        case "h":
-          periodUnit = "hora";
-          if (timing.frequency > 1) {
-            periodUnit = "horas";
-          }
-          break;
-        case "wk":
-          periodUnit = "semana";
-          break;
-        default:
-          break;
+      if (periodUnit === "d") {
+        modoDeToma = timing.timeOfDay.length + " vezes por dia";
       }
 
       let dayOfWeek = [7];
@@ -112,10 +65,17 @@ const FDMedicacaoInicio = ({ medicationList }) => {
         }
       }
       let medicationName = "Sem nome";
+      //let fetchPromise;
       if (medicationReference !== undefined) {
-        //medicationName = getMedicationName(medicationReference.reference);
+        const id = medicationReference.reference.substring(11);
+
+        /*fetchPromise = fetch(`/Medication/?id=${id}`, {
+          accept: "application/json",
+        });*/
+
+        console.log(medicationName);
       }
-      // {/*frequency*/} {/*period*/} {/*periodUnit*/}
+
       return (
         <div className="tableMedication" key={index}>
           <div className="lineMedication">{medicationName}</div>
@@ -158,7 +118,7 @@ const FDMedicacaoInicio = ({ medicationList }) => {
               <div></div>
             )}
             {dayOfWeekExist === 0 ? (
-              <div className="lineMedication2"></div>
+              <div className="lineMedication2"> {modoDeToma} </div>
             ) : (
               <div></div>
             )}
@@ -222,7 +182,7 @@ const FDMedicacaoInicio = ({ medicationList }) => {
           </div>
           <div className="lineMedication">
             {" "}
-            {font === "CARATm" ? font : airdocIcone}
+            {font === "CARATm" ? caratmIcone : airdocIcone}
           </div>
         </div>
       );

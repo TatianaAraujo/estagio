@@ -29,6 +29,7 @@ const FDSons = ({ patientId }) => {
         if (a.createdDateTime < b.createdDateTime) {
           return -1;
         }
+        return 0;
       });
       setSonsInfo(testSom);
     } else {
@@ -39,6 +40,7 @@ const FDSons = ({ patientId }) => {
         if (a.createdDateTime > b.createdDateTime) {
           return -1;
         }
+        return 0;
       });
       setSonsInfo(testSom);
     }

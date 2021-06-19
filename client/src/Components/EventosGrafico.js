@@ -1,5 +1,5 @@
 import React from "react";
-import { Bar } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 
 import entubVentMecanica from "../img/entubventmecanica.png";
 import intensivista from "../img/intensivista.png";
@@ -7,38 +7,124 @@ import internamento from "../img/internamento.png";
 import consulta from "../img/consulta.png";
 import medicacao from "../img/medicacao.png";
 
-import moment from "moment";
-
-const startDate = new Date(2020, 0, 1);
-const labels = [];
-
-for (let i = 1; i < 6; i++) {
-  const date = moment(startDate).add(i, "days").format("YYYY-MM-DD");
-  labels.push(date.toString());
-}
-
-const data2 = [1, [2, 3], 3, 5, [1, 4]];
-
-const data = () => {
-  return {
-    labels,
-    datasets: [
-      {
-        borderColor: "#ff0303",
-        showLine: false,
-        fill: false,
-        borderWidth: 0,
-        tension: 0,
-        backgroundColor: "#d4bebe",
-        data: data2, //[1, 2, 3, 4, 5],
-        ////data: [1, 3, 2, 4, 0],
-      },
-    ],
-  };
-};
 const EventosGrafico = (props) => {
-  //const adesao = props;
-  //const patientId = adesao.adesao;
+  const eventos = props;
+  const eventosInfo = eventos.eventosInfo;
+
+  let dates = [];
+  let values1 = [];
+  let values2 = [];
+  let values3 = [];
+  let values4 = [];
+  let values5 = [];
+  let flag = 0;
+
+  for (let i = 0; i < eventosInfo.length; i++) {
+    let value1 = null;
+    let value2 = null;
+    let value3 = null;
+    let value4 = null;
+    let value5 = null;
+    const answers = eventosInfo[i].all.item;
+    for (let j = 0; j < answers.length; j++) {
+      if (
+        answers[j].linkId === "Q301_1.1" &&
+        answers[j].answer[0].valueCoding.code === "A.2"
+      ) {
+        flag = 1;
+        break;
+      }
+
+      if (answers[j].linkId === "Q301_1.2")
+        dates.unshift(answers[j].answer[0].valueDate);
+
+      if (answers[j].answer[0].valueCoding !== undefined) {
+        if (answers[j].linkId === "Q301_2.1") {
+          if (answers[j].answer[0].valueCoding.code == "A.1") value1 = 1;
+        } else if (answers[j].linkId === "Q301_2.3") {
+          if (answers[j].answer[0].valueCoding.code == "A.1") value2 = 2;
+        } else if (answers[j].linkId === "Q301_2.2") {
+        } else if (answers[j].linkId === "Q301_2.4") {
+          if (answers[j].answer[0].valueCoding.code == "A.1") value3 = 3;
+        } else if (answers[j].linkId === "Q301_2.5") {
+          if (answers[j].answer[0].valueCoding.code == "A.1") value4 = 4;
+        }
+      }
+    }
+    if (flag !== 1) {
+      values1.unshift(value1);
+      values2.unshift(value2);
+      values3.unshift(value3);
+      values4.unshift(value4);
+      values5.unshift(value5);
+    }
+    flag = 0;
+  }
+
+  const data = () => {
+    return {
+      labels: dates,
+      datasets: [
+        {
+          //linha 1
+          label: "corticoide",
+          showLine: false,
+          fill: false,
+          borderWidth: 15,
+          borderColor: "#ff0303",
+          tension: 0,
+          backgroundColor: "#7d0101",
+          data: values1,
+        },
+        {
+          //linha 2
+          label: "Consulta não programada",
+          type: "line",
+          borderColor: "#ff0303",
+          showLine: false,
+          fill: false,
+          borderWidth: 15,
+          tension: 0,
+          backgroundColor: "#7d0101",
+          data: values2,
+        },
+        {
+          //linha 3
+          label: "Internamento",
+          borderColor: "#ff0303",
+          showLine: false,
+          fill: false,
+          borderWidth: 15,
+          tension: 0,
+          backgroundColor: "#7d0101",
+          data: values3,
+        },
+        {
+          //linha 4
+          label: "UCI",
+          borderColor: "#ff0303",
+          showLine: false,
+          fill: false,
+          borderWidth: 15,
+          tension: 0,
+          backgroundColor: "#7d0101",
+          data: values4,
+        },
+        {
+          //linha 5
+          label: "Entubação",
+          borderColor: "#ff0303",
+          showLine: false,
+          fill: false,
+          borderWidth: 15,
+          tension: 0,
+          backgroundColor: "#7d0101",
+          data: values5,
+        },
+      ],
+    };
+  };
+
   return (
     <div className="graficoEventos2">
       <div className="graficoEventosDiv">
@@ -79,7 +165,7 @@ const EventosGrafico = (props) => {
         </div>
 
         <div className="graficoPontosEventos">
-          <Bar
+          <Line
             data={data}
             width={100}
             height={90}

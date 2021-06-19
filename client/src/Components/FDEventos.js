@@ -1,12 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import calendar from "../img/calendar.png";
 import EventosGrafico from "./EventosGrafico";
 const FDEventos = (props) => {
-  //const eventos = props;
-  //const patientId = eventos.eventos;
+  const eventos = props;
+  const patientId = eventos.eventos;
+
+  const [eventosInfo, setEventosInfo] = useState([]);
+
+  useEffect(async () => {
+    const fetchEventos = async (patientId) => {
+      const res = await fetch(
+        `/QuestionnaireResponseAll?id=${patientId}&code=Q301PTpt_1.0`,
+        {
+          accept: "application/json",
+        }
+      );
+      const data = await res.json();
+      setEventosInfo(data);
+    };
+    await fetchEventos(patientId);
+  }, []);
 
   let filtrarUp = 0;
-
   const changeDataInformation = () => {
     const filtrarData = document.getElementById("filtrarData");
     const periodosSchedule = document.getElementById("periodosSchedule");
@@ -26,7 +41,7 @@ const FDEventos = (props) => {
       <div className="eventosLeft">
         <div className="graficoEventos">
           <h3> Agudizações </h3>
-          <EventosGrafico />
+          <EventosGrafico eventosInfo={eventosInfo} />
         </div>
       </div>
       <div className="eventosRight">

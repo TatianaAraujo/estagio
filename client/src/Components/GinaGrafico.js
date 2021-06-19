@@ -1,42 +1,65 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
-import moment from "moment";
 
-const startDate = new Date(2020, 0, 1);
-const labels = [""];
-for (let i = 1; i < 6; i++) {
-  const date = moment(startDate).add(i, "days").format("YYYY-MM-DD");
-  labels.push(date.toString());
-}
+const GinaGrafico = (props) => {
+  const gina = props;
+  const ginaInfo = gina.ginaInfo;
 
-const data = (canvas) => {
-  const ctx = canvas.getContext("2d");
-  var gradientStroke = ctx.createLinearGradient(0, 150, 0, 490);
-  gradientStroke.addColorStop(0, "#fe2f2e"); //vermelho
-  gradientStroke.addColorStop(0.3, "#fedf69"); //amarelo
-  gradientStroke.addColorStop(0.6, "#b1e0a3"); //verde
+  let dates;
+  let values;
+  let colors;
+  const constructInfo = (ginaInfo) => {
+    dates = [];
+    values = [];
+    colors = [];
+    for (let i = 0; i < ginaInfo.length; i++) {
+      dates.unshift(ginaInfo[i].all.authored.substring(0, 10));
+      let answers = ginaInfo[i].all.item;
 
-  return {
-    backgroundColor: gradientStroke,
-    labels,
-    datasets: [
-      {
-        borderColor: gradientStroke,
-        showLine: false,
-        fill: false,
-        borderWidth: 0,
-        tension: 0,
-        pointBackgroundColor: gradientStroke,
-        pointRadius: "10",
-        pointBorderWidth: "6",
-        //data: [0, 1, 2, 3, 4],
-        data: ["null", 1, 3, 2, 4, 0],
-      },
-    ],
+      let sumCurrent = 0;
+      for (let j = 0; j < answers.length; j++) {
+        if (answers[j].linkId === "Q911_1.1") {
+          if (answers[j].answer[0].valueInteger > 2) sumCurrent++;
+        } else if (answers[j].linkId === "Q911_1.2") {
+          if (answers[j].answer[0].valueCoding.code === "A.1") sumCurrent++;
+        } else if (answers[j].linkId === "Q911_1.3") {
+          if (answers[j].answer[0].valueInteger > 2) sumCurrent++;
+        } else if (answers[j].linkId === "Q911_1.4") {
+          if (answers[j].answer[0].valueCoding.code === "A.1") sumCurrent++;
+        }
+      }
+      values.unshift(sumCurrent);
+      if (sumCurrent === 0) colors.unshift("#b1e0a3");
+      else if (sumCurrent === 1 || sumCurrent === 2) colors.unshift("#fedf69");
+      else if (sumCurrent === 3 || sumCurrent === 4) colors.unshift("#fe2f2e");
+      sumCurrent = 0;
+    }
+    dates.unshift("");
+    values.unshift(null);
+    colors.unshift("");
   };
-};
 
-export default function GinaGrafico() {
+  const data = () => {
+    constructInfo(ginaInfo);
+
+    return {
+      backgroundColor: colors,
+      labels: dates,
+      datasets: [
+        {
+          borderColor: colors,
+          showLine: false,
+          fill: false,
+          borderWidth: 0,
+          tension: 0,
+          pointBackgroundColor: colors,
+          pointRadius: 7,
+          pointBorderWidth: 12,
+          data: values,
+        },
+      ],
+    };
+  };
   return (
     <div
       style={{
@@ -73,7 +96,7 @@ export default function GinaGrafico() {
                 },
                 ticks: {
                   beginAtZero: true,
-                  max: 4,
+                  max: 5,
                   min: 0,
                   stepSize: 1,
                 },
@@ -84,4 +107,5 @@ export default function GinaGrafico() {
       />
     </div>
   );
-}
+};
+export default GinaGrafico;

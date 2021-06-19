@@ -1,48 +1,61 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
-import moment from "moment";
 
-const startDate = new Date(2020, 0, 1);
-const labels = [];
-for (let i = 0; i < 7; i++) {
-  const date = moment(startDate).add(i, "days").format("YYYY-MM-DD");
-  labels.push(date.toString());
-}
+const CaratTotal = (props) => {
+  const carat = props;
+  const caratInfo = carat.caratInfo;
 
-const data = (canvas) => {
-  const ctx = canvas.getContext("2d");
-  var gradientStroke = ctx.createLinearGradient(0, 100, 0, 300);
-  gradientStroke.addColorStop(0, "#34ae16"); //verde
-  gradientStroke.addColorStop(0.2, "#fffd1e"); //amarelo
-  gradientStroke.addColorStop(0.8, "#ff0000"); //vermelho
+  let dates;
+  let values;
+  let goodValue;
 
-  return {
-    backgroundColor: gradientStroke,
-    labels,
-    datasets: [
-      {
-        backgroundColor: gradientStroke,
-        fill: true,
-        label: "carat",
-        borderWidth: 4,
-        tension: 0.1,
-        pointRadius: 0,
-        data: [0, 5, 10, 5, 20, 30, 15, 10],
-        //data: [0, 5, 10, 15, 20, 25, 30],
-      },
-      {
-        type: "line",
-        label: "Limite da Normalidade >= 24",
-        borderColor: "#34ae16",
-        pointRadius: 0,
-        fill: false,
-        data: [24, 24, 24, 24, 24, 24, 24],
-      },
-    ],
+  const constructInfo = (caratInfo) => {
+    dates = [];
+    values = [];
+    goodValue = [];
+    for (let i = 0; i < caratInfo.length; i++) {
+      if (caratInfo[i].all.valueQuantity !== undefined) {
+        dates.unshift(caratInfo[i].all.effectiveDateTime.substring(0, 10));
+        values.unshift(caratInfo[i].all.valueQuantity.value);
+        goodValue.push(24);
+      }
+    }
   };
-};
 
-export default function CaratTotal() {
+  const data = (canvas) => {
+    constructInfo(caratInfo);
+
+    const ctx = canvas.getContext("2d");
+    var gradientStroke = ctx.createLinearGradient(0, 100, 0, 300);
+    gradientStroke.addColorStop(0, "#34ae16"); //verde
+    gradientStroke.addColorStop(0.2, "#fffd1e"); //amarelo
+    gradientStroke.addColorStop(0.8, "#ff0000"); //vermelho
+
+    return {
+      backgroundColor: gradientStroke,
+      labels: dates,
+      datasets: [
+        {
+          backgroundColor: gradientStroke,
+          fill: true,
+          borderWidth: 4,
+          tension: 0.1,
+          pointRadius: 2,
+          data: values,
+          label: "Carat",
+        },
+        {
+          type: "line",
+          label: "Limite da Normalidade >= 24",
+          borderColor: "#34ae16",
+          pointRadius: 0,
+          fill: false,
+          data: goodValue,
+        },
+      ],
+    };
+  };
+
   return (
     <div
       style={{
@@ -63,7 +76,7 @@ export default function CaratTotal() {
           legend: {
             display: true,
             position: "bottom",
-            color: "#ff0000",
+            color: "#34ae16",
           },
           scales: {
             xAxes: [
@@ -86,4 +99,6 @@ export default function CaratTotal() {
       />
     </div>
   );
-}
+};
+
+export default CaratTotal;

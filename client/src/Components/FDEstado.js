@@ -1,5 +1,6 @@
 import React from "react";
 import calendar from "../img/calendar.png";
+import EstadoGrafico from "./EstadoGrafico";
 
 const FDEstado = () => {
   let filtrarUp = 0;
@@ -22,7 +23,9 @@ const FDEstado = () => {
   return (
     <div className="estadoPanel">
       <div className="estadoLeft">
-        <div className="graficoEstado"> Reservado para o gráfico</div>
+        <div className="graficoEstado">
+          <EstadoGrafico />
+        </div>
       </div>
       <div className="estadoRight">
         <div className="buttonSchedule" id="filtrarData">

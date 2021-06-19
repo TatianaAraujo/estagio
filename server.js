@@ -313,6 +313,37 @@ app.get("/QuestionnaireResponse", (req, res) => {
   }
 });
 
+app.get("/QuestionnaireResponseAll", (req, res) => {
+  try {
+    client
+      .search({
+        resourceType: "QuestionnaireResponse",
+        searchParams: {
+          subject: "Patient/" + req.query.id,
+          /*_sort: "desc=authored", //--> Sem efeito*/
+          questionnaire:
+            "http://fhir.inspirers.med.up.pt/Questionnaire/" + req.query.code,
+        },
+      })
+      .then((response) => {
+        const info = response.entry
+          ? response.entry.map((obj) => {
+              return {
+                all: obj.resource,
+              };
+            })
+          : [];
+
+        res.status(200).json(info);
+      })
+      .catch((error) => {
+        throw error;
+      });
+  } catch {
+    res.status(200).json([]);
+  }
+});
+
 app.listen(app.get("port"), () => {
   console.log("Server started");
 });

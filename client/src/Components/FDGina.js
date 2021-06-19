@@ -1,15 +1,41 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import calendar from "../img/calendar.png";
 
 import GinaGrafico from "./GinaGrafico";
 
 const FDGina = (props) => {
-  //const gina = props;
-  //const patientId = gina.gina;
+  const gina = props;
+  const patientId = gina.gina;
+
+  const [ginaInfo, setGinaInfo] = useState([]);
+
+  useEffect(() => {
+    /*const fetchGina = async (patientId) => {
+      const res = await fetch(
+        `/QuestionnaireResponseAll?id=${patientId}&code=Q911PTpt_1.0`,
+        {
+          accept: "application/json",
+        }
+      );
+      const data = await res.json();
+      setGinaInfo(data);
+    };
+    await fetchGina(patientId);*/
+
+    fetch(`/QuestionnaireResponseAll?id=${patientId}&code=Q911PTpt_1.0`, {
+      accept: "application/json",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setGinaInfo(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [patientId]);
 
   let filtrarUp = 0;
-
   const changeDataInformation = () => {
     const filtrarData = document.getElementById("filtrarData");
     const periodosSchedule = document.getElementById("periodosSchedule");
@@ -28,7 +54,7 @@ const FDGina = (props) => {
     <div className="ginaPanel">
       <div className="ginaLeft">
         <div className="graficoGina">
-          <GinaGrafico />
+          <GinaGrafico ginaInfo={ginaInfo} />
         </div>
       </div>
       <div className="ginaRight">

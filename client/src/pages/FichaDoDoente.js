@@ -77,7 +77,7 @@ const FichaDoDoente = () => {
     };
     await getDiagnosticosInfo();
 
-    const getTrabalho = async (code) => {
+    const getTrabalho = async () => {
       const res = await fetch(
         `/QuestionnaireResponse?id=${patientId}&code=Q701PTpt_1.0`,
         {
@@ -85,20 +85,16 @@ const FichaDoDoente = () => {
         }
       );
       const d = await res.json();
-      //console.log(d[0].all[i].length);
       for (let i = 0; i < d[0].all.length; i++) {
         if (d[0].all[i].linkId === "Q701_1.1") {
           let answer = d[0].all[i].answer[0].valueCoding.code;
           if (answer === "N.3") {
-            console.log("entrei");
             setTrabalhando(false);
             setTrabalho("Desempregado");
           } else if (answer === "N.4") {
-            console.log("entrei");
             setTrabalhando(false);
             setTrabalho("Estudante");
           } else if (answer === "N.5") {
-            console.log("entrei");
             setTrabalhando(false);
             setTrabalho("Reformado");
           }
@@ -107,7 +103,6 @@ const FichaDoDoente = () => {
           setTrabalho(d[0].all[i].answer[0].valueString);
         }
       }
-      console.log(d[0].all);
     };
     await getTrabalho();
   }, []);

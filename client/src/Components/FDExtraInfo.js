@@ -300,11 +300,17 @@ const FDExtraInfo = (props) => {
         <div className="infoLine">
           <div className="infoBlock">
             <div className="indicatores" style={{ color: "black" }}>
+              Histórico de Exacerbações
+            </div>
+          </div>
+          <div className="infoBlock">
+            <div className="indicatores" style={{ color: "black" }}>
               Outros
             </div>
             <div className="infoText">{gravidez}</div>
             <div className="infoText">{amamentar}</div>
           </div>
+          <div className="infoBlock"></div>
         </div>
       </div>
     </div>

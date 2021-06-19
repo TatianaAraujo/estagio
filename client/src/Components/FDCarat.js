@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import calendar from "../img/calendar.png";
 import { Switch, Route } from "react-router-dom";
 
@@ -11,8 +11,20 @@ const FDCarat = (props) => {
   const carat = props;
   const patientId = carat.carat;
 
-  let filtrarUp = 0;
+  const [caratInfo, setCaratInfo] = useState([]);
 
+  useEffect(async () => {
+    const fetchCarat = async (patientId) => {
+      const res = await fetch(`/Observation?id=${patientId}&code=2_901_0`, {
+        accept: "application/json",
+      });
+      const data = await res.json();
+      setCaratInfo(data);
+    };
+    await fetchCarat(patientId);
+  }, []);
+
+  let filtrarUp = 0;
   const changeDataInformation = () => {
     const filtrarData = document.getElementById("filtrarData");
     const periodosSchedule = document.getElementById("periodosSchedule");
@@ -36,15 +48,17 @@ const FDCarat = (props) => {
           <Switch>
             <Route
               path="/FichaDoDoente/Monitorizacao/Carat/CaratTotal"
-              render={(props) => <CaratTotal {...props} inicio={patientId} />}
+              render={(props) => (
+                <CaratTotal {...props} caratInfo={caratInfo} />
+              )}
             />
             <Route
               path="/FichaDoDoente/Monitorizacao/Carat/CaratVAI"
-              render={(props) => <CaratVAI {...props} inicio={patientId} />}
+              render={(props) => <CaratVAI {...props} caratInfo={caratInfo} />}
             />
             <Route
               path="/FichaDoDoente/Monitorizacao/Carat/CaratVAS"
-              render={(props) => <CaratVAS {...props} inicio={patientId} />}
+              render={(props) => <CaratVAS {...props} caratInfo={caratInfo} />}
             />
           </Switch>
         </div>
