@@ -1,34 +1,62 @@
 import React from "react";
 import { Doughnut } from "react-chartjs-2";
 
-const InicioCARAT = () => {
-  let values = [80, 20];
+const InicioAdesao = () => {
+  let todaMedicacaoInfo = JSON.parse(localStorage.getItem("todaMedicacao"));
+  let values = [];
+  let colors = [];
+
+  let sum = 0;
+  let average = 0;
+  if (todaMedicacaoInfo != null) {
+    for (let i = 0; i < todaMedicacaoInfo.length; i++) {
+      sum += todaMedicacaoInfo[i];
+    }
+    average = parseInt(sum / todaMedicacaoInfo.length);
+    values.push(average);
+    values.push(100 - average);
+
+    if (average >= 80) colors.push("#34ae16");
+    else if (average >= 51 && average <= 79) colors.push("#fffd1e");
+    else colors.push("#ff0000");
+    colors.push("white");
+  }
   const data = {
-    labels: ["Green", "White"],
+    labels: colors,
     datasets: [
       {
-        label: "My First Dataset",
         data: values,
-        backgroundColor: ["#00ad50", "#ffffff"],
+        backgroundColor: ["#bf0000", "#ffffff"],
         borderColor: "#e0e0e0",
       },
     ],
   };
 
   return (
-    <Doughnut
-      style={{ border: "10px solid yellow" }}
-      data={data}
-      options={{
-        legend: {
-          display: false,
-        },
-        tooltips: {
-          enabled: false,
-        },
-        maintainAspectRatio: false,
-      }}
-    />
+    <div style={{ height: "96%" }}>
+      <Doughnut
+        data={data}
+        options={{
+          legend: {
+            display: false,
+          },
+          tooltips: {
+            enabled: false,
+          },
+          maintainAspectRatio: false,
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          top: "79%",
+          left: "69.7%",
+          fontSize: "35px",
+        }}
+      >
+        {average}%
+      </div>
+    </div>
   );
 };
-export default InicioCARAT;
+export default InicioAdesao;

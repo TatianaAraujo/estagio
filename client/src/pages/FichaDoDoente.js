@@ -251,7 +251,7 @@ const FichaDoDoente = () => {
             />
             <Route
               path="/FichaDoDoente/Monitorizacao/Estado"
-              render={FDEstado}
+              render={(props) => <FDEstado {...props} estado={patientId} />}
             />
             <Route
               path="/FichaDoDoente/Monitorizacao/Eventos"

@@ -46,7 +46,7 @@ const CaratTotal = (props) => {
         },
         {
           type: "line",
-          label: "Limite da Normalidade >= 24",
+          label: "Limite da Normalidade > 24",
           borderColor: "#34ae16",
           pointRadius: 0,
           fill: false,

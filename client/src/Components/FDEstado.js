@@ -1,10 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import calendar from "../img/calendar.png";
 import EstadoGrafico from "./EstadoGrafico";
 
-const FDEstado = () => {
-  let filtrarUp = 0;
+const FDEstado = (props) => {
+  const estado = props;
+  const patientId = estado.estado;
 
+  const [answers, setAnswers] = useState([]);
+
+  useEffect(async () => {
+    const fetchEstado = async (patientId) => {
+      const res = await fetch(
+        `/QuestionnaireResponseAll?id=${patientId}&code=Q801PTpt_1.0`,
+        {
+          accept: "application/json",
+        }
+      );
+      const data = await res.json();
+      setAnswers(data);
+    };
+    await fetchEstado(patientId);
+  }, []);
+
+  let filtrarUp = 0;
   const changeDataInformation = () => {
     const filtrarData = document.getElementById("filtrarData");
     const periodosSchedule = document.getElementById("periodosSchedule");
@@ -24,7 +42,7 @@ const FDEstado = () => {
     <div className="estadoPanel">
       <div className="estadoLeft">
         <div className="graficoEstado">
-          <EstadoGrafico />
+          <EstadoGrafico data={answers} />
         </div>
       </div>
       <div className="estadoRight">

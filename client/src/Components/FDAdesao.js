@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
 
 import AdesaoMenu from "./AdesaoMenu";
@@ -16,8 +16,34 @@ const FDAdesao = (props) => {
   const adesao = props;
   const patientId = adesao.adesao;
 
-  let filtrarUp = 0;
+  const [medicationStatementInfo, setMedicationStatement] = useState([]);
+  const [medicationAdministration, setMedicationAdministration] = useState([]);
 
+  useEffect(() => {
+    fetch(`/MedicationStatement?status=active&subject=Patient/${patientId}`, {
+      accept: "application/json",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setMedicationStatement(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    fetch(`/medicationAdministration?subject=Patient/${patientId}`, {
+      accept: "application/json",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setMedicationAdministration(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [patientId]);
+
+  let filtrarUp = 0;
   const changeDataInformation = () => {
     const filtrarData = document.getElementById("filtrarData");
     const periodosSchedule = document.getElementById("periodosSchedule");
@@ -41,20 +67,29 @@ const FDAdesao = (props) => {
           <Switch>
             <Route
               path="/FichaDoDoente/Monitorizacao/Adesao/CorticoidesInalados"
-              render={(props) => (
-                <AdesaoCorticoides {...props} inicio={patientId} />
+              render={() => (
+                <AdesaoCorticoides
+                  medStatement={medicationStatementInfo}
+                  medAdministration={medicationAdministration}
+                />
               )}
             />
             <Route
               path="/FichaDoDoente/Monitorizacao/Adesao/TerapiaNasal"
-              render={(props) => (
-                <AdesaoTerapia {...props} inicio={patientId} />
+              render={() => (
+                <AdesaoTerapia
+                  medStatement={medicationStatementInfo}
+                  medAdministration={medicationAdministration}
+                />
               )}
             />
             <Route
               path="/FichaDoDoente/Monitorizacao/Adesao/TodaMedicacao"
-              render={(props) => (
-                <AdesaoMedicacao {...props} inicio={patientId} />
+              render={() => (
+                <AdesaoMedicacao
+                  medStatement={medicationStatementInfo}
+                  medAdministration={medicationAdministration}
+                />
               )}
             />
           </Switch>

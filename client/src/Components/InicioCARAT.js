@@ -9,7 +9,7 @@ const InicioCARAT = (props) => {
 
   let sum = 0;
   let tot = 0;
-  let average;
+  let average = 0;
   const constructInfo = () => {
     for (let i = 0; i < caratInfo.length; i++) {
       if (caratInfo[i].all.valueQuantity !== undefined) {

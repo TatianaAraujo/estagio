@@ -270,6 +270,20 @@ const FDInicio = (props) => {
             <div className="graficosInicio">{<InicioAdesao />}</div>
             <div className="caratInfo">
               <div> Objetivo: </div>
+              <div> {">"}= 80% </div>
+              <div
+                className="ultima"
+                style={{
+                  fontSize: "18px",
+                  color: "#4289cf",
+                  cursor: "pointer",
+                }}
+                onClick={() => {
+                  history.push("/FichaDoDoente/Monitorizacao/Adesao");
+                }}
+              >
+                <u>Ver Histórico</u>
+              </div>
             </div>
           </div>
         </div>

@@ -183,6 +183,36 @@ app.get("/medicationStatement", (req, res) => {
                 doseQuantity:
                   obj.resource.dosage[0].doseAndRate[0].doseQuantity,
                 font: obj.resource.meta.source,
+                date: obj.resource.effectiveDateTime,
+                medicationStatementId: obj.resource.id,
+              };
+            })
+          : [];
+
+        res.status(200).json(medication);
+      })
+      .catch((error) => {
+        throw error;
+      });
+  } catch {
+    res.status(200).json([]);
+  }
+});
+
+app.get("/medicationAdministration", (req, res) => {
+  try {
+    client
+      .search({
+        resourceType: "MedicationAdministration",
+        searchParams: {
+          subject: req.query.subject,
+        },
+      })
+      .then((response) => {
+        const medication = response.entry
+          ? response.entry.map((obj) => {
+              return {
+                all: obj.resource,
               };
             })
           : [];

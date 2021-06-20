@@ -1,13 +1,26 @@
 import React from "react";
 import { Doughnut } from "react-chartjs-2";
 
-const AdesaoMedicacaoCircular = (props) => {
-  //const adesao = props;
-  //const patientId = adesao.adesao;
+const AdesaoMedicacaoCircular = () => {
+  const todaMedicacaoInfo = JSON.parse(localStorage.getItem("todaMedicacao"));
+  let values = [];
+  let colors = [];
 
-  let values = [50, 100];
+  let sum = 0;
+  for (let i = 0; i < todaMedicacaoInfo.length; i++) {
+    sum += todaMedicacaoInfo[i];
+  }
+  const average = parseInt(sum / todaMedicacaoInfo.length);
+  values.push(average);
+  values.push(100 - average);
+
+  if (average >= 80) colors.push("#34ae16");
+  else if (average >= 51 && average <= 79) colors.push("#fffd1e");
+  else colors.push("#ff0000");
+  colors.push("white");
+
   const data = {
-    labels: ["Red", "White"],
+    labels: colors,
     datasets: [
       {
         data: values,
@@ -19,7 +32,7 @@ const AdesaoMedicacaoCircular = (props) => {
 
   return (
     <div style={{ width: "80%", height: "65%" }}>
-      <h5>Adesao Média a Toda a Medicação </h5>
+      <h5>Adesão Média a Toda a Medicação </h5>
       <Doughnut
         data={data}
         width={20}
@@ -34,6 +47,16 @@ const AdesaoMedicacaoCircular = (props) => {
           maintainAspectRatio: false,
         }}
       />
+      <div
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "45%",
+          fontSize: "35px",
+        }}
+      >
+        {average}%
+      </div>
     </div>
   );
 };

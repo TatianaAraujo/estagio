@@ -73,7 +73,7 @@ const FDMedicacaoInicio = ({ medicationList }) => {
           accept: "application/json",
         });*/
 
-        console.log(medicationName);
+        //console.log(medicationName);
       }
 
       return (
