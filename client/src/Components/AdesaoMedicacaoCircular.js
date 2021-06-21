@@ -38,8 +38,8 @@ const AdesaoMedicacaoCircular = () => {
         width={20}
         height={25}
         options={{
-          legend: {
-            display: false,
+          plugins: {
+            legend: false,
           },
           tooltips: {
             enabled: false,
@@ -51,7 +51,7 @@ const AdesaoMedicacaoCircular = () => {
         style={{
           position: "absolute",
           top: "50%",
-          left: "45%",
+          left: "43%",
           fontSize: "35px",
         }}
       >

@@ -41,8 +41,8 @@ const AdesaoCorticoidesCircular = () => {
         width={20}
         height={25}
         options={{
-          legend: {
-            display: false,
+          plugins: {
+            legend: false,
           },
           tooltips: {
             enabled: false,

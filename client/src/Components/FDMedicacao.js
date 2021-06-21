@@ -1,10 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import calendar from "../img/calendar.png";
 import MedicacaoGrafico from "./MedicacaoGrafico";
 
-const FDMedicacao = () => {
-  let filtrarUp = 0;
+const FDMedicacao = (props) => {
+  const medicacao = props;
+  const patientId = medicacao.medicacao;
 
+  const [medicationStatementInfo, setMedicationStatement] = useState([]);
+  const [medicationAdministration, setMedicationAdministration] = useState([]);
+
+  useEffect(() => {
+    fetch(`/MedicationStatement?status=active&subject=Patient/${patientId}`, {
+      accept: "application/json",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setMedicationStatement(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    fetch(`/medicationAdministration?subject=Patient/${patientId}`, {
+      accept: "application/json",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setMedicationAdministration(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [patientId]);
+
+  let filtrarUp = 0;
   const changeDataInformation = () => {
     const filtrarData = document.getElementById("filtrarData");
     const periodosSchedule = document.getElementById("periodosSchedule");
@@ -24,7 +53,10 @@ const FDMedicacao = () => {
     <div className="estadoPanel">
       <div className="estadoLeft">
         <div className="graficoEstado">
-          <MedicacaoGrafico />
+          <MedicacaoGrafico
+            medStatement={medicationStatementInfo}
+            medAdministration={medicationAdministration}
+          />
         </div>
       </div>
       <div className="estadoRight">

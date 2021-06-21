@@ -67,6 +67,16 @@ const EventosGrafico = (props) => {
       datasets: [
         {
           //linha 1
+          label: " ",
+          showLine: false,
+          fill: false,
+          borderWidth: 0,
+          tension: 0,
+          backgroundColor: "white",
+          data: [0, 0, 0, 0, 0, 0, 0, 0],
+        },
+        {
+          //linha 1
           label: "corticoide",
           showLine: false,
           fill: false,
@@ -119,7 +129,7 @@ const EventosGrafico = (props) => {
           borderWidth: 15,
           tension: 0,
           backgroundColor: "#7d0101",
-          data: values5,
+          data: [5, 5, 5, 5, 5, 5, 5, 5],
         },
       ],
     };
@@ -152,15 +162,15 @@ const EventosGrafico = (props) => {
         </div>
 
         <div className="graficoEventosLegenda">
-          <img src={entubVentMecanica} height="15%" width="55%" alt="" />
+          <img src={entubVentMecanica} height="11%" width="50%" alt="" />
           <div>Entubação/Ventilação</div>
-          <img src={intensivista} height="15%" width="55%" alt="" />
+          <img src={intensivista} height="12%" width="50%" alt="" />
           <div>Cuidados Intensivos</div>
-          <img src={internamento} height="15%" width="55%" alt="" />
+          <img src={internamento} height="11.5%" width="50%" alt="" />
           <div>Internamento</div>
-          <img src={consulta} height="15%" width="55%" alt="" />
+          <img src={consulta} height="12%" width="50%" alt="" />
           <div>SU/Consulta não programada</div>
-          <img src={medicacao} height="15%" width="55%" alt="" />
+          <img src={medicacao} height="11%" width="50%" alt="" />
           <div>Corticóide</div>
         </div>
 
@@ -168,18 +178,17 @@ const EventosGrafico = (props) => {
           <Line
             data={data}
             width={100}
-            height={90}
+            height={88}
             options={{
-              legend: {
-                display: false,
+              plugins: {
+                legend: false,
               },
               scales: {
                 yAxes: [
                   {
+                    beginAtZero: true,
                     ticks: {
-                      beginAtZero: true,
                       max: 5,
-                      min: 0.3,
                       stepSize: 1,
                       display: false,
                     },

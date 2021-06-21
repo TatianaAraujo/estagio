@@ -236,7 +236,7 @@ app.get("/Medication", (req, res) => {
       .then((response) => {
         if (response != undefined) {
           medication = {
-            name: response.code.coding[0].display,
+            name: response.entry[0].resource.code.coding[0].display,
           };
         }
         res.status(200).json(medication);

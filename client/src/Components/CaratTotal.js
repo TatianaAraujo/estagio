@@ -26,10 +26,10 @@ const CaratTotal = (props) => {
     constructInfo(caratInfo);
 
     const ctx = canvas.getContext("2d");
-    var gradientStroke = ctx.createLinearGradient(0, 100, 0, 300);
-    gradientStroke.addColorStop(0, "#34ae16"); //verde
-    gradientStroke.addColorStop(0.2, "#fffd1e"); //amarelo
-    gradientStroke.addColorStop(0.8, "#ff0000"); //vermelho
+    var gradientStroke = ctx.createLinearGradient(0, 55, 0, 200);
+    gradientStroke.addColorStop(0.1, "#34ae16"); //verde
+    gradientStroke.addColorStop(0.4, "#fffd1e"); //amarelo
+    gradientStroke.addColorStop(1.0, "#ff0000"); //vermelho
 
     return {
       backgroundColor: gradientStroke,
@@ -73,10 +73,12 @@ const CaratTotal = (props) => {
         width={95}
         height={40}
         options={{
-          legend: {
-            display: true,
-            position: "bottom",
-            color: "#34ae16",
+          plugins: {
+            legend: {
+              display: true,
+              position: "bottom",
+              color: "#34ae16",
+            },
           },
           scales: {
             xAxes: [

@@ -74,10 +74,12 @@ const CaratVAI = (props) => {
         width={95}
         height={40}
         options={{
-          legend: {
-            display: true,
-            position: "bottom",
-            color: "#34ae16",
+          plugins: {
+            legend: {
+              display: true,
+              position: "bottom",
+              color: "#34ae16",
+            },
           },
           scales: {
             xAxes: [

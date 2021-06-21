@@ -40,11 +40,8 @@ const AdesaoTerapiaCircular = () => {
         width={20}
         height={25}
         options={{
-          legend: {
-            display: false,
-          },
-          tooltips: {
-            enabled: false,
+          plugins: {
+            legend: false,
           },
           maintainAspectRatio: false,
         }}

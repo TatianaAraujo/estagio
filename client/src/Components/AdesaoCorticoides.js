@@ -120,7 +120,7 @@ function AdesaoCorticoides(props) {
 
   const createDatesAndValues = (dateFirstRegisteredMedication) => {
     let presentDay = new Date();
-    presentDay = presentDay.setDate(presentDay.getDate()); //TODO depois Pôrr aqui - 1!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+    presentDay = presentDay.setDate(presentDay.getDate() - 1);
 
     let i = dateFirstRegisteredMedication;
     while (i < presentDay) {
@@ -176,6 +176,7 @@ function AdesaoCorticoides(props) {
           fill: false,
           borderWidth: 4,
           data: values,
+          tension: 0.3,
         },
       ],
     };
@@ -198,6 +199,9 @@ function AdesaoCorticoides(props) {
         width={95}
         height={40}
         options={{
+          plugins: {
+            legend: false,
+          },
           legend: {
             display: false,
           },

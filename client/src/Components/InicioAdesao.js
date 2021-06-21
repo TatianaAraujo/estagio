@@ -37,8 +37,8 @@ const InicioAdesao = () => {
       <Doughnut
         data={data}
         options={{
-          legend: {
-            display: false,
+          plugins: {
+            legend: false,
           },
           tooltips: {
             enabled: false,
@@ -49,8 +49,8 @@ const InicioAdesao = () => {
       <div
         style={{
           position: "absolute",
-          top: "79%",
-          left: "69.7%",
+          top: "78.5%",
+          left: "69%",
           fontSize: "35px",
         }}
       >

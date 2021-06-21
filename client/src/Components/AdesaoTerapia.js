@@ -121,7 +121,7 @@ function AdesaoTerapia(props) {
 
   const createDatesAndValues = (dateFirstRegisteredMedication) => {
     let presentDay = new Date();
-    presentDay = presentDay.setDate(presentDay.getDate()); //TODO depois Pôrr aqui - 1!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+    presentDay = presentDay.setDate(presentDay.getDate() - 1);
 
     let i = dateFirstRegisteredMedication;
     while (i < presentDay) {
@@ -170,12 +170,14 @@ function AdesaoTerapia(props) {
     return {
       backgroundColor: gradientStroke,
       labels: dates,
+
       datasets: [
         {
           borderColor: gradientStroke,
           fill: false,
           borderWidth: 4,
           data: values,
+          tension: 0.3,
         },
       ],
     };
@@ -198,8 +200,8 @@ function AdesaoTerapia(props) {
         width={95}
         height={40}
         options={{
-          legend: {
-            display: false,
+          plugins: {
+            legend: false,
           },
           scales: {
             yAxes: [

@@ -36,7 +36,30 @@ const data = (canvas) => {
   };
 };
 
-export default function MedicacaoGrafico() {
+function MedicacaoGrafico(props) {
+  const adesaoInfo = props;
+  const medStatement = adesaoInfo.medStatement;
+  const medAdministration = adesaoInfo.medAdministration;
+
+  let values = [];
+  let dates = [];
+
+  console.log(medStatement);
+  console.log(medAdministration);
+
+  for (let i = 0; i < medAdministration.length; i++) {
+    //console.log(medAdministration[i].all.effectiveDateTime.substring(0, 10));
+    if (
+      medAdministration[i].all.reasonCode !== undefined &&
+      medAdministration[i].all.reasonCode[0].coding[0].display === "Emergency"
+    ) {
+      console.log(medAdministration[i].all.medicationReference.reference); //Nome do medicamento temporário
+      console.log(medAdministration[i].all); //
+
+      //const = getMedicationDose;
+    }
+  }
+
   return (
     <div
       style={{
@@ -44,15 +67,15 @@ export default function MedicacaoGrafico() {
         width: "100%",
         height: "100%",
         alignItems: "center",
-        justifyContent: "space-between",
+        justifyContent: "center",
         flexDirection: "column",
       }}
     >
-      <h2> Nº de tomas de Medicação SOS </h2>
+      <h3> Nº de tomas de Medicação SOS </h3>
       <Line
         data={data}
         width={95}
-        height={60}
+        height={80}
         options={{
           scales: {
             xAxes: [
@@ -78,3 +101,4 @@ export default function MedicacaoGrafico() {
     </div>
   );
 }
+export default MedicacaoGrafico;

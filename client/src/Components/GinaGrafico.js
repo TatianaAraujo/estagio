@@ -77,8 +77,8 @@ const GinaGrafico = (props) => {
         width={95}
         height={60}
         options={{
-          legend: {
-            display: false,
+          plugins: {
+            legend: false,
           },
           scales: {
             xAxes: [

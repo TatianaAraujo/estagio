@@ -85,22 +85,24 @@ const FichaDoDoente = () => {
         }
       );
       const d = await res.json();
-      for (let i = 0; i < d[0].all.length; i++) {
-        if (d[0].all[i].linkId === "Q701_1.1") {
-          let answer = d[0].all[i].answer[0].valueCoding.code;
-          if (answer === "N.3") {
-            setTrabalhando(false);
-            setTrabalho("Desempregado");
-          } else if (answer === "N.4") {
-            setTrabalhando(false);
-            setTrabalho("Estudante");
-          } else if (answer === "N.5") {
-            setTrabalhando(false);
-            setTrabalho("Reformado");
+      if (d[0] !== undefined) {
+        for (let i = 0; i < d[0].all.length; i++) {
+          if (d[0].all[i].linkId === "Q701_1.1") {
+            let answer = d[0].all[i].answer[0].valueCoding.code;
+            if (answer === "N.3") {
+              setTrabalhando(false);
+              setTrabalho("Desempregado");
+            } else if (answer === "N.4") {
+              setTrabalhando(false);
+              setTrabalho("Estudante");
+            } else if (answer === "N.5") {
+              setTrabalhando(false);
+              setTrabalho("Reformado");
+            }
           }
-        }
-        if (d[0].all[i].linkId === "Q701_1.3") {
-          setTrabalho(d[0].all[i].answer[0].valueString);
+          if (d[0].all[i].linkId === "Q701_1.3") {
+            setTrabalho(d[0].all[i].answer[0].valueString);
+          }
         }
       }
     };
@@ -263,7 +265,9 @@ const FichaDoDoente = () => {
             />
             <Route
               path="/FichaDoDoente/Monitorizacao/Medicacao"
-              render={FDMedicacao}
+              render={(props) => (
+                <FDMedicacao {...props} medicacao={patientId} />
+              )}
             />
             <Route
               path="/FichaDoDoente/Monitorizacao/Adesao/"

@@ -33,32 +33,37 @@ const FDSono = (props) => {
       );
       const data = await res.json();
       setAnswers(data);
-      return data[0].all;
+      if (data[0] != undefined) {
+        return data[0].all;
+      }
+      return [];
     };
 
     const informationRegister = async () => {
       let data = await fetchSono(patientId);
-      var lastDate = new Date(
-        data.authored.substring(0, 4),
-        data.authored.substring(6, 7) - 1,
-        data.authored.substring(8, 10)
-      );
-      setStartDate(lastDate);
-      let arrayAnswer = data.item;
+      if (data.authored !== undefined) {
+        var lastDate = new Date(
+          data.authored.substring(0, 4),
+          data.authored.substring(6, 7) - 1,
+          data.authored.substring(8, 10)
+        );
+        setStartDate(lastDate);
+        let arrayAnswer = data.item;
 
-      for (let i = 0; i < arrayAnswer.length; i++) {
-        switch (arrayAnswer[i].linkId) {
-          case "Q801_3.1":
-            setComoDormiu(arrayAnswer[i].answer[0].valueDecimal);
-            break;
-          case "Q801_3.2":
-            setProblemasAsma(arrayAnswer[i].answer[0].valueCoding.code);
-            break;
-          case "Q801_4.1":
-            setSonolento(arrayAnswer[i].answer[0].valueDecimal);
-            break;
-          default:
-            break;
+        for (let i = 0; i < arrayAnswer.length; i++) {
+          switch (arrayAnswer[i].linkId) {
+            case "Q801_3.1":
+              setComoDormiu(arrayAnswer[i].answer[0].valueDecimal);
+              break;
+            case "Q801_3.2":
+              setProblemasAsma(arrayAnswer[i].answer[0].valueCoding.code);
+              break;
+            case "Q801_4.1":
+              setSonolento(arrayAnswer[i].answer[0].valueDecimal);
+              break;
+            default:
+              break;
+          }
         }
       }
     };

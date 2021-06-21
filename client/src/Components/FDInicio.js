@@ -33,8 +33,10 @@ const FDInicio = (props) => {
         accept: "application/json",
       });
       const data = await res.json();
-      setLastCarat(data[0].all.effectiveDateTime.substring(0, 10));
-      setCaratInfo(data);
+      if (data[0] != undefined) {
+        setLastCarat(data[0].all.effectiveDateTime.substring(0, 10));
+        setCaratInfo(data);
+      }
     };
     await fetchCarat(patientId);
 
@@ -63,20 +65,24 @@ const FDInicio = (props) => {
 
     const gethabitosInfo = async () => {
       let qr = await getQuestionnaireResponse("Q510PTpt_1.0");
-      let qrAnswer = qr[0].all[0];
-      qrAnswer.answer[0].valueCoding.code === "A.1"
-        ? setHabitos("Fumador/a")
-        : setHabitos("Não Fumador/a");
+      if (qr[0] != undefined) {
+        let qrAnswer = qr[0].all[0];
+        qrAnswer.answer[0].valueCoding.code === "A.1"
+          ? setHabitos("Fumador/a")
+          : setHabitos("Não Fumador/a");
+      }
     };
     gethabitosInfo();
 
     const getOutrosInfo = async () => {
       let qr = await getQuestionnaireResponse("Q502PTpt_1.0");
-      qr[0].all[0].answer[0].valueCoding.code === "A.1"
-        ? setGravidez(
-            "Gravidez, " + qr[0].all[1].answer[0].valueInteger + " semanas"
-          )
-        : setGravidez("");
+      if (qr[0] !== undefined) {
+        qr[0].all[0].answer[0].valueCoding.code === "A.1"
+          ? setGravidez(
+              "Gravidez, " + qr[0].all[1].answer[0].valueInteger + " semanas"
+            )
+          : setGravidez("");
+      }
     };
     getOutrosInfo();
 

@@ -46,8 +46,8 @@ const SonoSonolencia = (props) => {
         width={100}
         height={65}
         options={{
-          legend: {
-            display: false,
+          plugins: {
+            legend: false,
           },
           scales: {
             yAxes: [

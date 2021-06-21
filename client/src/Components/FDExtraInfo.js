@@ -126,13 +126,15 @@ const FDExtraInfo = (props) => {
     const getGeraisInfo = async () => {
       //Apenas vai buscar a escolaridade Q02PTpt_1.0 (questionario)
       const qr = await getQuestionnaireResponse("Q02PTpt_1.0");
-      let answer = qr[0].all[0].answer[0].valueCoding.code;
-      for (var [key, value] of geraisInfo) {
-        if (key === answer) {
-          geraisSet.push(value);
+      if (qr !== undefined) {
+        let answer = qr[0].all[0].answer[0].valueCoding.code;
+        for (var [key, value] of geraisInfo) {
+          if (key === answer) {
+            geraisSet.push(value);
+          }
         }
+        setGerais(geraisSet);
       }
-      setGerais(geraisSet);
     };
     getGeraisInfo();
 
@@ -184,24 +186,28 @@ const FDExtraInfo = (props) => {
 
     const gethabitosInfo = async () => {
       let qr = await getQuestionnaireResponse("Q510PTpt_1.0");
-      let qrAnswer = qr[0].all[0];
-      qrAnswer.answer[0].valueCoding.code === "A.1"
-        ? setHabitos("Fumador")
-        : setHabitos("Não Fumador");
+      if (qr !== undefined) {
+        let qrAnswer = qr[0].all[0];
+        qrAnswer.answer[0].valueCoding.code === "A.1"
+          ? setHabitos("Fumador")
+          : setHabitos("Não Fumador");
+      }
     };
     gethabitosInfo();
 
     const getOutrosInfo = async () => {
       let qr = await getQuestionnaireResponse("Q502PTpt_1.0");
-      qr[0].all[0].answer[0].valueCoding.code === "A.1"
-        ? setGravidez(
-            "Gravidez " + qr[0].all[1].answer[0].valueInteger + " semanas"
-          )
-        : setGravidez("");
+      if (qr !== undefined) {
+        qr[0].all[0].answer[0].valueCoding.code === "A.1"
+          ? setGravidez(
+              "Gravidez " + qr[0].all[1].answer[0].valueInteger + " semanas"
+            )
+          : setGravidez("");
 
-      qr[0].all[2].answer[0].valueCoding.code === "A.1"
-        ? setAmamentar("A amamentar")
-        : setAmamentar("");
+        qr[0].all[2].answer[0].valueCoding.code === "A.1"
+          ? setAmamentar("A amamentar")
+          : setAmamentar("");
+      }
     };
     getOutrosInfo();
   }, []);
