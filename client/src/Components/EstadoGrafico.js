@@ -1,10 +1,7 @@
 import React from "react";
 import { Chart, Line } from "react-chartjs-2";
-//import Hammer from "react-hammerjs";
-//import * as Zoom from "chartjs-plugin-zoom";
-//import zoomPlugin from "chartjs-plugin-zoom";
-//import "chartjs-plugin-zoom";
-
+import zoomPlugin from "chartjs-plugin-zoom";
+Chart.register(zoomPlugin); // REGISTER PLUGIN
 function FDEstado(props) {
   const estado = props;
   const estadoInfo = estado.data;
@@ -49,6 +46,54 @@ function FDEstado(props) {
     };
   };
 
+  const options = {
+    maintainAspectRatio: false,
+    responsive: true,
+    scales: {
+      yAxes: [
+        {
+          beginAtZero: true,
+          ticks: {
+            max: 100,
+            stepSize: 10,
+          },
+        },
+      ],
+    },
+    plugins: {
+      zoom: {
+        limits: {
+          y: {
+            min: 0,
+            max: 100,
+            minRange: 10,
+          },
+          x: {
+            min: 0,
+            max: 100,
+            minRange: 6,
+          },
+        },
+        pan: {
+          enabled: true,
+          mode: "x",
+          speed: 0.2,
+          threshold: 5,
+        },
+        zoom: {
+          enabled: true,
+          wheel: {
+            enabled: true,
+          },
+          drag: false,
+          mode: "x",
+          speed: 0.1,
+          threshold: 2,
+        },
+      },
+    },
+  };
+
   return (
     <div
       style={{
@@ -61,27 +106,7 @@ function FDEstado(props) {
       }}
     >
       <h3>Estado de saúde geral</h3>
-      <Line
-        data={data}
-        width={95}
-        height={60}
-        options={{
-          plugins: {
-            legend: false,
-
-            scales: {
-              yAxes: [
-                {
-                  ticks: {
-                    beginAtZero: true,
-                    max: 100,
-                  },
-                },
-              ],
-            },
-          },
-        }}
-      />
+      <Line data={data} type="line" options={options} width={95} height={60} />
     </div>
   );
 }

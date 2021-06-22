@@ -73,6 +73,8 @@ const CaratTotal = (props) => {
         width={95}
         height={40}
         options={{
+          maintainAspectRatio: false,
+          responsive: true,
           plugins: {
             legend: {
               display: true,
@@ -92,7 +94,7 @@ const CaratTotal = (props) => {
               {
                 ticks: {
                   beginAtZero: true,
-                  max: 30,
+                  max: 35,
                 },
               },
             ],

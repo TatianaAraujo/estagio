@@ -13,6 +13,7 @@
 		"@syncfusion/ej2-react-calendars": "^19.1.66",
 		"antd": "^4.16.2",
 		"body-parser": "^1.18.3",
+		"client-oauth2": "^4.3.3",
 		"date-fns": "^2.22.1",
 		"express": "^4.16.4",
 		"fhir-kit-client": "^1.6.3",

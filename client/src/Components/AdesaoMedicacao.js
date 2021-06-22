@@ -1,5 +1,7 @@
 import React from "react";
-import { Line } from "react-chartjs-2";
+import { Chart, Line } from "react-chartjs-2";
+import zoomPlugin from "chartjs-plugin-zoom";
+Chart.register(zoomPlugin); // REGISTER PLUGIN
 
 function AdesaoMedicacao(props) {
   const adesaoInfo = props;
@@ -204,6 +206,38 @@ function AdesaoMedicacao(props) {
                 },
               },
             ],
+          },
+          plugins: {
+            zoom: {
+              limits: {
+                y: {
+                  min: 0,
+                  max: 100,
+                  minRange: 10,
+                },
+                x: {
+                  min: 0,
+                  max: 100,
+                  minRange: 6,
+                },
+              },
+              pan: {
+                enabled: true,
+                mode: "x",
+                speed: 0.2,
+                threshold: 5,
+              },
+              zoom: {
+                enabled: true,
+                wheel: {
+                  enabled: true,
+                },
+                drag: false,
+                mode: "x",
+                speed: 0.1,
+                threshold: 2,
+              },
+            },
           },
         }}
       />
