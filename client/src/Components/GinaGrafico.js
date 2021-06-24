@@ -1,5 +1,5 @@
 import React from "react";
-import { Line } from "react-chartjs-2";
+import { Line, Chart } from "react-chartjs-2";
 
 const GinaGrafico = (props) => {
   const gina = props;
@@ -38,6 +38,7 @@ const GinaGrafico = (props) => {
     values.unshift(null);
     colors.unshift("");
   };
+  Chart.defaults.font.size = 12;
 
   const data = () => {
     constructInfo(ginaInfo);
@@ -47,6 +48,7 @@ const GinaGrafico = (props) => {
       labels: dates,
       datasets: [
         {
+          label: "Score GINA",
           borderColor: colors,
           showLine: false,
           fill: false,
@@ -79,29 +81,6 @@ const GinaGrafico = (props) => {
         options={{
           plugins: {
             legend: false,
-          },
-          scales: {
-            xAxes: [
-              {
-                gridLines: {
-                  display: false,
-                },
-              },
-            ],
-            yAxes: [
-              {
-                scaleLabel: {
-                  display: true,
-                  labelString: "Score GINA",
-                },
-                ticks: {
-                  beginAtZero: true,
-                  max: 5,
-                  min: 0,
-                  stepSize: 1,
-                },
-              },
-            ],
           },
         }}
       />

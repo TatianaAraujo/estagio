@@ -311,6 +311,35 @@ app.get("/Observation", (req, res) => {
   }
 });
 
+app.get("/Observations", (req, res) => {
+  try {
+    client
+      .search({
+        resourceType: "Observation/",
+        searchParams: {
+          subject: "Patient/" + req.query.id,
+          code: "http://codesystem.inspirers.med.up.pt|" + req.query.code,
+        },
+      })
+      .then((response) => {
+        const info = response.entry
+          ? response.entry.map((obj) => {
+              return {
+                all: obj.resource,
+              };
+            })
+          : [];
+
+        res.status(200).json(info);
+      })
+      .catch((error) => {
+        throw error;
+      });
+  } catch {
+    res.status(200).json([]);
+  }
+});
+
 app.get("/QuestionnaireResponse", (req, res) => {
   try {
     client

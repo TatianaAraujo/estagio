@@ -11,18 +11,6 @@ const FDGina = (props) => {
   const [ginaInfo, setGinaInfo] = useState([]);
 
   useEffect(() => {
-    /*const fetchGina = async (patientId) => {
-      const res = await fetch(
-        `/QuestionnaireResponseAll?id=${patientId}&code=Q911PTpt_1.0`,
-        {
-          accept: "application/json",
-        }
-      );
-      const data = await res.json();
-      setGinaInfo(data);
-    };
-    await fetchGina(patientId);*/
-
     fetch(`/QuestionnaireResponseAll?id=${patientId}&code=Q911PTpt_1.0`, {
       accept: "application/json",
     })

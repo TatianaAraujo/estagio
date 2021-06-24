@@ -105,7 +105,7 @@ const FDAdesao = (props) => {
           <div className="legendaAdesao2">
             <div
               className="squadLegendaAdesao"
-              style={{ backgroundColor: "#fffd1e" }}
+              style={{ backgroundColor: "#ffd65c" }}
             ></div>
             <div> Razoável Adesão (51 - 79%)</div>
           </div>

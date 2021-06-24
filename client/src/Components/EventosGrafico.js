@@ -1,5 +1,5 @@
 import React from "react";
-import { Line } from "react-chartjs-2";
+import { Line, Chart } from "react-chartjs-2";
 
 import entubVentMecanica from "../img/entubventmecanica.png";
 import intensivista from "../img/intensivista.png";
@@ -60,6 +60,8 @@ const EventosGrafico = (props) => {
     }
     flag = 0;
   }
+  Chart.defaults.font.size = 12;
+  console.log(Chart.defaults.scale.ticks);
 
   const data = () => {
     return {

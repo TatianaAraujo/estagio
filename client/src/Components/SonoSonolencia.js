@@ -8,6 +8,13 @@ const SonoSonolencia = (props) => {
   const xlabels = [];
   const ylabels = [];
 
+  let lastDay;
+  let firstDay;
+  if (sonoData.length > 0) {
+    let l = sonoData.length;
+    lastDay = sonoData[0].all.authored.substring(0, 10);
+    firstDay = sonoData[l - 1].all.authored.substring(0, 10);
+  }
   for (let i = 0; i < sonoData.length; i++) {
     xlabels.unshift(sonoData[i].all.authored.substring(0, 10));
 
@@ -62,6 +69,43 @@ const SonoSonolencia = (props) => {
           },
         }}
       />
+
+      <div
+        className="sonoGraficoLegenda"
+        style={{
+          right: "12%",
+          top: "95%",
+        }}
+      >
+        {lastDay}
+      </div>
+      <div
+        className="sonoGraficoLegenda"
+        style={{
+          right: "32%",
+          top: "95%",
+        }}
+      >
+        {firstDay}
+      </div>
+      <div
+        className="sonoGraficoLegenda"
+        style={{
+          right: "35%",
+          top: "68%",
+        }}
+      >
+        <div>Muito sonolento</div>
+      </div>
+      <div
+        className="sonoGraficoLegenda"
+        style={{
+          right: "35%",
+          top: "92%",
+        }}
+      >
+        <div>Nada sonolento</div>
+      </div>
     </div>
   );
 };

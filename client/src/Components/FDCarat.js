@@ -15,10 +15,11 @@ const FDCarat = (props) => {
 
   useEffect(async () => {
     const fetchCarat = async (patientId) => {
-      const res = await fetch(`/Observation?id=${patientId}&code=2_901_0`, {
+      const res = await fetch(`/Observations?id=${patientId}&code=2_901_0`, {
         accept: "application/json",
       });
       const data = await res.json();
+      console.log(data);
       setCaratInfo(data);
     };
     await fetchCarat(patientId);

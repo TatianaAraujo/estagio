@@ -49,7 +49,7 @@ const InicioAdesao = () => {
       <div
         style={{
           position: "absolute",
-          top: "78.5%",
+          top: "80%",
           left: "69%",
           fontSize: "35px",
         }}

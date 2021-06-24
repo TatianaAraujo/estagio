@@ -1,13 +1,16 @@
 import React from "react";
 import { Chart, Line } from "react-chartjs-2";
 import zoomPlugin from "chartjs-plugin-zoom";
+
 Chart.register(zoomPlugin); // REGISTER PLUGIN
+
 function FDEstado(props) {
   const estado = props;
   const estadoInfo = estado.data;
 
   let values = [];
   let dates = [];
+  let maxValue = [];
 
   for (let i = 0; i < estadoInfo.length; i++) {
     let answerDate = estadoInfo[i].all.authored.substring(0, 10);
@@ -16,31 +19,50 @@ function FDEstado(props) {
       switch (arrayAnswer[i].linkId) {
         case "Q801_1.1":
           dates.unshift(answerDate);
-          values.unshift(arrayAnswer[i].answer[0].valueDecimal);
+          let v = parseInt(arrayAnswer[i].answer[0].valueDecimal);
+          values.unshift(v);
+          maxValue.unshift(100);
           break;
         default:
           continue;
       }
     }
   }
+  Chart.defaults.font.size = 12;
 
   const data = (canvas) => {
     const ctx = canvas.getContext("2d");
-    var gradientStroke = ctx.createLinearGradient(0, 10, 0, 350);
-    gradientStroke.addColorStop(0.2, "#34ae16"); //verde
-    gradientStroke.addColorStop(0.5, "#fffd1e"); //amarelo
-    gradientStroke.addColorStop(0.8, "#ff0000"); //vermelho
+    var gradientFill = ctx.createLinearGradient(0, 0, 0, canvas.height + 5);
+    gradientFill.addColorStop(0, "#34ae16"); //verde
+    gradientFill.addColorStop(0.21, "#34ae16");
+
+    gradientFill.addColorStop(0.22, "#ffd65c"); //amarelo
+    gradientFill.addColorStop(0.46, "#ffd65c");
+
+    gradientFill.addColorStop(0.5, "#fe0503"); //vermelho
+    gradientFill.addColorStop(1, "#fe0503");
 
     return {
-      backgroundColor: gradientStroke,
       labels: dates,
       datasets: [
         {
-          borderColor: gradientStroke,
-          fill: gradientStroke,
+          label: "Estado de saúde",
+          backgroundColor: gradientFill,
+          borderColor: gradientFill,
+          fill: false,
           tension: 0.3,
           borderWidth: 4,
           data: values,
+        },
+        {
+          type: "line",
+          label: "",
+          borderColor: "#ffffff",
+          backgroundColor: "white",
+          pointRadius: 0,
+          fill: false,
+          data: maxValue,
+          showLine: false,
         },
       ],
     };
@@ -71,13 +93,13 @@ function FDEstado(props) {
           x: {
             min: 0,
             max: 100,
-            minRange: 6,
+            minRange: 7,
           },
         },
         pan: {
           enabled: true,
           mode: "x",
-          speed: 0.2,
+          speed: 0.1,
           threshold: 5,
         },
         zoom: {

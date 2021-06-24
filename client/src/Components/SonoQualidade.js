@@ -1,5 +1,5 @@
 import React from "react";
-import { Line } from "react-chartjs-2";
+import { Line, Chart } from "react-chartjs-2";
 
 const SonoQualidade = (props) => {
   const dataProps = props;
@@ -7,6 +7,14 @@ const SonoQualidade = (props) => {
 
   const xlabels = [];
   const ylabels = [];
+
+  let lastDay;
+  let firstDay;
+  if (sonoData.length > 0) {
+    let l = sonoData.length;
+    lastDay = sonoData[0].all.authored.substring(0, 10);
+    firstDay = sonoData[l - 1].all.authored.substring(0, 10);
+  }
 
   for (let i = 0; i < sonoData.length; i++) {
     xlabels.unshift(sonoData[i].all.authored.substring(0, 10));
@@ -34,6 +42,13 @@ const SonoQualidade = (props) => {
     ],
   };
 
+  const options = {
+    plugins: {
+      legend: false,
+    },
+  };
+  Chart.defaults.font.size = 0;
+
   return (
     <div
       style={{
@@ -41,27 +56,45 @@ const SonoQualidade = (props) => {
         alignItems: "center",
       }}
     >
-      <Line
-        data={data}
-        width={100}
-        height={65}
-        options={{
-          plugins: {
-            legend: false,
-          },
-          scales: {
-            yAxes: [
-              {
-                ticks: {
-                  beginAtZero: true,
-                  max: 100,
-                  //display:false
-                },
-              },
-            ],
-          },
+      <Line data={data} width={100} height={65} options={options} />
+      <div
+        className="sonoGraficoLegenda"
+        style={{
+          right: "12%",
+          top: "55%",
         }}
-      />
+      >
+        {lastDay}
+      </div>
+      <div
+        className="sonoGraficoLegenda"
+        style={{
+          right: "32%",
+          top: "55%",
+        }}
+      >
+        {firstDay}
+      </div>
+      <div
+        className="sonoGraficoLegenda"
+        style={{
+          right: "35%",
+          top: "27%",
+        }}
+      >
+        <div>Dormi</div>
+        <div>muito bem</div>
+      </div>
+      <div
+        className="sonoGraficoLegenda"
+        style={{
+          right: "35%",
+          top: "50%",
+        }}
+      >
+        <div>Dormi</div>
+        <div>muito mal</div>
+      </div>
     </div>
   );
 };

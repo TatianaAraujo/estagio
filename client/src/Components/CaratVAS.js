@@ -1,5 +1,5 @@
 import React from "react";
-import { Line } from "react-chartjs-2";
+import { Line, Chart } from "react-chartjs-2";
 
 const CaratVAS = (props) => {
   const carat = props;
@@ -8,50 +8,66 @@ const CaratVAS = (props) => {
   let dates;
   let values;
   let goodValue;
+  let maxValue;
 
   const constructInfo = (caratInfo) => {
     dates = [];
     values = [];
     goodValue = [];
+    maxValue = [];
 
     for (let i = 0; i < caratInfo.length; i++) {
       if (caratInfo[i].all.valueQuantity !== undefined) {
         dates.unshift(caratInfo[i].all.effectiveDateTime.substring(0, 10));
         values.unshift(caratInfo[i].all.component[0].valueInteger);
         goodValue.push(8);
+        maxValue.push(12);
       }
     }
   };
+  Chart.defaults.font.size = 12;
 
   const data = (canvas) => {
     constructInfo(caratInfo);
 
     const ctx = canvas.getContext("2d");
-    var gradientStroke = ctx.createLinearGradient(0, 100, 0, 370);
-    gradientStroke.addColorStop(0, "#34ae16"); //verde
-    gradientStroke.addColorStop(0.3, "#fffd1e"); //amarelo
-    gradientStroke.addColorStop(0.8, "#ff0000"); //vermelho
+    var gradientFill = ctx.createLinearGradient(0, 0, 0, canvas.height);
+    gradientFill.addColorStop(0, "#34ae16"); //verde
+    gradientFill.addColorStop(0.25, "#34ae16");
+    gradientFill.addColorStop(0.4, "#fe0503"); //vermelho
+    gradientFill.addColorStop(1, "#fe0503");
 
     return {
-      backgroundColor: gradientStroke,
+      backgroundColor: gradientFill,
       labels: dates,
       datasets: [
         {
-          backgroundColor: gradientStroke,
+          backgroundColor: gradientFill,
           fill: true,
           borderWidth: 4,
           tension: 0.1,
           pointRadius: 2,
           data: values,
-          label: "carat",
+          label: "CARAT VAS",
         },
         {
           type: "line",
-          label: "Limite da Normalidade > 8",
+          label: "Limite da Normalidade > 24",
           borderColor: "#34ae16",
+          backgroundColor: "#34ae16",
           pointRadius: 0,
           fill: false,
           data: goodValue,
+        },
+        {
+          type: "line",
+          label: "",
+          borderColor: "#ffffff",
+          backgroundColor: "white",
+          pointRadius: 0,
+          fill: false,
+          data: maxValue,
+          showLine: false,
         },
       ],
     };

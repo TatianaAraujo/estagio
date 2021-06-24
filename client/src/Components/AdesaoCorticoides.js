@@ -1,5 +1,5 @@
 import React from "react";
-import { Line } from "react-chartjs-2";
+import { Line, Chart } from "react-chartjs-2";
 
 function AdesaoCorticoides(props) {
   const adesaoInfo = props;
@@ -7,6 +7,7 @@ function AdesaoCorticoides(props) {
   const medAdministration = adesaoInfo.medAdministration;
 
   let dates = [];
+  let maxValue = [];
   let values = [];
 
   let daysOfWeek = new Map();
@@ -138,15 +139,20 @@ function AdesaoCorticoides(props) {
       dates.push(
         i.getFullYear() + "-" + (i.getMonth() + 1) + "-" + i.getDate()
       );
+      maxValue.push(100);
+
+      let average = parseInt(
+        (medicationAdministrationDay / medicationStatementDayNumber) * 100
+      );
+      medicationAdministrationDay > medicationStatementDayNumber
+        ? (average = 100)
+        : (average = average);
+
       if (
         medicationAdministrationDay !== 0 ||
         medicationStatementDayNumber !== 0
       ) {
-        values.push(
-          parseInt(
-            (medicationAdministrationDay / medicationStatementDayNumber) * 100
-          )
-        );
+        values.push(average);
       } else {
         values.push(0);
       }
@@ -160,23 +166,41 @@ function AdesaoCorticoides(props) {
   const dateFirstRegisteredMedication = getDateFirstRegisteredMedication();
   createDatesAndValues(dateFirstRegisteredMedication);
 
+  Chart.defaults.font.size = 12;
+
   const data = (canvas) => {
     const ctx = canvas.getContext("2d");
-    var gradientStroke = ctx.createLinearGradient(0, 10, 0, 350);
-    gradientStroke.addColorStop(0, "#34ae16"); //verde
-    gradientStroke.addColorStop(0.4, "#fffd1e"); //amarelo
-    gradientStroke.addColorStop(0.8, "#ff0000"); //vermelho
+    var gradientFill = ctx.createLinearGradient(0, 0, 0, canvas.height + 5);
+    gradientFill.addColorStop(0, "#34ae16"); //verde
+    gradientFill.addColorStop(0.21, "#34ae16");
+
+    gradientFill.addColorStop(0.22, "#ffd65c"); //amarelo
+    gradientFill.addColorStop(0.46, "#ffd65c");
+
+    gradientFill.addColorStop(0.5, "#fe0503"); //vermelho
+    gradientFill.addColorStop(1, "#fe0503");
 
     return {
-      backgroundColor: gradientStroke,
       labels: dates,
       datasets: [
         {
-          borderColor: gradientStroke,
+          label: "Adesão ao corticóide",
+          backgroundColor: gradientFill,
+          borderColor: gradientFill,
           fill: false,
           borderWidth: 4,
           data: values,
           tension: 0.3,
+        },
+        {
+          type: "line",
+          label: "",
+          borderColor: "#ffffff",
+          backgroundColor: "white",
+          pointRadius: 0,
+          fill: false,
+          data: maxValue,
+          showLine: false,
         },
       ],
     };
@@ -199,12 +223,6 @@ function AdesaoCorticoides(props) {
         width={95}
         height={40}
         options={{
-          plugins: {
-            legend: false,
-          },
-          legend: {
-            display: false,
-          },
           scales: {
             yAxes: [
               {

@@ -1,5 +1,5 @@
 import React from "react";
-import { Line } from "react-chartjs-2";
+import { Line, Chart } from "react-chartjs-2";
 
 const CaratTotal = (props) => {
   const carat = props;
@@ -8,9 +8,11 @@ const CaratTotal = (props) => {
   let dates;
   let values;
   let goodValue;
+  let maxValue;
 
   const constructInfo = (caratInfo) => {
     dates = [];
+    maxValue = [];
     values = [];
     goodValue = [];
     for (let i = 0; i < caratInfo.length; i++) {
@@ -18,39 +20,53 @@ const CaratTotal = (props) => {
         dates.unshift(caratInfo[i].all.effectiveDateTime.substring(0, 10));
         values.unshift(caratInfo[i].all.valueQuantity.value);
         goodValue.push(24);
+        maxValue.push(30);
       }
     }
   };
+  Chart.defaults.font.size = 12;
 
   const data = (canvas) => {
     constructInfo(caratInfo);
 
     const ctx = canvas.getContext("2d");
-    var gradientStroke = ctx.createLinearGradient(0, 55, 0, 200);
-    gradientStroke.addColorStop(0.1, "#34ae16"); //verde
-    gradientStroke.addColorStop(0.4, "#fffd1e"); //amarelo
-    gradientStroke.addColorStop(1.0, "#ff0000"); //vermelho
+    var gradientFill = ctx.createLinearGradient(0, 0, 0, canvas.height);
+    gradientFill.addColorStop(0, "#34ae16"); //verde
+    gradientFill.addColorStop(0.15, "#34ae16");
+    gradientFill.addColorStop(0.25, "#fe0503"); //vermelho
+    gradientFill.addColorStop(1, "#fe0503");
 
     return {
-      backgroundColor: gradientStroke,
+      backgroundColor: gradientFill,
       labels: dates,
       datasets: [
         {
-          backgroundColor: gradientStroke,
+          backgroundColor: gradientFill,
           fill: true,
           borderWidth: 4,
           tension: 0.1,
           pointRadius: 2,
           data: values,
-          label: "Carat",
+          label: "CARAT Total",
         },
         {
           type: "line",
           label: "Limite da Normalidade > 24",
           borderColor: "#34ae16",
+          backgroundColor: "#34ae16",
           pointRadius: 0,
           fill: false,
           data: goodValue,
+        },
+        {
+          type: "line",
+          label: "",
+          borderColor: "#ffffff",
+          backgroundColor: "white",
+          pointRadius: 0,
+          fill: false,
+          data: maxValue,
+          showLine: false,
         },
       ],
     };
@@ -94,7 +110,7 @@ const CaratTotal = (props) => {
               {
                 ticks: {
                   beginAtZero: true,
-                  max: 35,
+                  max: 30,
                 },
               },
             ],

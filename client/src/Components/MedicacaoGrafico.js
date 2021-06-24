@@ -1,5 +1,5 @@
 import React from "react";
-import { Line } from "react-chartjs-2";
+import { Line, Chart } from "react-chartjs-2";
 import moment from "moment";
 
 const startDate = new Date(2020, 0, 1);
@@ -8,6 +8,7 @@ for (let i = 1; i < 6; i++) {
   const date = moment(startDate).add(i, "days").format("YYYY-MM-DD");
   labels.push(date.toString());
 }
+Chart.defaults.font.size = 12;
 
 const data = (canvas) => {
   const ctx = canvas.getContext("2d");

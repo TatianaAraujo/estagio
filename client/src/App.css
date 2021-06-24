@@ -457,7 +457,7 @@ td {
 
 .inicioInfoCarat {
   position: absolute;
-  top: 77.5%;
+  top: 79%;
   left: 41.5%;
   font-size: 45px;
 }
@@ -508,7 +508,7 @@ td {
   border-bottom-left-radius: 50px;
   border-bottom-right-radius: 50px;
   width: 84%;
-  height: 700px;
+  height: 750px;
   margin-left: 10.6%;
 }
 
@@ -532,6 +532,15 @@ td {
   margin-top: 1%;
   font-size: 20px;
   color: #707070;
+}
+
+.semRegistosInfo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #707070;
+  font-size: 20px;
+  margin-top: 5%;
 }
 
 .sons {
@@ -1249,6 +1258,11 @@ td {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.sonoGraficoLegenda {
+  position: absolute;
+  font-size: 12px;
 }
 
 .graficoRight {

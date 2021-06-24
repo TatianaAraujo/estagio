@@ -53,7 +53,7 @@ const AdesaoCorticoidesCircular = () => {
       <div
         style={{
           position: "absolute",
-          top: "56%",
+          top: "57%",
           left: "45%",
           fontSize: "35px",
         }}
