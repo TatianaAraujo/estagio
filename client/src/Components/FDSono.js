@@ -88,6 +88,7 @@ const FDSono = (props) => {
   const informationRegister = async (dateChosed) => {
     let arrayAnswer = findAnswerData(dateChosed);
     let dateError = document.getElementById("dateError");
+    let semResultados = document.getElementById("semResultados");
 
     if (arrayAnswer.length === 0) {
       setComoDormiu(0);
@@ -95,10 +96,13 @@ const FDSono = (props) => {
       setSonolento(0);
 
       dateError.style.display = "flex";
+      semResultados.style.display = "flex";
       return;
     }
 
     dateError.style.display = "none";
+    semResultados.style.display = "none";
+
     for (let i = 0; i < arrayAnswer.length; i++) {
       switch (arrayAnswer[i].linkId) {
         case "Q801_3.1":
@@ -118,6 +122,21 @@ const FDSono = (props) => {
 
   return (
     <div className="sonoPanel">
+      <div className="sonoRight">
+        <div className="qualidadeSono">
+          <p>Qualidade do Sono</p>
+          <div className="graficoRight">
+            <SonoQualidade {...props} data={answers} />
+          </div>
+        </div>
+        <div className="sonolencia">
+          <p>Sonolência</p>
+          <div className="graficoRight">
+            <SonoSonolencia {...props} data={answers} />
+          </div>
+        </div>
+      </div>
+
       <div className="sonoLeft">
         <div className="sonoData">
           <div>Últimas respostas a</div>
@@ -176,7 +195,6 @@ const FDSono = (props) => {
               style={{ color: "#175874" }}
               disabled
               value={sonolento}
-              aria-labelledby="disabled-slider"
               valueLabelDisplay="on"
             />
             <div className="sonoLegenda">
@@ -185,20 +203,7 @@ const FDSono = (props) => {
             </div>
           </div>
         </div>
-      </div>
-      <div className="sonoRight">
-        <div className="qualidadeSono">
-          <p>Qualidade do Sono</p>
-          <div className="graficoRight">
-            <SonoQualidade {...props} data={answers} />
-          </div>
-        </div>
-        <div className="sonolencia">
-          <p>Sonolência</p>
-          <div className="graficoRight">
-            <SonoSonolencia {...props} data={answers} />
-          </div>
-        </div>
+        <div className="semResultados" id="semResultados"></div>
       </div>
     </div>
   );

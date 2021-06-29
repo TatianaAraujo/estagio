@@ -734,7 +734,7 @@ td {
 }
 
 .menuAdesao {
-  height: 20%;
+  height: 15%;
   display: flex;
   justify-content: space-between;
   flex-direction: row;
@@ -742,7 +742,7 @@ td {
 }
 
 .graficoAdesao {
-  height: 60%;
+  height: 65%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1008,7 +1008,7 @@ td {
 }
 
 .graficoEventosLegenda {
-  width: 17%;
+  width: 18.5%;
   height: 90%;
   display: flex;
   flex-direction: column;
@@ -1038,6 +1038,12 @@ td {
   align-items: center;
   font-family: Arial;
   font-size: 26px;
+}
+.whiteDiv {
+  position: absolute;
+  background-color: white;
+  width: 1.2%;
+  height: 55%;
 }
 
 .estadoPanel {
@@ -1150,7 +1156,6 @@ td {
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  border-right: 1px solid #707070;
 }
 
 .sonoRight {
@@ -1159,6 +1164,7 @@ td {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  border-right: 1px solid #707070;
   font-size: 120%;
 }
 
@@ -1185,6 +1191,14 @@ td {
   display: none;
 }
 
+.semResultados {
+  display: none;
+  position: absolute;
+  background-color: white;
+  width: 37%;
+  height: 63%;
+}
+
 .sonoDormir {
   display: flex;
   flex-direction: column;
@@ -1194,6 +1208,8 @@ td {
 }
 
 .graficoComoDormiu {
+  position: relative;
+  z-index: 0;
   width: 95%;
   height: 50%;
   margin-left: 3%;
@@ -1232,6 +1248,8 @@ td {
 }
 
 .graficoSonolento {
+  position: relative;
+  z-index: 0;
   width: 95%;
   height: 60%;
   margin-left: 3%;

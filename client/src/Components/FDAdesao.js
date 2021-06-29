@@ -16,8 +16,9 @@ const FDAdesao = (props) => {
   const adesao = props;
   const patientId = adesao.adesao;
 
-  const [medicationStatementInfo, setMedicationStatement] = useState([]);
-  const [medicationAdministration, setMedicationAdministration] = useState([]);
+  const [answersPeriodStatement, setAnswersPeriodStatement] = useState([]);
+  const [allAnswersAdministration, setAllAnswersAdministration] = useState([]);
+  const [time, setTime] = useState(0);
 
   useEffect(() => {
     fetch(`/MedicationStatement?status=active&subject=Patient/${patientId}`, {
@@ -25,7 +26,7 @@ const FDAdesao = (props) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        setMedicationStatement(data);
+        setAnswersPeriodStatement(data);
       })
       .catch((err) => {
         console.log(err);
@@ -36,7 +37,7 @@ const FDAdesao = (props) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        setMedicationAdministration(data);
+        setAllAnswersAdministration(data);
       })
       .catch((err) => {
         console.log(err);
@@ -63,14 +64,31 @@ const FDAdesao = (props) => {
     <div className="adesaoPanel">
       <div className="adesaoLeft">
         <AdesaoMenu />
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <Switch>
+            <Route
+              path="/FichaDoDoente/Monitorizacao/Adesao/CorticoidesInalados"
+              render={() => <h3>Adesão Global a corticóides inalados</h3>}
+            />
+            <Route
+              path="/FichaDoDoente/Monitorizacao/Adesao/TerapiaNasal"
+              render={() => <h3>Adesão Global ao Tratamento Nasal </h3>}
+            />
+            <Route
+              path="/FichaDoDoente/Monitorizacao/Adesao/TodaMedicacao"
+              render={() => <h3>Adesao Global à Terapia</h3>}
+            />
+          </Switch>
+        </div>
         <div className="graficoAdesao">
           <Switch>
             <Route
               path="/FichaDoDoente/Monitorizacao/Adesao/CorticoidesInalados"
               render={() => (
                 <AdesaoCorticoides
-                  medStatement={medicationStatementInfo}
-                  medAdministration={medicationAdministration}
+                  medStatement={answersPeriodStatement}
+                  medAdministration={allAnswersAdministration}
+                  timing={time}
                 />
               )}
             />
@@ -78,8 +96,9 @@ const FDAdesao = (props) => {
               path="/FichaDoDoente/Monitorizacao/Adesao/TerapiaNasal"
               render={() => (
                 <AdesaoTerapia
-                  medStatement={medicationStatementInfo}
-                  medAdministration={medicationAdministration}
+                  medStatement={answersPeriodStatement}
+                  medAdministration={allAnswersAdministration}
+                  timing={time}
                 />
               )}
             />
@@ -87,8 +106,9 @@ const FDAdesao = (props) => {
               path="/FichaDoDoente/Monitorizacao/Adesao/TodaMedicacao"
               render={() => (
                 <AdesaoMedicacao
-                  medStatement={medicationStatementInfo}
-                  medAdministration={medicationAdministration}
+                  medStatement={answersPeriodStatement}
+                  medAdministration={allAnswersAdministration}
+                  timing={time}
                 />
               )}
             />
@@ -130,17 +150,55 @@ const FDAdesao = (props) => {
             />
           </div>
           <div className="periodosSchedule" id="periodosSchedule">
-            <div className="periodosSchedule2" id="semana">
+            <div
+              className="periodosSchedule2"
+              id="semana"
+              onClick={() => {
+                changeDataInformation();
+                setTime(7);
+              }}
+            >
               Última Semana
             </div>
-            <div className="periodosSchedule2" id="mes">
+            <div
+              className="periodosSchedule2"
+              id="mes"
+              onClick={() => {
+                changeDataInformation();
+                setTime(30);
+              }}
+            >
               Último Mês
             </div>
-            <div className="periodosSchedule2" id="3meses">
+            <div
+              className="periodosSchedule2"
+              id="3meses"
+              onClick={() => {
+                changeDataInformation();
+                setTime(90);
+              }}
+            >
               Últimos 3 Meses
             </div>
-            <div className="periodosSchedule2" id="ano">
+            <div
+              className="periodosSchedule2"
+              id="ano"
+              onClick={() => {
+                changeDataInformation();
+                setTime(365);
+              }}
+            >
               Último Ano
+            </div>
+            <div
+              className="periodosSchedule2"
+              id="sempre"
+              onClick={() => {
+                changeDataInformation();
+                setTime(0);
+              }}
+            >
+              Desde Sempre
             </div>
           </div>
         </div>

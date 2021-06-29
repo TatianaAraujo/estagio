@@ -11,7 +11,8 @@ const FDCarat = (props) => {
   const carat = props;
   const patientId = carat.carat;
 
-  const [caratInfo, setCaratInfo] = useState([]);
+  const [allAnswers, setAllAnswers] = useState([]);
+  const [answersPeriod, setAnswersPeriod] = useState([]);
 
   useEffect(async () => {
     const fetchCarat = async (patientId) => {
@@ -19,8 +20,8 @@ const FDCarat = (props) => {
         accept: "application/json",
       });
       const data = await res.json();
-      console.log(data);
-      setCaratInfo(data);
+      setAllAnswers(data);
+      setAnswersPeriod(data);
     };
     await fetchCarat(patientId);
   }, []);
@@ -41,6 +42,35 @@ const FDCarat = (props) => {
     }
   };
 
+  const filtrarAnswers = (nrDays) => {
+    let currentDate = new Date();
+    let newAnswers = [];
+
+    if (nrDays === 0) {
+      //desde sempre
+      setAnswersPeriod(allAnswers);
+      return;
+    }
+
+    for (let i = 0; i < allAnswers.length; i++) {
+      let answerDate = allAnswers[i].all.effectiveDateTime;
+      console.log(allAnswers[i].all.effectiveDateTime);
+      if (answerDate !== undefined) {
+        let date = new Date(
+          answerDate.substring(0, 4),
+          answerDate.substring(6, 7) - 1,
+          answerDate.substring(8, 10)
+        );
+        const diffTime = Math.abs(currentDate - date);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) - 1;
+        if (diffDays <= nrDays) {
+          newAnswers.push(allAnswers[i]);
+        }
+      }
+    }
+    setAnswersPeriod(newAnswers);
+  };
+
   return (
     <div className="caratPanel">
       <div className="adesaoLeft">
@@ -50,16 +80,20 @@ const FDCarat = (props) => {
             <Route
               path="/FichaDoDoente/Monitorizacao/Carat/CaratTotal"
               render={(props) => (
-                <CaratTotal {...props} caratInfo={caratInfo} />
+                <CaratTotal {...props} caratInfo={answersPeriod} />
               )}
             />
             <Route
               path="/FichaDoDoente/Monitorizacao/Carat/CaratVAI"
-              render={(props) => <CaratVAI {...props} caratInfo={caratInfo} />}
+              render={(props) => (
+                <CaratVAI {...props} caratInfo={answersPeriod} />
+              )}
             />
             <Route
               path="/FichaDoDoente/Monitorizacao/Carat/CaratVAS"
-              render={(props) => <CaratVAS {...props} caratInfo={caratInfo} />}
+              render={(props) => (
+                <CaratVAS {...props} caratInfo={answersPeriod} />
+              )}
             />
           </Switch>
         </div>
@@ -78,17 +112,55 @@ const FDCarat = (props) => {
             />
           </div>
           <div className="periodosSchedule" id="periodosSchedule">
-            <div className="periodosSchedule2" id="semana">
+            <div
+              className="periodosSchedule2"
+              id="semana"
+              onClick={() => {
+                changeDataInformation();
+                filtrarAnswers(7);
+              }}
+            >
               Última Semana
             </div>
-            <div className="periodosSchedule2" id="mes">
+            <div
+              className="periodosSchedule2"
+              id="mes"
+              onClick={() => {
+                changeDataInformation();
+                filtrarAnswers(30);
+              }}
+            >
               Último Mês
             </div>
-            <div className="periodosSchedule2" id="3meses">
+            <div
+              className="periodosSchedule2"
+              id="3meses"
+              onClick={() => {
+                changeDataInformation();
+                filtrarAnswers(90);
+              }}
+            >
               Últimos 3 Meses
             </div>
-            <div className="periodosSchedule2" id="ano">
+            <div
+              className="periodosSchedule2"
+              id="ano"
+              onClick={() => {
+                changeDataInformation();
+                filtrarAnswers(365);
+              }}
+            >
               Último Ano
+            </div>
+            <div
+              className="periodosSchedule2"
+              id="sempre"
+              onClick={() => {
+                changeDataInformation();
+                filtrarAnswers(0);
+              }}
+            >
+              Desde Sempre
             </div>
           </div>
         </div>

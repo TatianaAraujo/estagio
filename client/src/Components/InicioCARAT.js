@@ -6,23 +6,16 @@ const InicioCARAT = (props) => {
   const caratInfo = carat.caratInfo;
   let values = [];
   let colors = [];
+  let value = 0;
 
-  let sum = 0;
-  let tot = 0;
-  let average = 0;
   const constructInfo = () => {
-    for (let i = 0; i < caratInfo.length; i++) {
-      if (caratInfo[i].all.valueQuantity !== undefined) {
-        sum += caratInfo[i].all.valueQuantity.value;
-        tot = tot + 1;
-      }
+    if (caratInfo[0] !== undefined) {
+      value = caratInfo[0].all.valueQuantity.value;
+      values.push(value);
+      values.push(30 - value);
+      value >= 24 ? colors.push("#00ad50") : colors.push("#bf0000");
+      colors.push("white");
     }
-    average = parseInt(sum / tot);
-    values.push(average);
-    values.push(30 - average);
-
-    average >= 24 ? colors.push("#00ad50") : colors.push("#bf0000");
-    colors.push("white");
   };
   constructInfo();
   const data = {
@@ -38,7 +31,7 @@ const InicioCARAT = (props) => {
 
   return (
     <div style={{ height: "90%" }}>
-      <div className="inicioInfoCarat">{average}</div>
+      <div className="inicioInfoCarat">{value}</div>
       <Doughnut
         data={data}
         height={80}

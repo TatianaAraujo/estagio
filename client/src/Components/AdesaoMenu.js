@@ -11,13 +11,11 @@ const AdesaoMenu = () => {
 
   const buttonUp = (buttonId) => {
     let button = document.getElementById(buttonId);
-    //button.style.backgroundColor = "white";
     button.style.border = "4px solid #175874";
   };
 
   const buttonDown = (buttonId) => {
     let button = document.getElementById(buttonId);
-    //button.style.backgroundColor = "white";
     button.style.border = "1px solid #707070";
   };
 

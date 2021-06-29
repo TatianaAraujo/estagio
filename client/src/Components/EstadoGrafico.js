@@ -28,7 +28,6 @@ function FDEstado(props) {
       }
     }
   }
-  Chart.defaults.font.size = 12;
 
   const data = (canvas) => {
     const ctx = canvas.getContext("2d");
@@ -103,7 +102,6 @@ function FDEstado(props) {
           threshold: 5,
         },
         zoom: {
-          enabled: true,
           wheel: {
             enabled: true,
           },
@@ -128,7 +126,7 @@ function FDEstado(props) {
       }}
     >
       <h3>Estado de saúde geral</h3>
-      <Line data={data} type="line" options={options} width={95} height={60} />
+      <Line data={data} type="line" options={options} />
     </div>
   );
 }

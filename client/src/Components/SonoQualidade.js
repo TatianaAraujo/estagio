@@ -60,7 +60,7 @@ const SonoQualidade = (props) => {
       <div
         className="sonoGraficoLegenda"
         style={{
-          right: "12%",
+          left: "47%",
           top: "55%",
         }}
       >
@@ -69,7 +69,7 @@ const SonoQualidade = (props) => {
       <div
         className="sonoGraficoLegenda"
         style={{
-          right: "32%",
+          left: "27%",
           top: "55%",
         }}
       >
@@ -78,7 +78,7 @@ const SonoQualidade = (props) => {
       <div
         className="sonoGraficoLegenda"
         style={{
-          right: "35%",
+          left: "22%",
           top: "27%",
         }}
       >
@@ -88,7 +88,7 @@ const SonoQualidade = (props) => {
       <div
         className="sonoGraficoLegenda"
         style={{
-          right: "35%",
+          left: "22%",
           top: "50%",
         }}
       >

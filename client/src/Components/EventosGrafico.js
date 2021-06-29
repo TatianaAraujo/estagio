@@ -12,6 +12,7 @@ const EventosGrafico = (props) => {
   const eventosInfo = eventos.eventosInfo;
 
   let dates = [];
+  let values0 = [];
   let values1 = [];
   let values2 = [];
   let values3 = [];
@@ -52,6 +53,7 @@ const EventosGrafico = (props) => {
       }
     }
     if (flag !== 1) {
+      values0.unshift(0);
       values1.unshift(value1);
       values2.unshift(value2);
       values3.unshift(value3);
@@ -61,7 +63,6 @@ const EventosGrafico = (props) => {
     flag = 0;
   }
   Chart.defaults.font.size = 12;
-  console.log(Chart.defaults.scale.ticks);
 
   const data = () => {
     return {
@@ -75,7 +76,7 @@ const EventosGrafico = (props) => {
           borderWidth: 0,
           tension: 0,
           backgroundColor: "white",
-          data: [0, 0, 0, 0, 0, 0, 0, 0],
+          data: values0,
         },
         {
           //linha 1
@@ -199,6 +200,7 @@ const EventosGrafico = (props) => {
               },
             }}
           />
+          <div className="whiteDiv"></div>
         </div>
       </div>
     </div>

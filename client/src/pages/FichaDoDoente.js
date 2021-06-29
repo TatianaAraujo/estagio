@@ -184,7 +184,7 @@ const FichaDoDoente = () => {
   return (
     <div>
       <div className="generalInformationPanel1">
-        <img style={{ width: "5.5%" }} src={resSys} alt="" />
+        <img style={{ width: "5.4%" }} src={resSys} alt="" />
         <div className="generalInformationExtra" id="generalInformationExtra">
           <div
             className="generalInformationPanel2"

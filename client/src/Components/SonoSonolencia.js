@@ -73,7 +73,7 @@ const SonoSonolencia = (props) => {
       <div
         className="sonoGraficoLegenda"
         style={{
-          right: "12%",
+          left: "47%",
           top: "95%",
         }}
       >
@@ -82,7 +82,7 @@ const SonoSonolencia = (props) => {
       <div
         className="sonoGraficoLegenda"
         style={{
-          right: "32%",
+          left: "27%",
           top: "95%",
         }}
       >
@@ -91,7 +91,7 @@ const SonoSonolencia = (props) => {
       <div
         className="sonoGraficoLegenda"
         style={{
-          right: "35%",
+          left: "22%",
           top: "68%",
         }}
       >
@@ -100,7 +100,7 @@ const SonoSonolencia = (props) => {
       <div
         className="sonoGraficoLegenda"
         style={{
-          right: "35%",
+          left: "22%",
           top: "92%",
         }}
       >

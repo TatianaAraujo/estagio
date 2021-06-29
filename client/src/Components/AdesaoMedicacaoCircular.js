@@ -2,13 +2,18 @@ import React from "react";
 import { Doughnut } from "react-chartjs-2";
 
 const AdesaoMedicacaoCircular = () => {
-  const todaMedicacaoInfo = JSON.parse(localStorage.getItem("todaMedicacao"));
+  let todaMedicacaoInfo = [];
+  if (localStorage.getItem("todaMedicacao") !== null)
+    todaMedicacaoInfo = JSON.parse(localStorage.getItem("todaMedicacao"));
+
   let values = [];
   let colors = [];
 
   let sum = 0;
-  for (let i = 0; i < todaMedicacaoInfo.length; i++) {
-    sum += todaMedicacaoInfo[i];
+  if (todaMedicacaoInfo !== null) {
+    for (let i = 0; i < todaMedicacaoInfo.length; i++) {
+      sum += todaMedicacaoInfo[i];
+    }
   }
   const average = parseInt(sum / todaMedicacaoInfo.length);
   values.push(average);

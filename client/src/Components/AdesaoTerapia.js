@@ -5,6 +5,7 @@ function AdesaoTerapia(props) {
   const adesaoInfo = props;
   const medStatement = adesaoInfo.medStatement;
   const medAdministration = adesaoInfo.medAdministration;
+  const timing = adesaoInfo.timing;
 
   let dates = [];
   let maxValue = [];
@@ -82,14 +83,22 @@ function AdesaoTerapia(props) {
     }
     return medicationStatementDay;
   };
+
   const equalsDates = (medicationDay, day) => {
     medicationDay = new Date(
       medicationDay.substring(0, 4),
       medicationDay.substring(6, 7) - 1,
       medicationDay.substring(8, 10)
     );
-    return medicationDay.getTime() === day.getTime();
+
+    if (
+      medicationDay.getDate() === day.getDate() &&
+      medicationDay.getMonth() === day.getMonth() &&
+      medicationDay.getFullYear() === day.getFullYear()
+    )
+      return true;
   };
+
   const verifyMedicationAdministration = (medicationStatementDay, day) => {
     let cont = 0;
     for (let i = 0; i < medAdministration.length; i++) {
@@ -125,6 +134,12 @@ function AdesaoTerapia(props) {
     presentDay = presentDay.setDate(presentDay.getDate() - 1);
 
     let i = dateFirstRegisteredMedication;
+
+    if (timing !== 0) {
+      let newDate = new Date();
+      newDate.setDate(newDate.getDate() - timing);
+      i = newDate;
+    }
     while (i < presentDay) {
       let medicationStatementDay = verifyMedicationStatement(i);
 
@@ -159,7 +174,11 @@ function AdesaoTerapia(props) {
 
       i.setDate(i.getDate() + 1); //////////////////////////Cuidado com mudança de mês e/ou ano
     }
-    localStorage.setItem("medicacaoTerapiaNasal", JSON.stringify(values));
+    if (
+      !localStorage.hasOwnProperty("medicacaoTerapiaNasal") &&
+      medStatement !== []
+    )
+      localStorage.setItem("medicacaoTerapiaNasal", JSON.stringify(values));
   };
 
   const dateFirstRegisteredMedication = getDateFirstRegisteredMedication();
@@ -205,6 +224,52 @@ function AdesaoTerapia(props) {
     };
   };
 
+  const options = {
+    maintainAspectRatio: false,
+    responsive: true,
+    scales: {
+      yAxes: [
+        {
+          beginAtZero: true,
+          ticks: {
+            max: 100,
+            stepSize: 10,
+          },
+        },
+      ],
+    },
+    plugins: {
+      zoom: {
+        limits: {
+          y: {
+            min: 0,
+            max: 100,
+            minRange: 10,
+          },
+          x: {
+            min: 0,
+            max: 100,
+            minRange: 7,
+          },
+        },
+        pan: {
+          enabled: true,
+          mode: "x",
+          speed: 0.1,
+          threshold: 5,
+        },
+        zoom: {
+          wheel: {
+            enabled: true,
+          },
+          drag: false,
+          mode: "x",
+          speed: 0.1,
+          threshold: 2,
+        },
+      },
+    },
+  };
   return (
     <div
       style={{
@@ -216,24 +281,7 @@ function AdesaoTerapia(props) {
         flexDirection: "column",
       }}
     >
-      <h3>Adesão Global à Terapia</h3>
-      <Line
-        data={data}
-        width={95}
-        height={40}
-        options={{
-          scales: {
-            yAxes: [
-              {
-                ticks: {
-                  beginAtZero: true,
-                  max: 100,
-                },
-              },
-            ],
-          },
-        }}
-      />
+      <Line data={data} width={95} height={40} options={options} />
     </div>
   );
 }

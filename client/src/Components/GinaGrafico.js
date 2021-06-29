@@ -40,6 +40,53 @@ const GinaGrafico = (props) => {
   };
   Chart.defaults.font.size = 12;
 
+  const options = {
+    maintainAspectRatio: false,
+    responsive: true,
+    scales: {
+      yAxes: [
+        {
+          beginAtZero: true,
+          ticks: {
+            max: 100,
+            stepSize: 10,
+          },
+        },
+      ],
+    },
+    plugins: {
+      zoom: {
+        limits: {
+          y: {
+            min: 0,
+            max: 100,
+            minRange: 10,
+          },
+          x: {
+            min: 0,
+            max: 100,
+            minRange: 7,
+          },
+        },
+        pan: {
+          enabled: true,
+          mode: "x",
+          speed: 0.1,
+          threshold: 5,
+        },
+        zoom: {
+          wheel: {
+            enabled: true,
+          },
+          drag: false,
+          mode: "x",
+          speed: 0.1,
+          threshold: 2,
+        },
+      },
+    },
+  };
+
   const data = () => {
     constructInfo(ginaInfo);
 
@@ -74,16 +121,7 @@ const GinaGrafico = (props) => {
       }}
     >
       <h2> GINA </h2>
-      <Line
-        data={data}
-        width={95}
-        height={60}
-        options={{
-          plugins: {
-            legend: false,
-          },
-        }}
-      />
+      <Line data={data} width={95} height={60} options={options} />
     </div>
   );
 };

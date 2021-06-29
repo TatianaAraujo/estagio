@@ -9,12 +9,14 @@ const CaratVAS = (props) => {
   let values;
   let goodValue;
   let maxValue;
+  let minValue;
 
   const constructInfo = (caratInfo) => {
     dates = [];
     values = [];
     goodValue = [];
     maxValue = [];
+    minValue = [];
 
     for (let i = 0; i < caratInfo.length; i++) {
       if (caratInfo[i].all.valueQuantity !== undefined) {
@@ -22,6 +24,7 @@ const CaratVAS = (props) => {
         values.unshift(caratInfo[i].all.component[0].valueInteger);
         goodValue.push(8);
         maxValue.push(12);
+        minValue.push(0);
       }
     }
   };
@@ -33,7 +36,7 @@ const CaratVAS = (props) => {
     const ctx = canvas.getContext("2d");
     var gradientFill = ctx.createLinearGradient(0, 0, 0, canvas.height);
     gradientFill.addColorStop(0, "#34ae16"); //verde
-    gradientFill.addColorStop(0.25, "#34ae16");
+    gradientFill.addColorStop(0.32, "#34ae16");
     gradientFill.addColorStop(0.4, "#fe0503"); //vermelho
     gradientFill.addColorStop(1, "#fe0503");
 
@@ -69,8 +72,65 @@ const CaratVAS = (props) => {
           data: maxValue,
           showLine: false,
         },
+        {
+          type: "line",
+          label: "",
+          borderColor: "#ffffff",
+          backgroundColor: "white",
+          pointRadius: 0,
+          fill: false,
+          data: minValue,
+          showLine: false,
+        },
       ],
     };
+  };
+
+  const options = {
+    maintainAspectRatio: false,
+    responsive: true,
+    scales: {
+      yAxes: [
+        {
+          beginAtZero: true,
+          ticks: {
+            max: 100,
+            stepSize: 10,
+          },
+        },
+      ],
+    },
+    plugins: {
+      zoom: {
+        limits: {
+          y: {
+            min: 0,
+            max: 100,
+            minRange: 10,
+          },
+          x: {
+            min: 0,
+            max: 100,
+            minRange: 7,
+          },
+        },
+        pan: {
+          enabled: true,
+          mode: "x",
+          speed: 0.1,
+          threshold: 5,
+        },
+        zoom: {
+          wheel: {
+            enabled: true,
+          },
+          drag: false,
+          mode: "x",
+          speed: 0.1,
+          threshold: 2,
+        },
+      },
+    },
   };
 
   return (
@@ -85,37 +145,7 @@ const CaratVAS = (props) => {
       }}
     >
       <h3>Carat VAI</h3>
-      <Line
-        data={data}
-        width={95}
-        height={40}
-        options={{
-          plugins: {
-            legend: {
-              display: true,
-              position: "bottom",
-              color: "#34ae16",
-            },
-          },
-          scales: {
-            xAxes: [
-              {
-                gridLines: {
-                  display: false,
-                },
-              },
-            ],
-            yAxes: [
-              {
-                ticks: {
-                  beginAtZero: true,
-                  max: 14,
-                },
-              },
-            ],
-          },
-        }}
-      />
+      <Line data={data} width={95} height={40} options={options} />
     </div>
   );
 };

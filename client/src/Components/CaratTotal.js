@@ -9,10 +9,12 @@ const CaratTotal = (props) => {
   let values;
   let goodValue;
   let maxValue;
+  let minValue;
 
   const constructInfo = (caratInfo) => {
     dates = [];
     maxValue = [];
+    minValue = [];
     values = [];
     goodValue = [];
     for (let i = 0; i < caratInfo.length; i++) {
@@ -21,6 +23,7 @@ const CaratTotal = (props) => {
         values.unshift(caratInfo[i].all.valueQuantity.value);
         goodValue.push(24);
         maxValue.push(30);
+        minValue.push(0);
       }
     }
   };
@@ -32,8 +35,8 @@ const CaratTotal = (props) => {
     const ctx = canvas.getContext("2d");
     var gradientFill = ctx.createLinearGradient(0, 0, 0, canvas.height);
     gradientFill.addColorStop(0, "#34ae16"); //verde
-    gradientFill.addColorStop(0.15, "#34ae16");
-    gradientFill.addColorStop(0.25, "#fe0503"); //vermelho
+    gradientFill.addColorStop(0.21, "#34ae16");
+    gradientFill.addColorStop(0.27, "#fe0503"); //vermelho
     gradientFill.addColorStop(1, "#fe0503");
 
     return {
@@ -68,8 +71,65 @@ const CaratTotal = (props) => {
           data: maxValue,
           showLine: false,
         },
+        {
+          type: "line",
+          label: "",
+          borderColor: "#ffffff",
+          backgroundColor: "white",
+          pointRadius: 0,
+          fill: false,
+          data: minValue,
+          showLine: false,
+        },
       ],
     };
+  };
+
+  const options = {
+    maintainAspectRatio: false,
+    responsive: true,
+    scales: {
+      yAxes: [
+        {
+          beginAtZero: true,
+          ticks: {
+            max: 100,
+            stepSize: 10,
+          },
+        },
+      ],
+    },
+    plugins: {
+      zoom: {
+        limits: {
+          y: {
+            min: 0,
+            max: 100,
+            minRange: 10,
+          },
+          x: {
+            min: 0,
+            max: 100,
+            minRange: 7,
+          },
+        },
+        pan: {
+          enabled: true,
+          mode: "x",
+          speed: 0.1,
+          threshold: 5,
+        },
+        zoom: {
+          wheel: {
+            enabled: true,
+          },
+          drag: false,
+          mode: "x",
+          speed: 0.1,
+          threshold: 2,
+        },
+      },
+    },
   };
 
   return (
@@ -84,39 +144,7 @@ const CaratTotal = (props) => {
       }}
     >
       <h3>Carat Total</h3>
-      <Line
-        data={data}
-        width={95}
-        height={40}
-        options={{
-          maintainAspectRatio: false,
-          responsive: true,
-          plugins: {
-            legend: {
-              display: true,
-              position: "bottom",
-              color: "#34ae16",
-            },
-          },
-          scales: {
-            xAxes: [
-              {
-                gridLines: {
-                  display: false,
-                },
-              },
-            ],
-            yAxes: [
-              {
-                ticks: {
-                  beginAtZero: true,
-                  max: 30,
-                },
-              },
-            ],
-          },
-        }}
-      />
+      <Line data={data} width={95} height={40} options={options} />
     </div>
   );
 };

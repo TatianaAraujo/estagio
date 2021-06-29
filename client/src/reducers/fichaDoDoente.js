@@ -1,4 +1,4 @@
-import { GET_ID } from "../actions";
+import { GET_ID, GET_MEDICATION_NAME } from "../actions";
 
 const INICIAL_STATE = { id: "" };
 const fichaDoDoente = (state = INICIAL_STATE, action) => {
@@ -7,6 +7,12 @@ const fichaDoDoente = (state = INICIAL_STATE, action) => {
       return {
         ...state,
         id: action.id,
+      };
+    case GET_MEDICATION_NAME:
+      return {
+        ...state,
+        teste: state?.nome,
+        nome: [action.nome],
       };
     default:
       return state;

@@ -1,10 +1,18 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import airdoc from "../img/airdoc.png";
 import caratm from "../img/caratm.png";
+import MedicationName from "./MedicationName";
+import { getMedicationName } from "../actions/fichaDoDoente";
 
 const FDMedicacaoInicio = ({ medicationList }) => {
+  const dispatch = useDispatch();
+
   const airdocIcone = <img width="60%" src={airdoc} alt="" />;
   const caratmIcone = <img width="90%" src={caratm} alt="" />;
+  //const [idMedication, setIdMedication] = useState("");
+  const [medicationName, setMedicationName] = useState([]);
+  //let array = [];
 
   return medicationList.map(
     ({ medicationReference, timing, route, doseQuantity, font }, index) => {
@@ -64,21 +72,36 @@ const FDMedicacaoInicio = ({ medicationList }) => {
           timeOfDay[i] = timing.timeOfDay[i];
         }
       }
-      let medicationName = "Sem nome";
-      //let fetchPromise;
+
+      /*const getName = async (idMedication) => {
+        //console.log(medicationName);
+        //array.push(...medicationName);
+        const res = await fetch(`/Medication/?id=${idMedication}`, {
+          accept: "application/json",
+        });
+        //console.log(array);
+
+        const data = await res.json();
+        const name = data.name;
+        //console.log(data.name);
+        //array.push(...medicationName);
+        //setMedicationName([data.name]);
+        dispatch(getMedicationName(name));
+      };
+
       if (medicationReference !== undefined) {
         const id = medicationReference.reference.substring(11);
-
-        /*fetchPromise = fetch(`/Medication/?id=${id}`, {
-          accept: "application/json",
-        });*/
-
-        //console.log(medicationName);
-      }
+        getName(id);
+        //const index = e.target.id.slice(-1);
+        //const name = document.getElementById(`name${index}`);
+        //setIdMedication(id);
+        //name.innerHTML = "ss";
+      }*/
+      ///<MedicationName />
 
       return (
         <div className="tableMedication" key={index}>
-          <div className="lineMedication">{medicationName}</div>
+          <div className="lineMedication"> Sem Nome</div>
           <div className="lineMedication"> {route}</div>
 
           <div className="tableMedication2">
