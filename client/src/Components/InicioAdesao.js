@@ -40,6 +40,7 @@ const InicioAdesao = () => {
           plugins: {
             legend: false,
           },
+          animation: false,
           tooltips: {
             enabled: false,
           },

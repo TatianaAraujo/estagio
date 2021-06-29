@@ -40,6 +40,7 @@ const InicioCARAT = (props) => {
           legend: {
             display: false,
           },
+          animation: false,
           tooltips: {
             enabled: false,
           },

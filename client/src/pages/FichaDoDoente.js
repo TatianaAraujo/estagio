@@ -22,15 +22,11 @@ import FDExtraInfo from "../Components/FDExtraInfo";
 
 const FichaDoDoente = () => {
   const history = useHistory();
-
   const addBodyClass = (className) => document.body.classList.add(className);
   const removeBodyClass = (className) =>
     document.body.classList.remove(className);
 
   const patientId = localStorage.getItem("patientId");
-  if (patientId == null) {
-    history.push("/");
-  }
 
   const [showDataPath] = useState("/FichaDoDoente/");
   const [trabalho, setTrabalho] = useState([]);

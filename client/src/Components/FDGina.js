@@ -70,6 +70,15 @@ const FDGina = (props) => {
   return (
     <div className="ginaPanel">
       <div className="ginaLeft">
+        <div
+          style={{
+            backgroundColor: "white",
+            position: "absolute",
+            top: "30%",
+            width: "6%",
+            height: "5%",
+          }}
+        ></div>
         <div className="graficoGina">
           <GinaGrafico ginaInfo={answersPeriod} />
         </div>
