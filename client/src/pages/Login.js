@@ -20,9 +20,17 @@ const Login = () => {
       <div className="loginDiv">
         <div className="loginDivForm">
           <p className="textLoginForm"> Utilizador:</p>
-          <input type="text" className="formLogin" />
+          <input
+            type="text"
+            className="formLogin"
+            style={{ fontSize: "22px" }}
+          />
           <p className="textLoginForm"> Password: </p>
-          <input type="password" className="formLogin" />
+          <input
+            type="password"
+            className="formLogin"
+            style={{ fontSize: "22px" }}
+          />
           <p className="textLoginForm" style={{ fontSize: "20px" }}>
             Esqueceu-se da password?
           </p>

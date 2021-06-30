@@ -33,7 +33,7 @@ const FDSono = (props) => {
       );
       const data = await res.json();
       setAnswers(data);
-      if (data[0] != undefined) {
+      if (data[0] !== undefined) {
         return data[0].all;
       }
       return [];
@@ -73,7 +73,6 @@ const FDSono = (props) => {
   function findAnswerData(dateChosed) {
     for (let i = 0; i < answers.length; i++) {
       let answerDate = answers[i].all.authored;
-
       if (
         answerDate.substring(0, 4) == dateChosed.getFullYear() &&
         answerDate.substring(6, 7) == dateChosed.getMonth() + 1 &&

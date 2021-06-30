@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React from "react";
+//import { useDispatch } from "react-redux";
 import airdoc from "../img/airdoc.png";
 import caratm from "../img/caratm.png";
-import MedicationName from "./MedicationName";
-import { getMedicationName } from "../actions/fichaDoDoente";
+//import MedicationName from "./MedicationName";
+//import { getMedicationName } from "../actions/fichaDoDoente";
 
 const FDMedicacaoInicio = ({ medicationList }) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const airdocIcone = <img width="60%" src={airdoc} alt="" />;
   const caratmIcone = <img width="90%" src={caratm} alt="" />;
   //const [idMedication, setIdMedication] = useState("");
-  const [medicationName, setMedicationName] = useState([]);
+  //const [medicationName, setMedicationName] = useState([]);
   //let array = [];
 
   return medicationList.map(

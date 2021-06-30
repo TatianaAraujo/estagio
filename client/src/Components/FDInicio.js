@@ -33,7 +33,7 @@ const FDInicio = (props) => {
         accept: "application/json",
       });
       const data = await res.json();
-      if (data[0] != undefined) {
+      if (data[0] !== undefined) {
         setLastCarat(data[0].all.effectiveDateTime.substring(0, 10));
         setCaratInfo(data);
       }
@@ -65,7 +65,7 @@ const FDInicio = (props) => {
 
     const gethabitosInfo = async () => {
       let qr = await getQuestionnaireResponse("Q510PTpt_1.0");
-      if (qr[0] != undefined) {
+      if (qr[0] !== undefined) {
         let qrAnswer = qr[0].all[0];
         qrAnswer.answer[0].valueCoding.code === "A.1"
           ? setHabitos("Fumador/a")

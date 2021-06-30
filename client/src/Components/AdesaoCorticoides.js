@@ -52,8 +52,8 @@ function AdesaoCorticoides(props) {
     for (let i = 0; i < medStatement.length; i++) {
       if (registed(medStatement[i].date, day)) {
         if (medStatement[i].route === "Oral") {
-          if (medStatement[i].timing.timeOfDay != undefined) {
-            if (medStatement[i].timing.dayOfWeek != undefined) {
+          if (medStatement[i].timing.timeOfDay !== undefined) {
+            if (medStatement[i].timing.dayOfWeek !== undefined) {
               //Medicação em alguns dias da semana
               for (
                 let j = 0;
@@ -170,7 +170,7 @@ function AdesaoCorticoides(props) {
         values.push(0);
       }
 
-      i.setDate(i.getDate() + 1); //////////////////////////Cuidado com mudança de mês e/ou ano
+      i.setDate(i.getDate() + 1);
     }
 
     if (

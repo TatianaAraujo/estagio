@@ -41,14 +41,14 @@ const EventosGrafico = (props) => {
 
       if (answers[j].answer[0].valueCoding !== undefined) {
         if (answers[j].linkId === "Q301_2.1") {
-          if (answers[j].answer[0].valueCoding.code == "A.1") value1 = 1;
+          if (answers[j].answer[0].valueCoding.code === "A.1") value1 = 1;
         } else if (answers[j].linkId === "Q301_2.3") {
-          if (answers[j].answer[0].valueCoding.code == "A.1") value2 = 2;
+          if (answers[j].answer[0].valueCoding.code === "A.1") value2 = 2;
         } else if (answers[j].linkId === "Q301_2.2") {
         } else if (answers[j].linkId === "Q301_2.4") {
-          if (answers[j].answer[0].valueCoding.code == "A.1") value3 = 3;
+          if (answers[j].answer[0].valueCoding.code === "A.1") value3 = 3;
         } else if (answers[j].linkId === "Q301_2.5") {
-          if (answers[j].answer[0].valueCoding.code == "A.1") value4 = 4;
+          if (answers[j].answer[0].valueCoding.code === "A.1") value4 = 4;
         }
       }
     }

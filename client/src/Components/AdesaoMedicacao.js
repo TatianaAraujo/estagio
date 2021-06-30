@@ -53,8 +53,8 @@ function AdesaoMedicacao(props) {
     let medicationStatementDay = [];
     for (let i = 0; i < medStatement.length; i++) {
       if (registed(medStatement[i].date, day)) {
-        if (medStatement[i].timing.timeOfDay != undefined) {
-          if (medStatement[i].timing.dayOfWeek != undefined) {
+        if (medStatement[i].timing.timeOfDay !== undefined) {
+          if (medStatement[i].timing.dayOfWeek !== undefined) {
             //Medicação em alguns dias da semana
             for (let j = 0; j < medStatement[i].timing.dayOfWeek.length; j++) {
               if (

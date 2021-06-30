@@ -52,8 +52,8 @@ function AdesaoTerapia(props) {
     for (let i = 0; i < medStatement.length; i++) {
       if (registed(medStatement[i].date, day)) {
         if (medStatement[i].route === "Nasal") {
-          if (medStatement[i].timing.timeOfDay != undefined) {
-            if (medStatement[i].timing.dayOfWeek != undefined) {
+          if (medStatement[i].timing.timeOfDay !== undefined) {
+            if (medStatement[i].timing.dayOfWeek !== undefined) {
               //Medicação em alguns dias da semana
               for (
                 let j = 0;
