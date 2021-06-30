@@ -52,6 +52,8 @@ const FDMedicacao = (props) => {
   return (
     <div className="estadoPanel">
       <div className="estadoLeft">
+        <h3> Nº de tomas de Medicação SOS </h3>
+
         <div className="graficoEstado">
           <MedicacaoGrafico
             medStatement={medicationStatementInfo}

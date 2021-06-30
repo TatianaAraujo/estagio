@@ -55,7 +55,7 @@ const AdesaoMedicacaoCircular = () => {
       <div
         style={{
           position: "absolute",
-          top: "55%",
+          top: "57%",
           left: "43%",
           fontSize: "35px",
         }}

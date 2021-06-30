@@ -1062,6 +1062,7 @@ td {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
 .estadoRight {
@@ -1073,7 +1074,7 @@ td {
 
 .graficoEstado {
   width: 90%;
-  height: 80%;
+  height: 70%;
   display: flex;
   align-items: center;
   justify-content: center;
